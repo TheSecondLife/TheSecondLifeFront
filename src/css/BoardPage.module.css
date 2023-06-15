@@ -1,0 +1,91 @@
+.tg-0lax button {
+    border: none;
+    font-weight: 500;
+    background-color: transparent;
+  }
+  .category {
+    color: #333;
+  }
+  .writeboard_btn {
+    height: 42px;
+    background-color: #000;
+    color: #fff;
+    display: inline-block;
+    min-width: 80px;
+    margin-left: 10px;
+    /* padding: 10px; */
+    border: 1px solid black;
+    border-radius: 2px;
+    float: right;
+    margin-right: 150px;
+    margin-top: -40px;
+  }
+  /* board */
+  .boardtable {
+    height: 560px;
+  }
+  .board-intro {
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+  tr {
+    height: 50px;
+    border-bottom: 0.5px solid rgba(85, 107, 47, 0.161);
+  }
+  .tg {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-left: 20px;
+    margin-top: -40px;
+  }
+  .tg td {
+    border-bottom-width: 1px;
+    border-color: black;
+    border-style: solid;
+    border-top-width: 1px;
+    border-width: 0px;
+    /* font-family:Arial, sans-serif; */
+    font-size: 14px;
+    overflow: hidden;
+    padding: 3px 20px;
+    word-break: normal;
+  }
+  .tg th {
+    border-bottom-width: 1px;
+    border-color: black;
+    border-style: solid;
+    border-top-width: 1px;
+    border-width: 0px;
+    /* font-family:Arial, sans-serif; */
+    font-size: 14px;
+    font-weight: normal;
+    overflow: hidden;
+    padding: 3px 20px;
+    word-break: normal;
+  }
+  .tg .tg-baqh {
+    text-align: center;
+    vertical-align: center;
+  }
+  .tg .tg-8lxw {
+    font-weight: bold;
+    font-size: 15px;
+    /* background-color:#efefefab; */
+    border-bottom: 1px solid darkolivegreen;
+    text-align: center;
+    vertical-align: center;
+  }
+  .tg .tg-0lax {
+    text-align: center;
+    vertical-align: center;
+  }
+  .btn-cover {
+    margin-top: 20px;
+    margin-left: 40px;
+    color: #682b2b;
+    font-size: 17px;
+  }
+  .btn-cover .page-btn {
+    border: none;
+    background-color: transparent;
+  }
