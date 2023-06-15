@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import "./css/Home.module.css"
 
 function Home() {
-    const users = useSelector((state) => state.users);
-    console.log(users);
+    const boards = useSelector((state) => state.boards);
+    console.log(boards);
   return (
     <div className='container'>
         <h2>CRUD practice 게시판</h2>
@@ -19,12 +19,12 @@ function Home() {
                 </tr>
             </thead>
             <tbody>
-                {users.map((user, i) => (
+                {boards.map((board, i) => (
                     <tr key={i}>
-                       <td>{user.category}</td>     
-                       <td>{user.title}</td>     
-                       <td>{user.date}</td>     
-                       <td>{user.viewCnt}</td>     
+                       <td>{board.category}</td>     
+                       <td>{board.title}</td>     
+                       <td>{board.date}</td>     
+                       <td>{board.viewCnt}</td>     
                     </tr>
                 ))}
             </tbody>

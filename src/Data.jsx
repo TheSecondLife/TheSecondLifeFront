@@ -1,4 +1,4 @@
-export const userList = [
+export const boardList = [
     {
         category : "분류1",
         title : "제목1",

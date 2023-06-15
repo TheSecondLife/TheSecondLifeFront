@@ -14,7 +14,7 @@ const boardSlice = createSlice({
 
 export default configureStore({
     reducer : {
-        users : boardSlice.reducer,
+        boards : boardSlice.reducer,
     }
 })
 export let {addBoard} = boardSlice.actions;
