@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Route, Routes, Link, useNavigate, Outlet } from 'react-router-dom';
 import axios from 'axios'
 
-
 function BoardPage() {
     //useState
     let [boards, setBoards] = useState([{title : "제목", date : "2023-06-15", viewCnt : 33}]);
