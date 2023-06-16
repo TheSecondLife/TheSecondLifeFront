@@ -1,0 +1,45 @@
+.page {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  /* max-width: 500px; */
+  padding: 0 20px;
+
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  background-color: #f7f7f7;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+  overflow: auto;
+}
+
+/* 메인 이미지 */
+.mainImg {
+  width: 100%;
+  height: 580px;
+  background-color: black;
+}
+
+.mainImg img {
+  width: 580px;
+  height: 580px;
+  /* background-color: black; */
+}
+
+/* 버튼 css */
+.buttonLayout {
+  margin-top: 5%;
+}
+.buttonLayout button {
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  margin-left: 5%;
+}
