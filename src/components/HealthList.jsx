@@ -35,7 +35,7 @@ const HealthList = () => {
         {/* 안내문구 */}
         <div className={style.msg}>000님, 이런 병원들은 어떠세요?</div>
 
-        <table class="table table-hover">
+        {/* <table class="table table-hover">
           <thead>
             <tr>
               <th scope="col">분류</th>
@@ -62,10 +62,29 @@ const HealthList = () => {
             }
             
           </tbody>
-        </table>
+        </table> */}
 
-        {/* page nation */}
-        <nav aria-label="Page navigation example">
+        {
+          [1,2,3,4,5,6,7,8,9,10].map(()=>{
+            return(
+              <div className={style.hospital_info}>
+                <div><button type="button" class="btn" className={style.category}>상급병원</button></div>
+                <div className={style.hospital_info_sub}>
+                  <div>인하대 병원</div>
+                  <div>대전광역시 유성구 00동 000건물 1층</div>
+                </div>
+                <div className={style.btn_content}>
+                  <div><button type="button" class="btn" className={style.regist_btn}>찜</button></div>
+                  <div><button type="button" class="btn" className={style.regist_btn}>예약</button></div>
+                </div>
+              </div>
+            );
+          })
+        }
+
+
+        {/* page nation -> 무한 스크롤로 하면 필요 없음*/}
+        {/* <nav aria-label="Page navigation example">
           <ul class="pagination" style={{justifyContent:'center'}}>
             <li class="page-item">
               <a class="page-link" href="#" aria-label="Previous">
@@ -81,7 +100,7 @@ const HealthList = () => {
               </a>
             </li>
           </ul>
-        </nav>
+        </nav> */}
         
       </div>
     );
