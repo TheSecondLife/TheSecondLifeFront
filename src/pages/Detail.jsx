@@ -10,58 +10,84 @@ function Detail() {
     let {id} = useParams();
     let user = useSelector((state) => state.user);
     let [board, setBoard] = useState({});
-    
-    //페이지 create 시 get으로 해당 아이디의 게시글 가져오기
+    function setDummyBoard(){
+        setBoard({
+        title : "제목1",
+        category : "건강",
+        content : "내용1",
+        createdDate : "2023-06-17",
+        commentList: [
+            {
+              "id": 1,
+              "content": "좋습니다",
+              "createdDate": "2023-06-08T00:37:11",
+              "modifiedDate": "2023-06-09T00:37:11",
+              "userId": 2,
+              "userNickName": "daen",
+              "userProfileImg": "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/de45b98d-980f-4cd4-b9ae-405e2b76b3a9-nara_1.jpeg",
+              "userGrade": "씨앗"
+            },
+            {
+              "id": 2,
+              "content": "최고입니다",
+              "createdDate": "2023-06-08T00:39:11",
+              "modifiedDate": "2023-06-09T00:39:11",
+              "userId": 3,
+              "userNickName": "tksgk",
+              "userProfileImg": "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/57b3f1c6-057b-4170-83aa-5997a0b51ae9-jyj.png",
+              "userGrade": "씨앗"
+            },
+        ]
+        });
+    }
+
+    function modifyBoard(){
+
+    }
     useEffect(() => {
-        const url = "http://localhost:8080/api/";
-        axios.get(url+"post/"+id)
-        .then((result) => {
-          setBoard(result.data);
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+        setDummyBoard();
+
+        // const url = "http://localhost:8080/api/";
+        // axios.get(url+"post/"+id)
+        // .then((result) => {
+        //   setBoard(result.data);
+        // })
+        // .catch((err) => {
+        //   console.log(err)
+        // })
       },[])
-
-
 
   return (
     <div className='container'>
-        <br/>
-        <h2>The SecondLife</h2>
-        <br />
-        <br />
+
     <table className='table'>
             <tbody>
-                <tr>
-                    <td className='inputTitle'><input type="text" placeholder='제목을 입력해주세요'
-                        onChange={(e) => {setTitle(e.target.value); console.log(title)}}
-                    /></td>
+                <tr><img className='mainImg' src="https://www.next-t.co.kr/public/uploads/7b7f7e2138e29e598cd0cdf2c85ea08d.jpg" alt="" /></tr>
+                <tr className='userWrap'>
+                    <img src="https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/de45b98d-980f-4cd4-b9ae-405e2b76b3a9-nara_1.jpeg" alt="" />
+                    
+                    
                 </tr>
                 <tr>
-                    <td className='selectCategory'>
-                        카테고리 선택
-
-                    <select name="" id="" v-model="category" class="category"
-                         onChange={e => {setCategory(e.target.value); console.log(category)}}
-                    >
-                        <option value="JOB">직업</option>
-                        <option value="CULTURE">문화생활</option>
-                        <option value="HEALTH">건강</option>
-                        <option value="COMMUNICATION">소통</option>
-                    </select>
+                <td>{user.name}  🌱</td>
+                </tr>
+                <tr className='titleWrap'>
+                    <td className='selectCategory'>{board.category} | {board.title} | {board.createdDate}</td>
+                </tr>
+                <tr>
+                    <td className='inputContent'>{board.content}
+                    <br />
+                    <br />
                     </td>
                 </tr>
-                <tr>
-                    <td className='inputContent'><textarea name="" id="" cols="30" rows="10" placeholder='내용을 입력해주세요'
-                         onChange={e => setContent(e.target.value)}
-                    ></textarea></td>
-                </tr>
+                {board && <tr>
+                    <td>{board.commentList[0].userNickName} 🌱 | {board.commentList[0].content} | {board.commentList[0].createdDate}</td>
+                </tr>}
             </tbody>
     </table>
     <button className='btn btn-primary my-3'
-        onClick={createBoard}
-    >등록하기</button>
+        onClick={modifyBoard}
+    >수정하기</button>
     </div>
   )
 }

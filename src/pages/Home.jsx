@@ -41,7 +41,7 @@ function Home() {
                     <tr key={i}>
                        <td>{i+1}</td>     
                        <td>{board.category}</td>     
-                       <td onClick={() => { navigate('/detail/' + board.id) }}>{board.title}</td>     
+                       <td onClick={() => { navigate('/boardDetail') }}>{board.title}</td>     
                        <td>{board.createdDate}</td>     
                        <td>{0}</td>     
                     </tr>
