@@ -11,18 +11,18 @@ function BoardPage() {
 
     //axios
     //useEffect
-    useEffect(()=>{
-        axios.get("")
-    .then((res) => {
-        setBoards(res.data);
-        console.log("axios requested!");
-        console.log(res.data);
-    })
-    .catch((err) => {
-        console.log("failed!");
-    })
-    .finally(() => setLoading(false));
-    }, [])
+    // useEffect(()=>{
+    //     axios.get("")
+    // .then((res) => {
+    //     setBoards(res.data);
+    //     console.log("axios requested!");
+    //     console.log(res.data);
+    // })
+    // .catch((err) => {
+    //     console.log("failed!");
+    // })
+    // .finally(() => setLoading(false));
+    // }, [])
     
 
   return (
