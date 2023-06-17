@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import store from "./UserReducer";
+import store from "./store/store.jsx";
 
 // Bootstrap CSS
 import "bootstrap/dist/css/bootstrap.min.css";

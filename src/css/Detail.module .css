@@ -1,0 +1,23 @@
+input {
+    border: none;
+    width: 100%;
+    text-align: left;
+    outline: none;
+}
+
+textarea {
+    border: none;
+    text-align: left;
+    outline: none;
+    width: 100%;
+}
+
+select {
+    text-align: left;
+    border: none;
+    width: 50%;
+    outline: none;
+}
+.selectCategory {
+    text-align: left;
+}

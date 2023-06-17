@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import {useSelector} from 'react-redux'
-import { Link } from 'react-router-dom';
-import "./css/Home.module.css"
+import { Link, useNavigate } from 'react-router-dom';
+import "../css/Home.module.css"
 
 function Home() {
-    // const boards = useSelector((state) => state.boards);
-    // console.log(boards);
-    let [boards, setBoards] = useState([]);
+    const navigate = useNavigate();
+    const boards = useSelector((state) => state.board);
+    console.log(boards);
+    // let [boards, setBoards] = useState([]);
 
-    useEffect(() => {
-        axios.get("http://localhost:8080/api/post/list")
-    .then((res) => {
-        setBoards(res.data);
-        console.log("axios requested!");
-        console.log(res.data);
-    })
-    .catch((err) => {
-        console.log("failed!");
-    })
-    }, [])
+    // useEffect(() => {
+    //     const url = "http://localhost:8080/api/";
+    //     axios.get(`${url}/post/list`)
+    // .then((res) => {
+    //     setBoards(res.data);
+    //     console.log("axios requested!");
+    //     console.log(res.data);
+    // })
+    // .catch((err) => {
+    //     console.log("failed!");
+    // })
+    // }, [])
    
   return (
     <div className='container'>
@@ -27,6 +29,7 @@ function Home() {
         <table className='table'>
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>카테고리</th>
                     <th>제목</th>
                     <th>날짜</th>
@@ -36,9 +39,9 @@ function Home() {
             <tbody>
                 {boards.map((board, i) => (
                     <tr key={i}>
-                       <td>{board.id}</td>     
+                       <td>{i+1}</td>     
                        <td>{board.category}</td>     
-                       <td>{board.title}</td>     
+                       <td onClick={() => { navigate('/detail/' + board.id) }}>{board.title}</td>     
                        <td>{board.createdDate}</td>     
                        <td>{0}</td>     
                     </tr>
