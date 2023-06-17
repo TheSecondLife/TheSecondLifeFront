@@ -30,6 +30,7 @@ export default function Main(){
       <div><button className={style.btn} style={{marginTop:"5%"}}>로그인</button></div>
       <div><button className={style.btn} style={{marginTop:"5%"}}>회원가입</button></div>
 
+      <div className={style.bottom}></div>
     </div>
   );
 }
