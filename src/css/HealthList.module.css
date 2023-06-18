@@ -1,0 +1,78 @@
+* {
+  font-family: "Noto Sans KR";
+}
+.hospital_info {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  padding: 3%;
+  justify-content: space-between;
+  border-bottom: 1px groove rgb(212, 209, 209);
+}
+.hospital_info_sub .title {
+  font-size: 20px;
+  text-align: center;
+}
+.hospital_info_sub .addr {
+  font-size: 12px;
+}
+
+.logo {
+  font-family: "Caveat";
+  margin-top: 3%;
+  margin-bottom: 3%;
+  font-size: 50px;
+  color: #a26ce9;
+}
+.msg {
+  font-family: "Noto Sans KR";
+  margin: 0 auto;
+  background-color: #a26ce9;
+  color: white;
+  font-size: 20px;
+  margin-bottom: 10%;
+  border-radius: 15px;
+  width: 90%;
+  height: 50px;
+  line-height: 50px;
+  box-shadow: 5px 5px 5px grey;
+}
+
+.category {
+  background-color: rgb(235, 210, 248);
+  border-color: white;
+  height: 100%;
+  line-height: 35px;
+  font-weight: bolder;
+}
+
+/* 버튼 관련 */
+.btn_content {
+  display: flex;
+}
+.regist_btn {
+  background-color: rgb(235, 210, 248);
+  border-color: white;
+  width: 50px;
+  height: 100%;
+  line-height: 30px;
+  font-weight: bolder;
+  text-align: center;
+}
+
+/* 텍스트가 서서히 나타납니다. */
+.fadein {
+  overflow: hidden;
+  animation: fadein 1s ease-in-out;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
