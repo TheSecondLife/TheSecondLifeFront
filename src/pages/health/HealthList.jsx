@@ -1,8 +1,8 @@
 import React, { useState , useEffect} from 'react';
 import axios from 'axios';
-import style from "../css/HealthList.module.css";
+import style from "../../css/HealthList.module.css";
 import { useSelector, useDispatch } from 'react-redux';
-import {changeHospitalList} from "../store/HospitalSlice.jsx";
+import {changeHospitalList} from "../../store/HospitalSlice.jsx";
 
 //https://www.data.go.kr/data/15001698/openapi.do
 const HealthList = () => {

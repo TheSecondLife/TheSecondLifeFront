@@ -7,9 +7,13 @@ import Main from "./pages/login/Main";
 // import Home from "./pages/Home";
 import Create from "./pages/Create";
 import Detail from "./pages/Detail";
+<<<<<<< Updated upstream
 import KakaoCallback from './pages/login/KakaoCallback'
 import Select from './pages/Select';
 
+=======
+import HealthList from "./pages/health/HealthList";
+>>>>>>> Stashed changes
 
 function App() {
     return (
