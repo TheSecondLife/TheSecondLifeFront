@@ -1,0 +1,88 @@
+* {
+  width: 100%;
+  /* background-color: #fdbfa8; */
+}
+
+.logo {
+  font-size: 40px;
+  margin-top: 30%; /*전체 위치 산정*/
+  font-family: "Caveat";
+  margin-bottom: 2%;
+}
+
+.page {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  /* max-width: 500px; */
+  padding: 0 20px;
+
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  background-color: #a26ce9;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+  overflow: auto;
+}
+
+/* 슬라이더 관련 */
+.mainImg {
+  width: 100%;
+  height: 580px;
+  background-color: black;
+}
+
+.mainImg img {
+  width: 100%;
+  height: 100%;
+  /* background-color: black; */
+}
+
+/* 버튼 관련 */
+.btn {
+  background-color: #a26ce9;
+  color: white;
+  width: 60%;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 auto;
+  border-radius: 40px;
+  border: none;
+  font-weight: 700;
+  font-size: 15px;
+  font-family: Noto Sans KR;
+}
+
+.btn:hover {
+  background-color: navy;
+  color: white;
+}
+
+/* 텍스트가 서서히 올라옵니다. */
+.fadein {
+  overflow: hidden;
+  animation: fadein 2s ease-in-out;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* bottom */
+.bottom {
+  margin-top: 20%;
+}
