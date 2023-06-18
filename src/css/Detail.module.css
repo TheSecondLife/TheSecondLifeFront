@@ -4,7 +4,23 @@ input {
     text-align: left;
     outline: none;
 }
+.mainImg {
+    width: 100%;
+    margin: auto;
+    display: block;
+}
+.titleWrap > td {
+    border-bottom: 1px solid gray;
+    font-size: large;
+}
+.userWrap img {
+    border-radius: 30px;
+    width: 10%;
 
+}
+.titleWrap {
+    border: 1px solid red;
+}
 textarea {
     border: none;
     text-align: left;
@@ -20,5 +36,4 @@ select {
 }
 .selectCategory {
     text-align: left;
-    color: #333;
 }

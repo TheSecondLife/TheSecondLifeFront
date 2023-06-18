@@ -1,0 +1,32 @@
+import "./App.css";
+import { Route, Routes, Link, useNavigate, Outlet, Router } from 'react-router-dom';
+
+import BoardPage from "./BoardPage";
+import Home from "./Home";
+import Create from "./Create";
+import Login from "./components/Login";
+import TestEnter from './test/TestEnter/TestEnter';
+import KakaoCallback from './test/TestLogin/KakaoCallback'
+import Test from './test/TestXMLtoJSON/Test'
+import TestMain from './test/TestMain'
+
+function App() {
+  return (
+    <div className="App">
+      {/* <Test></Test> */}
+      <Routes>
+        <Route path='/' element={ <TestEnter/> }></Route>
+        <Route path='/kakao/callback' element={<KakaoCallback></KakaoCallback>}> </Route>
+        <Route path='/home' element={<TestMain></TestMain>}></Route>
+      </Routes>
+      {/* <Routes>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/" element={<Home></Home>}></Route>
+        <Route path="/boardCreate" element={<Create />}></Route>
+      </Routes> */}
+
+    </div>
+  );
+}
+
+export default App;
