@@ -17,7 +17,7 @@ function App() {
                     <Route path="/boardCreate" element={<Create />}></Route>
                     <Route path="/main" element={<Main />}></Route>
                     <Route path='/boardDetail' element={<Detail />} />
-
+                    <Route path="/HealthList" element={<HealthList/>}></Route> {/*이거 지워야함*/}
                 </Routes>
         </div>
         
