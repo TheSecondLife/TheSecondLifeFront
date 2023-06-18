@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import store from "./store"; //여기 다시 유저스토어로 바꿔야함 
+import store from "./store/store"; //여기 다시 유저스토어로 바꿔야함 
 
 // Bootstrap CSS
 import "bootstrap/dist/css/bootstrap.min.css";

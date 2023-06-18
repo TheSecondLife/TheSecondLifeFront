@@ -9,8 +9,12 @@
   justify-content: space-between;
   border-bottom: 1px groove rgb(212, 209, 209);
 }
-.hospital_info_sub {
-  text-align-last: left;
+.hospital_info_sub .title {
+  font-size: 20px;
+  text-align: center;
+}
+.hospital_info_sub .addr {
+  font-size: 12px;
 }
 
 .logo {
@@ -47,7 +51,6 @@
   display: flex;
 }
 .regist_btn {
-  text-align: right;
   background-color: rgb(235, 210, 248);
   border-color: white;
   width: 50px;

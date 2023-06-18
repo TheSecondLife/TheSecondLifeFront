@@ -2,26 +2,19 @@ import React, { useState , useEffect} from 'react';
 import axios from 'axios';
 import style from "../css/HealthList.module.css";
 import { useSelector, useDispatch } from 'react-redux';
-import { changeHospital } from '../store';
-
+import {changeHospitalList} from "../store/HospitalSlice.jsx";
 
 //https://www.data.go.kr/data/15001698/openapi.do
 const HealthList = () => {
   // redux 불러오기
-  let state = useSelector((state) => state.hospitalList);
+  let state_hospital = useSelector((state) => state.hospital);
   let dispatch = useDispatch();
-
-  // console.log(state);
-
-  let [list,setList]=useState();
-  
-  let [hospital,setHospital] = useState();//판매 신발 정보 
  
-    useEffect( ()=>{axios.get('https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=fERDp1OKmJqiN%2BlVyCvnmH8YoFqdfOjIk7KzkZoDA8%2FIw6vmfXxGYvEou8NwVtlFsiX%2FLynuCmwQv9K1YfOGXw%3D%3D')
+    useEffect(()=>{axios.get('https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=fERDp1OKmJqiN%2BlVyCvnmH8YoFqdfOjIk7KzkZoDA8%2FIw6vmfXxGYvEou8NwVtlFsiX%2FLynuCmwQv9K1YfOGXw%3D%3D')
           .then((data)=>{
-            // console.log(data.data.response.body.items.item[0]);
-            dispatch(changeHospital(data.data.response.body.items.item));
-            setList(data.data.response.body.items);
+            // api로 불러온 정보 가져옴
+            dispatch(changeHospitalList(data.data.response.body.items.item));
+            console.log(data.data.response.body.items.item);
           })
           .catch(()=>{
             console.log("error");
@@ -35,47 +28,20 @@ const HealthList = () => {
         {/* 안내문구 */}
         <div className={style.msg}>000님, 이런 병원들은 어떠세요?</div>
 
-        {/* <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">분류</th>
-              <th scope="col">병원명</th>
-              <th scope="col">전화번호</th>
-              <th scope="col">위치</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              //여기 병원 정보 돌리기 
-              [1,2,3].map((index)=>{
-                return(
-                  <tr className={style.infoLine}>
-                    <th scope="row">
-                      <button type="button" class="btn" className={style.category}>상급병원</button>
-                    </th>
-                    <td>000병원</td>
-                    <td>032-000-0000</td>
-                    <td>대전광역시 유성구 00동 000건물 1층 </td>
-                  </tr>
-                );
-              })
-            }
-            
-          </tbody>
-        </table> */}
-
         {
-          [1,2,3,4,5,6,7,8,9,10].map(()=>{
+          state_hospital.hospitalList.map((res)=>{
             return(
               <div className={style.hospital_info}>
-                <div><button type="button" class="btn" className={style.category}>상급병원</button></div>
+                {/* 분류 / 병원 이름 / 병원 주소 순 */}
+                <div><button type="button" class="btn" className={style.category}>{res.clCdNm}</button></div>
                 <div className={style.hospital_info_sub}>
-                  <div>인하대 병원</div>
-                  <div>대전광역시 유성구 00동 000건물 1층</div>
+                  <div className={style.title}>{res.yadmNm}</div>
+                  <div className={style.addr}>{res.addr}</div>
                 </div>
+                {/* 예약버튼 누르면 전화걸기 창으로 넘어감 */}
                 <div className={style.btn_content}>
                   <div><button type="button" class="btn" className={style.regist_btn}>찜</button></div>
-                  <div><button type="button" class="btn" className={style.regist_btn}>예약</button></div>
+                  <a href={`tel:${res.telno}`}><button type="button" class="btn" className={style.regist_btn}>예약</button></a>
                 </div>
               </div>
             );

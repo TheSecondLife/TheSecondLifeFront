@@ -4,8 +4,8 @@ import { Route, Routes, Link, useNavigate, Outlet, Router } from 'react-router-d
 import BoardPage from "./BoardPage";
 import Home from "./Home";
 import Create from "./Create";
-import Login from "./components/Login";
-import HealthList from "./components/HealthList";
+import Login from "./pages/Login";
+import HealthList from "./pages/HealthList";
 
 function App() {
     return (
