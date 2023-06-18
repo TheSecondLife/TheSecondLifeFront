@@ -1,10 +1,23 @@
 import React, { useState , useEffect} from 'react';
-import style from "../css/Main.module.css";
+import style from "../../css/Main.module.css";
 
 
 export default function Main(){
+
+  let [latitude, setLatitude] = useState(-1);
+  let [longitude, setLongitude] =useState(-1);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      setLatitude(pos.coords.latitude);
+      setLongitude(pos.coords.longitude);
+      const url = process.env.REACT_APP_KAKAO_LOGIN_URL;
+      // console.log(url)
+  });
+  }, [])
   return(
     <div className={`${style.page, style.fadein}`}>
+      <p>위도 : {latitude}, 경도 : {longitude}</p>
 
       {/* 로고 */}
       <div className={style.logo}>We're your <b style={{color:"#a26ce9"}}>Second Life</b></div>
@@ -24,13 +37,18 @@ export default function Main(){
         </div>
       </div>
 
-      {/* <img src={process.env.PUBLIC_URL + '/mainImg.jpeg'}/> */}
       
-
-      <div><button className={style.btn} style={{marginTop:"5%"}}>로그인</button></div>
-      <div><button className={style.btn} style={{marginTop:"5%"}}>회원가입</button></div>
+      {/* 카카오 로그인 */}
+      <div><button className={style.btn} style={{marginTop:"5%"}} onClick={() => {
+        kakaoLogin()}}>로그인</button></div>
+      {/* <div><button className={style.btn} style={{marginTop:"5%"}} onClick={() => {
+        enter()}}>회원가입</button></div> */}
 
       <div className={style.bottom}></div>
     </div>
   );
+
+  function kakaoLogin() {
+    window.location.href = process.env.REACT_APP_KAKAO_LOGIN_URL
+  }
 }
