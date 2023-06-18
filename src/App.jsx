@@ -9,7 +9,8 @@ import Create from "./pages/Create";
 import Detail from "./pages/Detail";
 import KakaoCallback from './pages/login/KakaoCallback'
 import Select from './pages/Select';
-
+import HealthList from "./pages/health/HealthList";
+import HealthQuestion from "./pages/health/HealthQuestion";
 
 function App() {
     return (
@@ -22,7 +23,8 @@ function App() {
                     <Route path="/boardCreate" element={<Create />}></Route>
                     <Route path="/main" element={<Main />}></Route>
                     <Route path='/boardDetail' element={<Detail />} />
-                    <Route path="/HealthList" element={<HealthList/>}></Route> {/*이거 지워야함*/}
+                    <Route path="/HealthList" element={<HealthList/>}></Route>
+                    <Route path="/HealthQuestion" element={<HealthQuestion/>}></Route>
                 </Routes>
         </div>
         
