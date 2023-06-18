@@ -9,12 +9,15 @@ const HealthList = () => {
   // redux 불러오기
   let state_hospital = useSelector((state) => state.hospital);
   let dispatch = useDispatch();
+
+  console.log(state_hospital.sido_num);
  
-    useEffect(()=>{axios.get('https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=fERDp1OKmJqiN%2BlVyCvnmH8YoFqdfOjIk7KzkZoDA8%2FIw6vmfXxGYvEou8NwVtlFsiX%2FLynuCmwQv9K1YfOGXw%3D%3D')
+    useEffect(()=>{axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=fERDp1OKmJqiN%2BlVyCvnmH8YoFqdfOjIk7KzkZoDA8%2FIw6vmfXxGYvEou8NwVtlFsiX%2FLynuCmwQv9K1YfOGXw%3D%3D&sgguCd=${state_hospital.sido_num}`)
           .then((data)=>{
             // api로 불러온 정보 가져옴
-            dispatch(changeHospitalList(data.data.response.body.items.item));
-            console.log(data.data.response.body.items.item);
+            if(data.data.response.body.items.item != null)
+              dispatch(changeHospitalList(data.data.response.body.items.item));
+            console.log(data);
           })
           .catch(()=>{
             console.log("error");
