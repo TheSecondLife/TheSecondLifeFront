@@ -1,5 +1,6 @@
 * {
   font-family: "Noto Sans KR";
+  text-align: center;
 }
 
 /* HealthList 관련 CSS */
@@ -9,8 +10,10 @@
   margin-bottom: 3%;
   font-size: 50px;
   color: #a26ce9;
+  text-align: center;
 }
 .msg {
+  text-align: center;
   font-family: "Noto Sans KR";
   margin: 0 auto;
   background-color: #a26ce9;
@@ -32,6 +35,7 @@
   font-weight: bolder;
 }
 .card {
+  text-align: center;
   width: 100%;
   display: inline-block;
   margin: 5%;
@@ -55,6 +59,7 @@
 .fadein {
   overflow: hidden;
   animation: fadein 1s ease-in-out;
+  text-align: center;
 }
 
 @keyframes fadein {
@@ -89,10 +94,12 @@
   height: 100%;
   background-color: rgb(235, 210, 248);
   border-radius: 15px;
+  text-align: center;
 }
 
 .explain {
   line-height: 80px;
+  text-align: center;
 }
 .answer_text {
   width: 80%;
@@ -115,7 +122,6 @@
   height: 50px;
   line-height: 30px;
   font-weight: bolder;
-  text-align: center;
 }
 
 .step_btn {
