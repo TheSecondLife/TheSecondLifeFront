@@ -60,7 +60,7 @@ const getHTML6 = async() => {
 let codes_info = [];
 const parsing = async () => {
   let html = await getHTML();
-  console.log(html);
+  // console.log(html);
   let $ = cheerio.load(html.data);
   let $codeList = $("#codeTbl>tbody>tr");
 

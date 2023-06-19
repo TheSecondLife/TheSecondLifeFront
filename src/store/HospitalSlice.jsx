@@ -1,7 +1,7 @@
 import {createSlice } from "@reduxjs/toolkit";
+// import {codes_info} from "../pages/health/scraper.js";
+import {server} from "../pages/health/server";
 
-
-// const {codes_info} = require("../pages/health/scraper.js");
 
 let initialState = {
   hospitalList  : [],
