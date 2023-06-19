@@ -10,69 +10,123 @@ const HealthList = () => {
   let state_hospital = useSelector((state) => state.hospital);
   let dispatch = useDispatch();
 
-  console.log(state_hospital.sido_num);
- 
-    useEffect(()=>{axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=fERDp1OKmJqiN%2BlVyCvnmH8YoFqdfOjIk7KzkZoDA8%2FIw6vmfXxGYvEou8NwVtlFsiX%2FLynuCmwQv9K1YfOGXw%3D%3D&sgguCd=${state_hospital.sido_num}`)
-          .then((data)=>{
-            // api로 불러온 정보 가져옴
-            if(data.data.response.body.items.item != null)
-              dispatch(changeHospitalList(data.data.response.body.items.item));
-            console.log(data);
-          })
-          .catch(()=>{
-            console.log("error");
-          })},[])
+  //loginUser 불러오기
+  let loginUser = JSON.parse(localStorage.getItem("loginUser"));
+
+  //화면이 초기화되면 redux 내용이 모두 바뀌기 때문에 local storage에 값 저장 -> 불러오기
+  let address_gu = localStorage.getItem("address_gu");
+  let address_dong = localStorage.getItem("address_dong");
+  let sickness = localStorage.getItem("sickness");
+
+  // api요청
+  useEffect(()=>{axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=fERDp1OKmJqiN%2BlVyCvnmH8YoFqdfOjIk7KzkZoDA8%2FIw6vmfXxGYvEou8NwVtlFsiX%2FLynuCmwQv9K1YfOGXw%3D%3D&sgguCd=${address_gu}&emdongNm=${address_dong}`)
+    .then((data)=>{
+    // api로 불러온 정보 가져옴
+    if(data.data.response.body.items.item != null)
+    dispatch(changeHospitalList(data.data.response.body.items.item));
+    console.log(data);
+  })
+  .catch(()=>{
+    console.log("error");
+  })},[])
         
-    return(
-      <div className={style.intro, style.fadein}> 
-        {/* 로고 */}
-        <div className={style.logo}>Second Life</div>
+  return(
+    <div className={style.intro, style.fadein}> 
+      {/* 로고 */}
+      <div className={style.logo}>Second Life</div>
 
-        {/* 안내문구 */}
-        <div className={style.msg}>000님, 이런 병원들은 어떠세요?</div>
+      {/* 안내문구 */}
+      <div className={style.msg}>{loginUser.name}님, 이런 병원들은 어떠세요?
 
-        {
-          state_hospital.hospitalList.map((res)=>{
-            return(
-              <div className={style.hospital_info}>
-                {/* 분류 / 병원 이름 / 병원 주소 순 */}
-                <div><button type="button" class="btn" className={style.category}>{res.clCdNm}</button></div>
-                <div className={style.hospital_info_sub}>
-                  <div className={style.title}>{res.yadmNm}</div>
-                  <div className={style.addr}>{res.addr}</div>
-                </div>
-                {/* 예약버튼 누르면 전화걸기 창으로 넘어감 */}
-                <div className={style.btn_content}>
-                  <div><button type="button" class="btn" className={style.regist_btn}>찜</button></div>
-                  <a href={`tel:${res.telno}`}><button type="button" class="btn" className={style.regist_btn}>예약</button></a>
-                </div>
-              </div>
-            );
-          })
-        }
-
-
-        {/* page nation -> 무한 스크롤로 하면 필요 없음*/}
-        {/* <nav aria-label="Page navigation example">
-          <ul class="pagination" style={{justifyContent:'center'}}>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav> */}
-        
+        <a href="/HealthQuestion" style={{textDecoration:"none"}} >
+          <p className={style.replay_btn}>다시 찾을래요</p>
+        </a>
       </div>
+
+      {/* 결과 지도 및 리스트 */}
+      <div><Kakao></Kakao></div>
+      {state_hospital.hospitalList.map((res)=>{
+        return(
+          <div class="card" className={style.card} style={{width:"18rem"}}>
+            <img src="https://media.istockphoto.com/id/1240772668/ko/%EC%82%AC%EC%A7%84/%EB%B3%91%EC%9B%90%EC%9D%84%EC%9C%84%ED%95%9C-%ED%8C%8C%EB%9E%80%EC%83%89-%EB%AC%B8%EC%9E%90-h-%EA%B8%B0%ED%98%B8%EC%99%80-%ED%81%B0-%ED%98%84%EB%8C%80-%EA%B1%B4%EB%AC%BC.jpg?s=612x612&w=0&k=20&c=L4PWMffTtF8qilVCFpWjyIK8iqvBE9XVv3WpAF4naPs=" class="card-img-top" alt="..."/>
+            <div class="card-body">
+              <h5 class="card-title">{res.yadmNm}</h5>
+              <p class="card-text" style={{fontSize:"15px", height:"100px"}}>{res.addr}</p>
+              <a href="#" class="btn btn-dark" href={`tel:${res.telno}`}>전화하기</a>
+            </div>
+          </div>
+        )
+      })}
+    </div>
     );
 }
 
+
+
+
+
+// 참고 :  https://velog.io/@tpgus758/React%EC%97%90%EC%84%9C-Kakao-map-API-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
+const {kakao} = window;
+
+function Kakao(){
+  //화면이 초기화되면 redux 내용이 모두 바뀌기 때문에 local storage에 값 저장 -> 불러오기
+  let address_gu = localStorage.getItem("address_gu");
+  let address_dong = localStorage.getItem("address_dong");
+  let sickness = localStorage.getItem("sickness");
+
+  // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+  function makeOverListener(map, marker, infowindow) {
+    return function() {
+        infowindow.open(map, marker);
+    };
+  }
+
+  // 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+  function makeOutListener(infowindow) {
+    return function() {
+        infowindow.close();
+    };
+  }
+
+  useEffect(()=>{
+
+    // 마커 표시
+    axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=fERDp1OKmJqiN%2BlVyCvnmH8YoFqdfOjIk7KzkZoDA8%2FIw6vmfXxGYvEou8NwVtlFsiX%2FLynuCmwQv9K1YfOGXw%3D%3D&sgguCd=${address_gu}&emdongNm=${address_dong}`)
+    .then((data)=>{
+
+    // 카카오 api
+    var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+    var options = { //지도를 생성할 때 필요한 기본 옵션
+      center: new kakao.maps.LatLng(data.data.response.body.items.item[0].YPos, data.data.response.body.items.item[0].XPos), //지도의 중심좌표.
+      level: 7//지도의 레벨(확대, 축소 정도)
+    };
+    var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+    // api로 불러온 정보 가져옴 -> 정보 수만큼 마커 표시
+    data.data.response.body.items.item.map((res)=>{
+      var markerPosition  = new kakao.maps.LatLng(res.YPos, res.XPos); 
+      var marker = new kakao.maps.Marker({
+        position: markerPosition
+      });
+      marker.setMap(map);
+
+
+      // 마커 위에 정보 표시
+      var infowindow = new kakao.maps.InfoWindow({
+        content:res.yadmNm // 인포윈도우에 표시할 내용
+      });
+
+      // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+      kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+      kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+    })
+  })
+  .catch(()=>{
+    console.log("error");
+  })
+  },[])
+
+  return(
+    <div id="map" style={{width:"100%", height:"300px"}}></div>
+  )
+}
 export default HealthList;

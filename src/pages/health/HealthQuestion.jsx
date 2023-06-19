@@ -9,6 +9,9 @@ const HealthQuestion = () => {
   let state_hospital = useSelector((state) => state.hospital);
   let dispatch = useDispatch();
 
+  // 로그인 유저 정보 가져오기
+  let loginUser = JSON.parse(localStorage.getItem("loginUser"));
+
   const [questionNumber, setQuestionNumber] = useState(0);
   const [btnOn, setBtnOn] = useState(false);
   
@@ -33,7 +36,7 @@ const HealthQuestion = () => {
       <div className={style.logo}>Second Life</div>
 
       {/* 안내문구 */}
-      <div className={style.msg}>000님, {state_hospital.question[questionNumber]} <p style={{fontSize:"15px", marginTop:"-15px"}}>ex) {state_hospital.explain[questionNumber]}</p></div>
+      <div className={style.msg}>{loginUser.name}님, {state_hospital.question[questionNumber]} <p style={{fontSize:"15px", marginTop:"-15px"}}>ex) {state_hospital.explain[questionNumber]}</p></div>
       
       <div className={style.q_and_a}>
         <div className={style.explain}>💛 녹음버튼을 누른 채 말씀해주세요 💛</div>
@@ -53,13 +56,22 @@ const HealthQuestion = () => {
 
         <div className={style.step_btn}>
 
+        {questionNumber>=1 && <button className={style.prev} onClick={()=>{
+            setQuestionNumber(questionNumber-1);
+            // input 비우기위해 value 초기화
+            setValue("")
+          }}>이전</button>}
+
+          {/* 답변을 local storage에 저장할 것 */}
           <button className={style.next} onClick={()=>{
             if(questionNumber==0){dispatch(getAddress_sido(value));}
-            else if(questionNumber==1){dispatch(getAddress_dong(value));}
-            else if(questionNumber==2){dispatch(getSickness(value));}
+            if(questionNumber==1){dispatch(getAddress_dong(value)); localStorage.setItem("address_dong", value);}
+            else if(questionNumber==2){dispatch(getSickness(value)); localStorage.setItem("sickness", value);}
             setQuestionNumber(questionNumber+1);
             if(questionNumber==2){window.location.href = "/HealthList"}
             if(questionNumber>=1){return setBtnOn(true)}
+            // input 비우기위해 value 초기화
+            setValue("")
           }}>다음</button>
         </div>
 
