@@ -1,0 +1,14 @@
+.headerComp {
+  background-color: white;
+  position: fixed;
+}
+
+.headerCompLogo {
+  text-align: left !important;
+  font-family: "Caveat";
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 3%;
+  font-size: 30px;
+  color: #a26ce9;
+}
