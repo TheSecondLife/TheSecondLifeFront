@@ -1,0 +1,47 @@
+.postComp {
+  padding: 2% 1% 2.5% 2%;
+  background-color: antiquewhite;
+  width: 95%;
+  margin: auto;
+  margin-top: 2%;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.category {
+  background-color: gainsboro;
+  width: fit-content;
+  padding-left: 2%;
+  padding-right: 2%;
+  border-radius: 10px 10px 10px 10px;
+  font-size: small;
+  font-weight: bold;
+}
+
+.postTitle {
+  padding-top: 1%;
+  font-weight: bold;
+}
+
+.postContent {
+  font-size: small;
+}
+
+.postDate {
+  font-size: small;
+}
+
+.categoryList{
+  display: flex;
+  padding-left: 3%;
+}
+
+.item {
+  margin-right: 1%;
+  background-color: gainsboro;
+  width: fit-content;
+  padding-left: 2%;
+  padding-right: 2%;
+  border-radius: 10px 10px 10px 10px;
+  font-size: small;
+  font-weight: bold;
+}
