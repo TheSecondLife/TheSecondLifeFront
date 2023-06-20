@@ -1,8 +1,11 @@
 import React, { useState , useEffect} from 'react';
 import style from "../../css/HealthList.module.css";
 import { useSelector, useDispatch } from 'react-redux';
-import {changeHospitalList, getAddress_sido, getAddress_dong, getSickness} from "../../store/HospitalSlice.jsx";
+import {changeHospitalList, getAddress_sido, getAddress_dong, getSickness,getDiagnosis_list,getDiagnosisCodes} from "../../store/HospitalSlice.jsx";
 import { useSpeechRecognition } from "react-speech-kit";
+import axios from 'axios';
+import HeaderComp from "../HeaderComp";
+import FooterComp from "../FooterComp";
 
 const HealthQuestion = () => {
   // redux 불러오기
@@ -30,10 +33,39 @@ const HealthQuestion = () => {
     window.location.href = "/HealthList"
   }
 
+  function GPT() {
+    let list = [];
+    axios.post("http://localhost:8080/api/gpt/chat",{
+            model : "gpt-3.5-turbo",
+            role : "user",
+            message:state_hospital.sickness,
+            maxTokens : 1000,
+          })
+          .then((res)=>{
+            let result = res.data.messages[0].message.split(', ');
+            dispatch(getDiagnosis_list(result));
+            console.log(res.data.messages[0].message.split(', '));
+  
+            console.log(state_hospital.diagnosis_list.length);
+            console.log(state_hospital.hospitalInfo.length);
+            //진료과명을 code로 변환
+            state_hospital.diagnosis_list.map((diagnosis)=>{
+              state_hospital.hospitalInfo.map((info)=>{
+                if(info.name === diagnosis && state_hospital.diagnosisCodes.indexOf(diagnosis)===-1){
+                  dispatch(getDiagnosisCodes(info.code));
+                  list.push(info.code);
+                }
+              });
+            });
+            localStorage.setItem("diagnosisCodes",list);
+            console.log(list);
+  
+          })
+  }
+
   return(
     <div className={style.intro, style.fadein}> 
-      {/* 로고 */}
-      <div className={style.logo}>Second Life</div>
+      <HeaderComp/>
 
       {/* 안내문구 */}
       <div className={style.msg}>{loginUser.name}님, {state_hospital.question[questionNumber]} <p style={{fontSize:"15px", marginTop:"-15px"}}>ex) {state_hospital.explain[questionNumber]}</p></div>
@@ -64,21 +96,23 @@ const HealthQuestion = () => {
 
           {/* 답변을 local storage에 저장할 것 */}
           <button className={style.next} onClick={()=>{
-            if(questionNumber==0){dispatch(getAddress_sido(value));}
-            if(questionNumber==1){dispatch(getAddress_dong(value)); localStorage.setItem("address_dong", value);}
-            else if(questionNumber==2){dispatch(getSickness(value)); localStorage.setItem("sickness", value);}
+            if(questionNumber==0){setValue(""); dispatch(getAddress_sido(value));}
+            else if(questionNumber==1){setValue(""); dispatch(getAddress_dong(value)); localStorage.setItem("address_dong", value);}
+            else if(questionNumber==2){setValue(""); dispatch(getSickness(value)); localStorage.setItem("sickness", value); GPT();}
             setQuestionNumber(questionNumber+1);
             if(questionNumber==2){window.location.href = "/HealthList"}
             if(questionNumber>=1){return setBtnOn(true)}
-            // input 비우기위해 value 초기화
-            setValue("")
           }}>다음</button>
         </div>
+        <FooterComp/>
 
     </div>
 
     
+
+    
   );
+
 }
 
 export default HealthQuestion;
