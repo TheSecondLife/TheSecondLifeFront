@@ -11,7 +11,7 @@ function Footer () {
   let navigate = useNavigate();
 
   useEffect(() => {
-    let user = JSON.parse(localStorage.getItem("loginUser")).profileImg;
+    let user = JSON.parse(sessionStorage.getItem("loginUser")).profileImg;
     setProfileImg(user);
     let navState = localStorage.getItem("navState")
     if (navState === null) {

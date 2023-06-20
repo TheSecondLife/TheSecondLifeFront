@@ -7,7 +7,7 @@ let user = createSlice({
     name:"Daen"
   },
   reducers : {
-    chageUser(state, action) {
+    changeUser(state, action) {
       state = action.payload
     },
   }

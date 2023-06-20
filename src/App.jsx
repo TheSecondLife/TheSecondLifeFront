@@ -8,22 +8,25 @@ import Main from "./pages/login/Main";
 import Create from "./pages/Create";
 import Detail from "./pages/Detail";
 import KakaoCallback from './pages/login/KakaoCallback'
-import Select from './pages/Select';
+import HomePage from './pages/HomePage';
 import HealthList from "./pages/health/HealthList";
 import HealthQuestion from "./pages/health/HealthQuestion";
 import ChatPage from "./pages/ChatPage";
 import BoardPage from "./pages/BoardPage";
 import ProfilePage from './pages/ProfilePage'
-import board from './store/BoardSlice';
+import JobPage from './pages/JobPage'
+import CulturePage from './pages/CulturePage'
+import BoardDetail from './pages/BoardDetail'
 
 
 function App() {
+
     return (
         <div className="App">
                 <Routes>
                     <Route path="/" element={<Main />} />
                     <Route path='/kakao/callback' element={<KakaoCallback></KakaoCallback>}> </Route>
-                    <Route path='/home' element={<Select/>}></Route>
+                    <Route path='/home' element={<HomePage/>}></Route>
                     {/* <Route path="/" element={<Home></Home>}></Route> */}
                     <Route path="/boardCreate" element={<Create />}></Route>
                     <Route path="/main" element={<Main />}></Route>
@@ -33,6 +36,9 @@ function App() {
                     <Route path='/chat' element={<ChatPage />}></Route>
                     <Route path='/board' element={<BoardPage />}></Route>
                     <Route path='/profile' element={<ProfilePage />}></Route>
+                    <Route path='/job' element={<JobPage/>}></Route>
+                    <Route path='/culture' element={<CulturePage/>}></Route>
+                    <Route path='/board/:id' element={<BoardDetail/>}></Route>
                 </Routes>
         </div>
         

@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
 function GetAuthCodeAndSendToSpring() {
 
   const navigate = useNavigate();
@@ -13,7 +12,7 @@ function GetAuthCodeAndSendToSpring() {
   }, [])
 
   async function kakaoLogin(code2) {
-    const url = "http://localhost:8080/api/kakao/code";
+    const url = "/api/kakao/code";
     const data = { 
       code: code2,
       redirect: "http://localhost:3000/kakao/callback", 
@@ -23,7 +22,7 @@ function GetAuthCodeAndSendToSpring() {
     await axios.post(url, data, config)
     .then((result) => {
       const loginUser = JSON.stringify(result.data)
-      localStorage.setItem("loginUser", loginUser);
+      sessionStorage.setItem("loginUser", loginUser);
       navigate("/home");
     })
   }
