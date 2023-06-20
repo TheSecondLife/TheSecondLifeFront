@@ -13,7 +13,7 @@ const HealthQuestion = () => {
   let dispatch = useDispatch();
 
   // 로그인 유저 정보 가져오기
-  let loginUser = JSON.parse(localStorage.getItem("loginUser"));
+  let loginUser = JSON.parse(sessionStorage.getItem("loginUser"));
 
   const [questionNumber, setQuestionNumber] = useState(0);
   const [btnOn, setBtnOn] = useState(false);

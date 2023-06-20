@@ -13,7 +13,7 @@ const HealthList = () => {
   let dispatch = useDispatch();
 
   //loginUser 불러오기
-  let loginUser = JSON.parse(localStorage.getItem("loginUser"));
+  let loginUser = JSON.parse(sessionStorage.getItem("loginUser"));
 
   //화면이 초기화되면 redux 내용이 모두 바뀌기 때문에 local storage에 값 저장 -> 불러오기
   let address_gu = localStorage.getItem("address_gu");

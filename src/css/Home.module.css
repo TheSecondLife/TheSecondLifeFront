@@ -1,3 +1,99 @@
-*{
-    text-align: center;
+* {
+  text-align: center;
+}
+
+.msg {
+  text-align: center;
+  font-family: "Noto Sans KR";
+  margin: 0 auto;
+  background-color: #a26ce9;
+  color: white;
+  font-size: 20px;
+  margin-bottom: 10%;
+  border-radius: 15px;
+  width: 90%;
+  height: 80px;
+  line-height: 80px;
+  box-shadow: 5px 5px 5px grey;
+  margin-top: 10%;
+}
+
+.selectBtn {
+  display: flex;
+  flex-direction: column;
+  padding: 10%;
+  padding-top: 0%;
+  width: 100%;
+}
+
+.lineOne {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5%;
+  justify-content: space-evenly;
+}
+
+.lineOne > button {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  margin-right: 1%;
+  background-color: white;
+}
+
+.lineTwo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.lineTwo > button {
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  margin-right: 1%;
+  background-color: white;
+}
+
+.workBtn {
+  background-image: url("../../public/worknonback.png");
+  background-size: cover;
+  opacity: 1;
+}
+.exerciseBtn {
+  background-image: url("../../public/exercise_nonback.png");
+  background-size: cover;
+  opacity: 1;
+}
+.healthBtn {
+  background-image: url("../../public/health_nonback.png");
+  background-size: cover;
+  opacity: 1;
+}
+.communicationBtn {
+  background-image: url("../../public/communication_nonback.png");
+  background-size: cover;
+  opacity: 1;
+}
+
+.workBtn:hover .title,
+.exerciseBtn:hover .title,
+.healthBtn:hover .title,
+.communicationBtn:hover .title {
+  display: block;
+  opacity: 1;
+  text-align: center;
+  background-color: white;
+  opacity: 0.9;
+}
+
+.backText {
+  width: 100%;
+  height: 100%;
+}
+.title {
+  z-index: 1;
+  font-size: 50px;
+  display: none;
+  margin-top: 30%;
 }
