@@ -19,7 +19,7 @@ export default function Main(){
       {/* <p>위도 : {latitude}, 경도 : {longitude}</p> */}
 
       {/* 로고 */}
-      <div className={style.logo}>We're your <b style={{color:"#a26ce9"}}>Second Life</b></div>
+      <div className={style.logo}>We're your <b style={{color:"#a26ce9", fontFamily:"Caveat"}}>Second Life</b></div>
      
       {/* auto playing */}
       <div className={style.slider} id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">

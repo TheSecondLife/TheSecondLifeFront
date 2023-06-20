@@ -3,6 +3,8 @@ import axios from 'axios';
 import style from "../../css/HealthList.module.css";
 import { useSelector, useDispatch } from 'react-redux';
 import {changeHospitalList} from "../../store/HospitalSlice.jsx";
+import HeaderComp from "../HeaderComp";
+import FooterComp from "../FooterComp";
 
 //https://www.data.go.kr/data/15001698/openapi.do
 const HealthList = () => {
@@ -16,24 +18,50 @@ const HealthList = () => {
   //화면이 초기화되면 redux 내용이 모두 바뀌기 때문에 local storage에 값 저장 -> 불러오기
   let address_gu = localStorage.getItem("address_gu");
   let address_dong = localStorage.getItem("address_dong");
-  let sickness = localStorage.getItem("sickness");
+  let diagnosisCodes = localStorage.getItem("diagnosisCodes");
 
-  // api요청
-  useEffect(()=>{axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=fERDp1OKmJqiN%2BlVyCvnmH8YoFqdfOjIk7KzkZoDA8%2FIw6vmfXxGYvEou8NwVtlFsiX%2FLynuCmwQv9K1YfOGXw%3D%3D&sgguCd=${address_gu}&emdongNm=${address_dong}`)
-    .then((data)=>{
-    // api로 불러온 정보 가져옴
-    if(data.data.response.body.items.item != null)
-    dispatch(changeHospitalList(data.data.response.body.items.item));
-    console.log(data);
-  })
-  .catch(()=>{
-    console.log("error");
-  })},[])
+  // api요청 -> 내가 지금 위치한 곳 기준 전체 병원
+  let hospitalList = [];
+  let flag = false;
+
+  useEffect(()=>{
+    diagnosisCodes.split(",").map((code)=>{
+      axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=${process.env.REACT_APP_HEALTH_KEY}&numOfRows=10&sgguCd=${address_gu}&emdongNm=${address_dong}&dgsbjtCd=${code}`)
+      .then((data)=>{
+
+        // api로 불러온 정보 가져옴
+        for(let i=0;i<data.data.response.body.items.item.length;i++){ 
+          for(let j=0;j<hospitalList.length;j++){
+            if(hospitalList[j].yadmNm === data.data.response.body.items.item[i].yadmNm){
+              //중복된 값이 이미 있다.
+              flag = true;
+            }
+          }
+        
+          if(!flag){
+            hospitalList.push(data.data.response.body.items.item[i]);
+            dispatch(changeHospitalList(data.data.response.body.items.item[i]));
+          }
+          flag=false;
+        }//for end
+
+      })
+      .catch(()=>{
+        console.log("error");
+      })
+    });
+  },[]);
+
+  console.log(state_hospital.hospitalList);
+
+  
         
   return(
-    <div className={style.intro, style.fadein}> 
+    <div className={style.fadein}> 
+      <HeaderComp/>
+
       {/* 로고 */}
-      <div className={style.logo}>Second Life</div>
+      {/* <div className={style.logo}>Second Life</div> */}
 
       {/* 안내문구 */}
       <div className={style.msg}>{loginUser.name}님, 이런 병원들은 어떠세요?
@@ -45,27 +73,28 @@ const HealthList = () => {
 
       {/* 결과 지도 및 리스트 */}
       <div><Kakao></Kakao></div>
-      {state_hospital.hospitalList.map((res)=>{
-        return(
-          <div class="card" className={style.card} style={{width:"18rem"}}>
-            <img src="https://media.istockphoto.com/id/1240772668/ko/%EC%82%AC%EC%A7%84/%EB%B3%91%EC%9B%90%EC%9D%84%EC%9C%84%ED%95%9C-%ED%8C%8C%EB%9E%80%EC%83%89-%EB%AC%B8%EC%9E%90-h-%EA%B8%B0%ED%98%B8%EC%99%80-%ED%81%B0-%ED%98%84%EB%8C%80-%EA%B1%B4%EB%AC%BC.jpg?s=612x612&w=0&k=20&c=L4PWMffTtF8qilVCFpWjyIK8iqvBE9XVv3WpAF4naPs=" class="card-img-top" alt="..."/>
-            <div class="card-body">
-              <h5 class="card-title">{res.yadmNm}</h5>
-              <p class="card-text" style={{fontSize:"15px", height:"100px"}}>{res.addr}</p>
-              <a href="#" class="btn btn-dark" href={`tel:${res.telno}`}>전화하기</a>
+      {
+        state_hospital.hospitalList.map((res)=>{
+          return(
+            <div class="card" className={style.card} style={{width:"18rem"}}>
+              <img src="https://media.istockphoto.com/id/1240772668/ko/%EC%82%AC%EC%A7%84/%EB%B3%91%EC%9B%90%EC%9D%84%EC%9C%84%ED%95%9C-%ED%8C%8C%EB%9E%80%EC%83%89-%EB%AC%B8%EC%9E%90-h-%EA%B8%B0%ED%98%B8%EC%99%80-%ED%81%B0-%ED%98%84%EB%8C%80-%EA%B1%B4%EB%AC%BC.jpg?s=612x612&w=0&k=20&c=L4PWMffTtF8qilVCFpWjyIK8iqvBE9XVv3WpAF4naPs=" class="card-img-top" alt="..."/>
+              <div class="card-body">
+                <h5 class="card-title">{res.yadmNm}</h5>
+                <p class="card-text" style={{fontSize:"15px", height:"100px"}}>{res.addr}</p>
+                <a href="#" class="btn btn-dark" href={`tel:${res.telno}`}>전화하기</a>
+              </div>
             </div>
-          </div>
-        )
-      })}
+          )
+        })
+      }
+      <FooterComp/>
     </div>
     );
 }
 
 
-
-
-
 // 참고 :  https://velog.io/@tpgus758/React%EC%97%90%EC%84%9C-Kakao-map-API-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
+// 카카오맵 api 시작
 const {kakao} = window;
 
 function Kakao(){
@@ -73,6 +102,7 @@ function Kakao(){
   let address_gu = localStorage.getItem("address_gu");
   let address_dong = localStorage.getItem("address_dong");
   let sickness = localStorage.getItem("sickness");
+  let diagnosisCodes = localStorage.getItem("diagnosisCodes");
 
   // 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
   function makeOverListener(map, marker, infowindow) {
@@ -91,7 +121,7 @@ function Kakao(){
   useEffect(()=>{
 
     // 마커 표시
-    axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=fERDp1OKmJqiN%2BlVyCvnmH8YoFqdfOjIk7KzkZoDA8%2FIw6vmfXxGYvEou8NwVtlFsiX%2FLynuCmwQv9K1YfOGXw%3D%3D&sgguCd=${address_gu}&emdongNm=${address_dong}`)
+    axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=${process.env.REACT_APP_HEALTH_KEY}&sgguCd=${address_gu}&emdongNm=${address_dong}`)
     .then((data)=>{
 
     // 카카오 api

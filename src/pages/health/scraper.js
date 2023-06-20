@@ -1,7 +1,10 @@
 //참고 : https://www.youtube.com/watch?v=xbehh8lWy_A
-
+//지역 코드 크롤링 > 추후 정보가 바뀌면 이거 페이지 번호 추가해서 이용할 것
 const axios = require("axios");
 const cheerio = require("cheerio");
+const express = require('express');
+const path = require('path');
+const app = express();
 
 const getHTML = async() => {
   
@@ -60,7 +63,6 @@ const getHTML6 = async() => {
 let codes_info = [];
 const parsing = async () => {
   let html = await getHTML();
-  console.log(html);
   let $ = cheerio.load(html.data);
   let $codeList = $("#codeTbl>tbody>tr");
 
@@ -75,7 +77,7 @@ const parsing = async () => {
 
   html = await getHTML2();
   $ = cheerio.load(html.data);
-  // $codeList = $("#codeTbl");
+  $codeList = $("#codeTbl>tbody>tr");
   $codeList.each((idx, node)=>{
     
     codes_info.push({
@@ -86,7 +88,7 @@ const parsing = async () => {
 
   html = await getHTML3();
   $ = cheerio.load(html.data);
-  // $codeList = $("#codeTbl");
+  $codeList = $("#codeTbl>tbody>tr");
   $codeList.each((idx, node)=>{
     
     codes_info.push({
@@ -97,7 +99,7 @@ const parsing = async () => {
 
   html = await getHTML4();
   $ = cheerio.load(html.data);
-  // $codeList = $("#codeTbl");
+  $codeList = $("#codeTbl>tbody>tr");
   $codeList.each((idx, node)=>{
     
     codes_info.push({
@@ -109,7 +111,7 @@ const parsing = async () => {
 
   html = await getHTML5();
   $ = cheerio.load(html.data);
-  // $codeList = $("#codeTbl");
+  $codeList = $("#codeTbl>tbody>tr");
   $codeList.each((idx, node)=>{
     
     codes_info.push({
@@ -120,7 +122,7 @@ const parsing = async () => {
 
   html = await getHTML6();
   $ = cheerio.load(html.data);
-  // $codeList = $("#codeTbl");
+  $codeList = $("#codeTbl>tbody>tr");
   $codeList.each((idx, node)=>{
     
     codes_info.push({
@@ -136,4 +138,16 @@ const parsing = async () => {
 
 parsing();
 
-// export {codes_info}; export쓰면 안되고 return으로 보내야함
+
+
+app.listen(9000, function(){
+  console.log('listening on 9000')
+})
+
+app.get("/api/crwal", async(req, res)=>{
+  // const result = await handleAsync();
+
+  res.send([{
+    codes_info,
+  }]);
+});
