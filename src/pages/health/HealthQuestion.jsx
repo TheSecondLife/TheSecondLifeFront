@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import {changeHospitalList, getAddress_sido, getAddress_dong, getSickness,getDiagnosis_list,getDiagnosisCodes} from "../../store/HospitalSlice.jsx";
 import { useSpeechRecognition } from "react-speech-kit";
 import axios from 'axios';
+import HeaderComp from "../HeaderComp";
+import FooterComp from "../FooterComp";
 
 const HealthQuestion = () => {
   // redux 불러오기
@@ -63,8 +65,7 @@ const HealthQuestion = () => {
 
   return(
     <div className={style.intro, style.fadein}> 
-      {/* 로고 */}
-      <div className={style.logo}>Second Life</div>
+      <HeaderComp/>
 
       {/* 안내문구 */}
       <div className={style.msg}>{loginUser.name}님, {state_hospital.question[questionNumber]} <p style={{fontSize:"15px", marginTop:"-15px"}}>ex) {state_hospital.explain[questionNumber]}</p></div>
@@ -103,6 +104,7 @@ const HealthQuestion = () => {
             if(questionNumber>=1){return setBtnOn(true)}
           }}>다음</button>
         </div>
+        <FooterComp/>
 
     </div>
 

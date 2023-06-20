@@ -3,6 +3,8 @@ import axios from 'axios';
 import style from "../../css/HealthList.module.css";
 import { useSelector, useDispatch } from 'react-redux';
 import {changeHospitalList} from "../../store/HospitalSlice.jsx";
+import HeaderComp from "../HeaderComp";
+import FooterComp from "../FooterComp";
 
 //https://www.data.go.kr/data/15001698/openapi.do
 const HealthList = () => {
@@ -22,32 +24,33 @@ const HealthList = () => {
   let hospitalList = [];
   let flag = false;
 
-  // 데이터 호출이 무한대로 됨...^^
-  diagnosisCodes.split(",").map((code)=>{
-    axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=%2ByMntfXCNDDY6sHvlIsfuyfqtxOGz2jQ73ffnn7U4cd%2BlLwmr1D3NcVSEo8%2FwEyJmgtWTDEEIoCWw06fDdr7JQ%3D%3D&numOfRows=10&sgguCd=${address_gu}&emdongNm=${address_dong}&dgsbjtCd=${code}`)
-    .then((data)=>{
+  useEffect(()=>{
+    diagnosisCodes.split(",").map((code)=>{
+      axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=${process.env.REACT_APP_HEALTH_KEY}&numOfRows=10&sgguCd=${address_gu}&emdongNm=${address_dong}&dgsbjtCd=${code}`)
+      .then((data)=>{
 
-      // api로 불러온 정보 가져옴
-      for(let i=0;i<data.data.response.body.items.item.length;i++){ 
-        for(let j=0;j<hospitalList.length;j++){
-          if(hospitalList[j].yadmNm === data.data.response.body.items.item[i].yadmNm){
-            //중복된 값이 이미 있다.
-            flag = true;
+        // api로 불러온 정보 가져옴
+        for(let i=0;i<data.data.response.body.items.item.length;i++){ 
+          for(let j=0;j<hospitalList.length;j++){
+            if(hospitalList[j].yadmNm === data.data.response.body.items.item[i].yadmNm){
+              //중복된 값이 이미 있다.
+              flag = true;
+            }
           }
-        }
-      
-        if(!flag){
-          hospitalList.push(data.data.response.body.items.item[i]);
-          dispatch(changeHospitalList(data.data.response.body.items.item[i]));
-        }
-        flag=false;
-      }//for end
+        
+          if(!flag){
+            hospitalList.push(data.data.response.body.items.item[i]);
+            dispatch(changeHospitalList(data.data.response.body.items.item[i]));
+          }
+          flag=false;
+        }//for end
 
-    })
-    .catch(()=>{
-      console.log("error");
-    })
-  });
+      })
+      .catch(()=>{
+        console.log("error");
+      })
+    });
+  },[]);
 
   console.log(state_hospital.hospitalList);
 
@@ -55,8 +58,10 @@ const HealthList = () => {
         
   return(
     <div className={style.fadein}> 
+      <HeaderComp/>
+
       {/* 로고 */}
-      <div className={style.logo}>Second Life</div>
+      {/* <div className={style.logo}>Second Life</div> */}
 
       {/* 안내문구 */}
       <div className={style.msg}>{loginUser.name}님, 이런 병원들은 어떠세요?
@@ -82,6 +87,7 @@ const HealthList = () => {
           )
         })
       }
+      <FooterComp/>
     </div>
     );
 }
@@ -115,7 +121,7 @@ function Kakao(){
   useEffect(()=>{
 
     // 마커 표시
-    axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=fERDp1OKmJqiN%2BlVyCvnmH8YoFqdfOjIk7KzkZoDA8%2FIw6vmfXxGYvEou8NwVtlFsiX%2FLynuCmwQv9K1YfOGXw%3D%3D&sgguCd=${address_gu}&emdongNm=${address_dong}`)
+    axios.get(`https://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList?ServiceKey=${process.env.REACT_APP_HEALTH_KEY}&sgguCd=${address_gu}&emdongNm=${address_dong}`)
     .then((data)=>{
 
     // 카카오 api
