@@ -2,7 +2,7 @@
 .body {
   z-index: 1;
   margin: auto;
-  width: 90%;
+  width: 85%;
 }
 .body::before {
   margin: auto;
@@ -18,7 +18,82 @@
   background-repeat: no-repeat;
   background-size: contain;
   z-index: -1;
-  opacity : 0.4;
+  opacity : 0.2;
 }
 
 
+.goBack {
+  text-align: left;
+  margin-left: 5%;
+  font-weight: bold;
+  color: #555;
+  padding-bottom: 5%;
+}
+.profileWrap{
+  display: flex;
+  padding-bottom: 5%;
+}
+
+.img {
+  flex: 1;
+  width: 70px;
+  height: 70px;
+  padding: 2px;
+  margin-right: 7%;
+  margin-left: 7.5%;
+  border-radius: 60%;
+  border: 1px solid #a26de8;
+}
+.profileImg {
+  flex:1;
+}
+.commentProfileImg {
+  margin-top: 3px;
+  width: 40px;
+  height: 40px;
+  border-radius: 60%;
+  border: 0.5px solid #555;
+}
+.commentProfileInfo {
+  padding-top: 5px;
+  margin-left: 5px;
+  flex: 1.5;
+  text-align: left;
+}
+.commentContent {
+  flex: 4;
+  line-height: 40px;
+  font-size: smaller;
+}
+.profileInfo {
+  padding-top: 10px;
+  margin-left: 20px;
+  flex: 4;
+}
+.profileInfo :first-child {
+  text-align: left;
+  font-weight: bold;
+}
+.profileInfo :nth-child(2){
+  text-align: left;
+  font-size: smaller;
+}
+.title{
+  text-align: left;
+  font-weight: bold;
+  font-size: larger;
+  padding-bottom: 5%;
+} 
+.content {
+  text-align: left;
+
+}
+
+.commentWrap {
+}
+.line {
+  background-color: rgba(0, 0, 0, 0.035);
+  margin-bottom: 7px;
+  padding: 2px 2px;
+  border-radius: 10px;
+}

@@ -9,12 +9,14 @@ function BoardDetail() {
   
   let { id } = useParams();
   let [post, setPost] = useState({});
+  let[commentList, setCommentList] = useState([]); 
 
   useEffect(()=> {
     const url = "/api/post/" + id;
     axios.get(url)
     .then((result) => {
       console.log(result.data);
+      setCommentList(result.data.commentList);
       setPost(result.data);
     })
     .catch((err) => {
@@ -27,26 +29,29 @@ function BoardDetail() {
       <div  style={{height: "53px"}}>
         <HeaderComp />
       </div>
-      <div>뒤로가기</div>
+      <div className={`${style.goBack}`}>뒤로가기</div>
       <div className={`${style.body}`}>
         <div className={`${style.profileWrap}`}>
-            <div className={`${style.profileImg}`}><img src={`${post.profileImg}`} alt="" /></div>
+            <div className={`${style.profileImg}`}><img className={`${style.img}`} src={`${post.profileImg}`} alt="" /></div>
             <div className={`${style.profileInfo}`}>
-                <div>{post.userNickName} {paintGrade(post.userGrade)}</div>
-                <div>{post.modifiedDate}</div>
+                <div>{post.userNickName} {paintGrade(post.grade, post)}</div>
+                <div>{sliceDate(post.modifiedDate)}</div>
             </div>
         <br />
         </div>
         <div className={`${style.title}`}>
           {post.title}
         </div>
+
         <div className={`${style.content}`}>
           {post.content}
         </div>
+        <img style={{width : "50%", borderRadius : "7px"}} src={post.img} alt="" />
+        <hr />
         <div className={`${style.commentWrap}`}>
-          {/* {post.commentList.map((comment, i) =>{
+          {commentList.map((comment, i) =>{
             return <Comment comment={comment} key={i} ></Comment>
-          })} */}
+          })}
           
         </div>
        
@@ -62,22 +67,47 @@ function BoardDetail() {
     </>
   ) 
 }
+function sliceDate(data){
+  let today = new Date();
 
-function Comment(props){
+    let year = today.getFullYear();
+    let month = ('0' + (today.getMonth() + 1)).slice(-2);
+    let day = ('0' + today.getDate()).slice(-2);
+    let dateString = year + '-' + month  + '-' + day;
+
+    let regdate = '' + data;
+    let result = "";
+    if (regdate.substring(0, 10) === dateString) {
+      result = regdate.substring(11);
+    } else {
+      result = regdate.substring(0, 10);
+    }
+    return result;
+}
+function Comment({comment}){
   return (
     <>
-    <div>
-      {props.comment}
+    <div className={`${style.line}`}>
+      <div className={`${style.profileWrap}`}>
+        <img className={`${style.commentProfileImg}`} src={comment.userProfileImg} alt="" />
+        <div className={`${style.commentProfileInfo}` }>
+            <div>{comment.userNickName} {paintGrade(comment.userGrade)}</div>
+            <div style={{fontSize: "11px", marginLeft : "-3px" }} >{sliceDate(comment.modifiedDate)}</div>
+        </div>
+        <div className={`${style.commentContent}`}>{comment.content}</div>
+      </div>
     </div>
     </>
   )
 }
 function paintGrade(grade){
-  if(grade === "씨앗") return 
-  if(grade === "떡잎") return 
-  if(grade === "줄기") return 
-  if(grade === "꽃") return 
-  if(grade === "열매") return 
+  console.log(grade);
+  // console.log(post.commentList.length);
+  if(grade === "씨앗") return "🌱";
+  if(grade === "떡잎") return "🌿";
+  if(grade === "줄기") return "🪴";
+  if(grade === "꽃") return  "🌸";
+  if(grade === "열매") return  "🍎";
 }
 
 export default BoardDetail;
