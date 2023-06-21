@@ -27,21 +27,21 @@ function Footer () {
       <div className={`${style.footer}`}>
         {
           state == 0 ? 
-          <img className={`${style.icon}`} src='icon/mainselect.png' onClick={() => selectIcon(0)}></img>
+          <img className={`${style.icon}`} src='https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/secondlife/mainselect.png' onClick={() => selectIcon(0)}></img>
           :
-          <img className={`${style.icon}`} src='icon/main.png' onClick={() => selectIcon(0)}></img>
+          <img className={`${style.icon}`} src='https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/secondlife/main.png' onClick={() => selectIcon(0)}></img>
         }
         {
           state == 1 ?
-          <img className={`${style.icon}`} src='icon/chatselect.png' onClick={() => selectIcon(1)}></img>
+          <img className={`${style.icon}`} src='https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/secondlife/chatselect.png' onClick={() => selectIcon(1)}></img>
           :
-          <img className={`${style.icon}`} src='icon/chat.png' onClick={() => selectIcon(1)}></img>
+          <img className={`${style.icon}`} src='https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/secondlife/chat.png' onClick={() => selectIcon(1)}></img>
         }
         {
           state == 2 ?
-          <img className={`${style.icon}`} src='icon/boardselect.png' onClick={() => selectIcon(2)}></img>
+          <img className={`${style.icon}`} src='https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/secondlife/boardselect.png' onClick={() => selectIcon(2)}></img>
           :
-          <img className={`${style.icon}`} src='icon/board.png' onClick={() => selectIcon(2)}></img>
+          <img className={`${style.icon}`} src='https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/secondlife/board.png' onClick={() => selectIcon(2)}></img>
         }
         <img className={`${style.profile}`} src={`${profileImg}`} onClick={() => selectIcon(3)}></img>
       </div>
