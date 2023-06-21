@@ -1,0 +1,24 @@
+
+.body {
+  z-index: 1;
+  margin: auto;
+  width: 90%;
+}
+.body::before {
+  margin: auto;
+  width: 90%;
+  content: "";
+  background-image: url("../../public/communication_nonback.png");
+  position: absolute;
+  top: 55%;
+  left: 5%;
+  bottom: 0;
+  /* background-attachment: fixed;
+  background-position: center; */
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: -1;
+  opacity : 0.4;
+}
+
+

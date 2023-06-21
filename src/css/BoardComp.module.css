@@ -1,12 +1,60 @@
-.postComp {
+/* .postComp {
   padding: 2% 1% 2.5% 2%;
   background-color: antiquewhite;
   width: 95%;
   margin: auto;
   margin-top: 2%;
   border-radius: 10px 10px 10px 10px;
+} */
+.body {
+  z-index: 1;
+  margin: auto;
+  width: 90%;
+  /* background-size: contain;
+  background-attachment: fixed;
+  background-position: center bottom; */
+
+}
+.body::before {
+  margin: auto;
+  width: 90%;
+  content: "";
+  background-image: url("../../public/communication_nonback.png");
+  position: absolute;
+  top: 55%;
+  left: 5%;
+  bottom: 0;
+  /* background-attachment: fixed;
+  background-position: center; */
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: -1;
+  opacity : 0.4;
 }
 
+
+.postComp {
+  padding: 2% 1% 2.5% 2%;
+  background-color: none;
+  width: 95%;
+  margin: auto;
+  margin-top: 2%;
+  border-bottom: 0.5px solid #ddd;
+}
+
+.chatCnt {
+  display: flex;
+  width: 9%;
+  margin-left: 90%;
+}
+.chatCnt span {
+  font-size: 13px;
+}
+.chatCnt img {
+  width: 15px;
+  height: 15px;
+  font-size: 11px;
+}
 .category {
   background-color: gainsboro;
   width: fit-content;
@@ -18,7 +66,8 @@
 }
 
 .postTitle {
-  padding-top: 1%;
+  margin-top: -3%;
+  /* padding-top: 1%; */
   font-weight: bold;
 }
 
@@ -32,16 +81,36 @@
 
 .categoryList{
   display: flex;
-  padding-left: 3%;
+  margin: auto;
+  
 }
 
 .item {
-  margin-right: 1%;
-  background-color: gainsboro;
+  /* flex: 1; */
+  flex-wrap: wrap;
+  margin-right: 2%;
+  background-color: #a869c3;
+  color: white;
   width: fit-content;
-  padding-left: 2%;
-  padding-right: 2%;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  margin-bottom: 5%;
+  margin-top: 3%;
   border-radius: 10px 10px 10px 10px;
-  font-size: small;
   font-weight: bold;
+}
+
+.addPost {
+  position: fixed;
+  right: 10px;
+  bottom: 50px;
+
+  /* display:inline; */
+  background-color: #a869c3;
+  font-size: 40px;
+  color: white;
+  /* border-radius: 60%; */
+  padding : 0px 15px;
 }
