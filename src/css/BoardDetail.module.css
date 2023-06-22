@@ -1,0 +1,128 @@
+
+.body {
+  z-index: 1;
+  margin: auto;
+  width: 85%;
+}
+.body::before {
+  margin: auto;
+  width: 90%;
+  content: "";
+  background-image: url("../../public/communication_nonback.png");
+  position: absolute;
+  top: 55%;
+  left: 5%;
+  bottom: 0;
+  /* background-attachment: fixed;
+  background-position: center; */
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: -1;
+  opacity : 0.2;
+}
+
+
+.goBack {
+  margin-top: -2%;
+  text-align: left;
+  margin-left: 5%;
+  font-weight: bold;
+  font-size: 25px;
+  color: #555;
+}
+.profileWrap{
+  display: flex;
+  padding-bottom: 5%;
+}
+
+.img {
+  flex: 1;
+  width: 70px;
+  height: 70px;
+  padding: 2px;
+  margin-right: 7%;
+  margin-left: 7.5%;
+  border-radius: 60%;
+  border: 1px solid #a26de8;
+}
+.profileImg {
+  flex:1;
+}
+.commentProfileImg {
+  margin-top: 3px;
+  width: 40px;
+  height: 40px;
+  border-radius: 60%;
+  border: 0.5px solid #555;
+}
+.commentProfileInfo {
+  padding-top: 5px;
+  margin-left: 5px;
+  flex: 1.5;
+  text-align: left;
+}
+.commentContent {
+  flex: 4;
+  line-height: 40px;
+  font-size: smaller;
+}
+.profileInfo {
+  padding-top: 10px;
+  margin-left: 20px;
+  flex: 4;
+}
+.profileInfo :first-child {
+  text-align: left;
+  font-weight: bold;
+}
+.profileInfo :nth-child(2){
+  text-align: left;
+  font-size: smaller;
+}
+.title{
+  text-align: left;
+  font-weight: bold;
+  font-size: larger;
+  padding-bottom: 5%;
+} 
+.content {
+  text-align: left;
+
+}
+
+.commentWrap {
+}
+.line {
+  background-color: rgba(0, 0, 0, 0.035);
+  margin-bottom: 7px;
+  padding: 2px 2px;
+  border-radius: 10px;
+}
+
+.inputComment {
+  position: fixed;
+  margin: auto;
+  width: 80%;
+  border: 1px solid gray;
+  border-radius: 5px;
+  bottom: 70px;
+  font-size: smaller;
+}
+.inputComment input {
+  padding: 5px;
+  width: 90%;
+  height: 30px;
+  background-color:#ffffffac ;
+
+}
+
+.inputComment > .sendBtn {
+  padding: 1% 1.5%;
+  width: 10%;
+  height: 100%;
+  background-color: #a26de8;
+}
+.bookmark {
+  padding-left: 40%;
+  margin-top: 5%;
+}

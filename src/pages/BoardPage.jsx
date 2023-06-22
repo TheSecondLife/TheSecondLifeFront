@@ -5,7 +5,6 @@ import BoardComp from './BoardComp';
 import axios from 'axios';
 import style from '../css/BoardComp.module.css';
 
-
 function BoardPage() {
 
   let [postList, setPostList] = useState([]);
@@ -26,10 +25,12 @@ function BoardPage() {
   let categoryList = ["전체","인기글", "취업", "문화", "건강", "소통"];
 
   return(
-    <>
-      <div style={{height: "53px"}}>
+    <div>
+      <div  style={{height: "53px"}}>
         <HeaderComp />
       </div>
+      <div className={`${style.body}`}>
+      
       <div className={`${style.categoryList}`}>
         {
           categoryList.map((category, index) => {
@@ -42,10 +43,12 @@ function BoardPage() {
           return <BoardComp post={post} key={post.id}/>
         })
       }
+      </div>
+      <span className={`${style.addPost}`}>+</span>
       <div style={{height: "51px"}}>
         <Footer />
       </div>
-    </>
+    </div>
   )
 
   function CategoryItem(props) {
