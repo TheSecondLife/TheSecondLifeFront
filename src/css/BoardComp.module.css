@@ -20,9 +20,9 @@
   width: 90%;
   content: "";
   background-image: url("../../public/communication_nonback.png");
-  position: absolute;
+  position: fixed;
   top: 55%;
-  left: 5%;
+  left: 10%;
   bottom: 0;
   /* background-attachment: fixed;
   background-position: center; */
@@ -86,31 +86,39 @@
 }
 
 .item {
-  /* flex: 1; */
+  flex: 1;
   flex-wrap: wrap;
-  margin-right: 2%;
+  /* margin-right: 2%; */
   background-color: #a869c3;
   color: white;
   width: fit-content;
+/* 
   padding-left: 3%;
   padding-right: 3%;
   padding-top: 1%;
-  padding-bottom: 1%;
+  padding-bottom: 1%; */
+  margin-left: 1%;
+  margin-right: 1%;
   margin-bottom: 5%;
   margin-top: 3%;
   border-radius: 10px 10px 10px 10px;
   font-weight: bold;
+}
+.item :nth-child(2) {
+  font-size: smaller;
 }
 
 .addPost {
   position: fixed;
   right: 10px;
   bottom: 50px;
-
-  /* display:inline; */
-  background-color: #a869c3;
-  font-size: 40px;
+  color: #7d578d;
+  display:inline;
+  font-size: 43px;
   color: white;
+  margin-right: 5%;
+  margin-bottom: 5%;
+  width: 10%;
   /* border-radius: 60%; */
-  padding : 0px 15px;
+  /* padding : 0px 15px; */
 }

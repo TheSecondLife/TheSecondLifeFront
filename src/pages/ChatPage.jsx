@@ -22,7 +22,7 @@ function ChatPage() {
 
   function connect() {
     client.current = new StompJs.Client({
-      brokerURL: 'ws://localhost:5000/ws',
+      brokerURL: 'ws://localhost:8080/ws',
       onConnect: () => {
         console.log('success');
         subscribe();
