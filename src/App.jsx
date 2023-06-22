@@ -17,6 +17,7 @@ import ProfilePage from './pages/ProfilePage'
 import JobPage from './pages/JobPage'
 import CulturePage from './pages/CulturePage'
 import BoardDetail from './pages/BoardDetail'
+import WorkQuestion from './pages/work/WorkQuestion'
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
                     <Route path='/job' element={<JobPage/>}></Route>
                     <Route path='/culture' element={<CulturePage/>}></Route>
                     <Route path='/board/:id' element={<BoardDetail/>}></Route>
+                    <Route path='/workQuestion' element={<WorkQuestion/>}></Route>
                 </Routes>
         </div>
         
