@@ -6,23 +6,28 @@ import * as StompJs from '@stomp/stompjs';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import style from "../css/ChatPage.module.css"
 
 function ChatPage() {
+
+  const navigate = useNavigate();
 
   let [chatList, setChatList] = useState([]);
   let [chat, setChat] = useState('');
   let [name, setName] = useState('');
+  let [userId, setUserId] = useState(0);
 
   const { otherId } = useParams();
-  console.log(otherId)
+
   const roomId = 1
   // const apply_id = 1;
   const client = useRef({});
 
   function connect() {
     client.current = new StompJs.Client({
-      brokerURL: 'ws://localhost:5000/ws',
+      brokerURL: 'ws://localhost:8080/ws',
       onConnect: () => {
         console.log('success');
         subscribe();
@@ -32,15 +37,16 @@ function ChatPage() {
   };
 
   function publish(chat) {
-    if (!client.current.connected) return;
-
+    if (!client.current.connected) {
+      return;
+    }
     client.current.publish({
       destination: '/pub/chat',
       body: JSON.stringify({
-        channelId: roomId,
-        userId: 1,
+        roomId: roomId,
+        userId: userId,
         nickname: name,
-        profileImg: "",
+        profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
         chat: chat,
       }),
     });
@@ -74,12 +80,42 @@ function ChatPage() {
   function nameChange(event) {
     setName(event.target.value);
   }
+
+  function idChange(event) {
+    setUserId(event.target.value);
+  }
   
   useEffect(() => {
-    connect();
-    return () => disconnect();
+
+    // let roomId = localStorage.getItem("roomId")
+    // if (roomId == null) {
+    //   navigate("/home")
+    //   return
+    // }
+
+    let userId = JSON.parse(sessionStorage.getItem("loginUser")).id;
+    setUserId(userId);
+    
+
+
+    const url = "/api/chat/" + roomId
+    axios.get(url)
+    .then((result) => {
+      setChatList(result.data);
+      connect();
+    })
+
+    return () => {
+      localStorage.removeItem("roomId")
+      disconnect();
+    }
   }, []);
 
+  const styleObj = {
+		textAlign: "left",
+    paddingLeft: "3%",
+    fontWeight:"bolder"
+	}
 
   return(
     <>
@@ -87,32 +123,61 @@ function ChatPage() {
         <HeaderComp />
       </div>
       <div>
-        <h4>{roomId} 번 채팅방</h4>
+        <h4>chatRoom : {roomId}</h4>
         <div>
-          이름설정 : {name}
+          name : {name}
           <InputGroup/>
           <InputGroup className="mb-3">
             <Form.Control placeholder="" type={'text'} onChange={nameChange} value={name} />
           </InputGroup>
+          userId : {userId}
+          <InputGroup/>
+          <InputGroup className="mb-3">
+            <Form.Control placeholder="" type={'text'} onChange={idChange} value={userId} />
+          </InputGroup>
         </div>
-        <h2>채팅내역</h2>
+        <hr></hr>
+        <h4 style={styleObj}>대화</h4>
         {
           chatList.map((item, index) => {
-            return <div key={index}>{item.nickname} : {item.chat}</div>
+            return (
+              <div key={index}>
+                {
+                  userId == item.userId ?
+                  <div className={style.other}>
+                    <img className={style.chatProfileImg} src={item.profileImg}/>
+                    <p className={style.name}>{item.nickname}</p>
+                  </div> 
+                  : null
+                }
+                <div className={
+                  userId == item.userId ? style.left:style.right
+                }>
+                  {item.chat}
+                </div>
+                {
+                  userId == item.userId? null:
+                  <div>
+                    <br></br><br></br>
+                  </div>
+                }
+              </div>
+            )
           })
         }
         <br></br>
-        <form onSubmit={(event) => handleSubmit(event, chat)}>
-          <div>
+        <br></br>
+        <br></br>
 
+        <form onSubmit={(event) => handleSubmit(event, chat)}>
           <InputGroup className="mb-3"  onSubmit={(event) => handleSubmit(event, chat)} >
-            <Form.Control placeholder="" type={'text'} onChange={handleChange} value={chat} />
+            <Form.Control placeholder="메시지를 입력하세요" type={'text'} onChange={handleChange} value={chat} />
             <Button type={'submit'} variant="outline-secondary" id="button-addon2">
               전송
             </Button>
           </InputGroup>
-          </div>
         </form>
+
       </div>
       <div style={{height: "51px"}}>
         <Footer />
