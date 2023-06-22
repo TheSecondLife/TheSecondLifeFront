@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import style from '../css/BoardComp.module.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,7 +7,12 @@ function BoardComp(props) {
   
   let user = JSON.parse(sessionStorage.getItem("loginUser"))
   let [post, setPost] = useState(props.post)
+  let [commentList, setCommentList] = useState(props.post.commentList)
   let navigate = useNavigate();
+
+  useEffect(() =>{
+    setCommentList([]);
+  },[])
 
   return(
     <>
@@ -16,7 +21,7 @@ function BoardComp(props) {
       }}>
         <div className={`${style.category}`}>{setCategory(post.category)}</div>
         <div className={`${style.postTitle}`}>{post.title}</div>
-        <div className={`${style.postDate}`}>{sliceDate(post.createdDate)}</div>
+        <div className={`${style.postDate}`}>{sliceDate(post.modifiedDate)}</div>
         <div className={`${style.chatCnt}`}>
           <img className={`${style.chatIcon}`} src="icon/chat.png" alt="" />
           <span className={`${style.chatNum}`} >1</span>
@@ -24,9 +29,9 @@ function BoardComp(props) {
       </div>
     </>
   )
-  function commentLength(comment){
-    return comment.length;
-  }
+  // function commentLength(comment){
+  //   return comment.length;
+  // }
   function setCategory(category){
     if(category === "JOB") return "취업";
     if(category === "CULTURE") return "문화";

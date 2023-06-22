@@ -4,7 +4,8 @@ import { useParams } from 'react-router-dom';
 import HeaderComp from './HeaderComp';
 import Footer from './FooterComp';
 import style from "../css/BoardDetail.module.css"
-
+import {BsSend} from 'react-icons/bs';
+import {VscBookmark} from "react-icons/vsc";
 function BoardDetail() {
   
   let { id } = useParams();
@@ -29,7 +30,7 @@ function BoardDetail() {
       <div  style={{height: "53px"}}>
         <HeaderComp />
       </div>
-      <div className={`${style.goBack}`}>뒤로가기</div>
+      <div className={`${style.goBack}`}>←</div>
       <div className={`${style.body}`}>
         <div className={`${style.profileWrap}`}>
             <div className={`${style.profileImg}`}><img className={`${style.img}`} src={`${post.profileImg}`} alt="" /></div>
@@ -37,6 +38,7 @@ function BoardDetail() {
                 <div>{post.userNickName} {paintGrade(post.grade, post)}</div>
                 <div>{sliceDate(post.modifiedDate)}</div>
             </div>
+            <VscBookmark className={`${style.bookmark}`} size={20} color=''/>
         <br />
         </div>
         <div className={`${style.title}`}>
@@ -54,13 +56,13 @@ function BoardDetail() {
           })}
           
         </div>
-       
-      {/* {
-        postList.map((post) => {
-          return <BoardComp post={post} key={post.id}/>
-        })
-      } */}
-      </div>
+       <div className={`${style.inputComment}`}>
+        <input type="text" placeholder='댓글을 입력해주세요' />
+        <BsSend className={`${style.sendBtn}`} size={18} color='white' />
+        {/* <span>+</span> */}
+       </div>
+
+      </div >
       <div style={{height: "51px"}}>
         <Footer />
       </div>
