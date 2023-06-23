@@ -74,7 +74,9 @@ function ChatPage() {
 
   function handleSubmit(event, chat) { // 보내기 버튼 눌렀을 때 publish
     event.preventDefault();
-    publish(chat);
+    if (chat !== "") {
+      publish(chat);
+    }
   };
 
   function nameChange(event) {
@@ -122,7 +124,13 @@ function ChatPage() {
       <div style={{height: "53px"}}>
         <HeaderComp />
       </div>
+      <div className={style.chatHeader}>
+          <img className={style.backImg} src="https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/secondlife/back.png"/>
+          <h4 style={styleObj}>대화</h4>
+        </div>
+        
       <div>
+        {/* temp */}
         <h4>chatRoom : {roomId}</h4>
         <div>
           name : {name}
@@ -137,29 +145,32 @@ function ChatPage() {
           </InputGroup>
         </div>
         <hr></hr>
-        <h4 style={styleObj}>대화</h4>
+        {/* temp */}
+
         {
           chatList.map((item, index) => {
             return (
               <div key={index}>
                 {
-                  userId == item.userId ?
+                  userId == item.userId ? null
+                  :                   
                   <div className={style.other}>
                     <img className={style.chatProfileImg} src={item.profileImg}/>
                     <p className={style.name}>{item.nickname}</p>
                   </div> 
-                  : null
                 }
                 <div className={
-                  userId == item.userId ? style.left:style.right
+                  userId == item.userId ? style.right:style.left
                 }>
                   {item.chat}
                 </div>
                 {
-                  userId == item.userId? null:
+                  userId == item.userId?
                   <div>
                     <br></br><br></br>
                   </div>
+                  :
+                  null
                 }
               </div>
             )
@@ -168,20 +179,21 @@ function ChatPage() {
         <br></br>
         <br></br>
         <br></br>
-
-        <form onSubmit={(event) => handleSubmit(event, chat)}>
-          <InputGroup className="mb-3"  onSubmit={(event) => handleSubmit(event, chat)} >
-            <Form.Control placeholder="메시지를 입력하세요" type={'text'} onChange={handleChange} value={chat} />
-            <Button type={'submit'} variant="outline-secondary" id="button-addon2">
-              전송
-            </Button>
-          </InputGroup>
-        </form>
+        <div className={style.messages}>
+          <form className={style.send} onSubmit={(event) => handleSubmit(event, chat)}>
+            <input className={style.input} placeholder="메시지를 입력하세요" type={'text'} onChange={handleChange} value={chat} />
+            <button className={style.btn} type={'submit'}>
+              <img src="https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/secondlife/send.png"
+                className={style.sendImg}
+              />
+            </button>
+          </form>
+        </div>
 
       </div>
-      <div style={{height: "51px"}}>
+      {/* <div style={{height: "51px"}}>
         <Footer />
-      </div>
+      </div> */}
     </>
   )
 }
