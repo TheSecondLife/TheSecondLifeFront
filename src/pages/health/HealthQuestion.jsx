@@ -29,7 +29,6 @@ const HealthQuestion = () => {
 
   // 결과 페이지 이동 함수
   function resultPage(){
-    console.log(11);
     window.location.href = "/HealthList"
   }
 
