@@ -1,6 +1,6 @@
 import React, { useState , useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {getAddress, getWork} from "../../store/WorkSlice.jsx";
+import {getAddress, getWork, changeStatement} from "../../store/WorkSlice.jsx";
 
 import style from "../../css/WorkQuestion.module.css";
 
@@ -87,6 +87,7 @@ const WorkQuestion = () => {
 
           {/* 답변을 local storage에 저장할 것 */}
           <button className={style.next} onClick={()=>{
+            dispatch(changeStatement("여기를 눌러주세요"));
             if(questionNumber==0){setValue(""); dispatch(getAddress(value));}
             setQuestionNumber(questionNumber+1);
             if(questionNumber==3){window.location.href = "/workList"}

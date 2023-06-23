@@ -15,6 +15,7 @@ let initialState = {
   local_code:"0000",
   work_code:"011100",
   job_list : [],
+  click : "여기를 눌러주세요",
 }
 
 const work = createSlice({
@@ -62,10 +63,14 @@ const work = createSlice({
 
     setJobList : (state, action)=>{
       state.job_list = action.payload;
+    },
+
+    changeStatement : (state, action)=>{
+        state.click = action.payload;
     }
   }
 })
 
 
-export let {getAddress, getWork, setDepth_data, setDepth1, setDepth2, setDepth3, setJobList} = work.actions
+export let {changeStatement,getAddress, getWork, setDepth_data, setDepth1, setDepth2, setDepth3, setJobList} = work.actions
 export default work;
