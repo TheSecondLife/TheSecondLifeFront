@@ -1,0 +1,180 @@
+* {
+  font-family: "Noto Sans KR";
+  text-align: center;
+}
+
+.msg {
+  text-align: center;
+  font-family: "Noto Sans KR";
+  margin: 0 auto;
+  background-color: #a26ce9;
+  color: white;
+  font-size: 20px;
+  margin-bottom: 10%;
+  border-radius: 15px;
+  width: 90%;
+  height: 80px;
+  line-height: 50px;
+  box-shadow: 5px 5px 5px grey;
+  margin-top: 20%;
+}
+
+.category {
+  background-color: rgb(235, 210, 248);
+  border-color: white;
+  height: 100%;
+  line-height: 35px;
+  font-weight: bolder;
+}
+.card {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  margin: 5%;
+  /* margin-bottom: 5%; */
+}
+/* 버튼 관련 */
+.btn_content {
+  display: flex;
+}
+.regist_btn {
+  background-color: rgb(235, 210, 248);
+  border-color: white;
+  width: 50px;
+  height: 100%;
+  line-height: 30px;
+  font-weight: bolder;
+  text-align: center;
+}
+
+/* 텍스트가 서서히 나타납니다. */
+.fadein {
+  overflow: hidden;
+  animation: fadein 1s ease-in-out;
+  text-align: center;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.replay_btn {
+  background-color: rgb(235, 210, 248);
+  width: 30%;
+  height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  border-radius: 15px;
+  margin: 0 auto;
+  color: grey;
+}
+
+.replay_btn:hover {
+  background-color: #6e6ce9;
+  color: white;
+}
+
+/* Question 관련 css*/
+.q_and_a {
+  height: 100%;
+  background-color: rgb(235, 210, 248);
+  border-radius: 15px;
+  text-align: center;
+}
+
+.explain {
+  line-height: 80px;
+  text-align: center;
+}
+.answer_text {
+  width: 80%;
+  height: 50px;
+  border: 1px double black;
+  text-align: center;
+  margin-bottom: 5%;
+}
+
+.answer_text:hover {
+  border: 1px double #6e6ce9;
+  vertical-align: middle;
+}
+
+.speack_btn {
+  margin-top: 5%;
+  background-color: rgb(235, 210, 248);
+  border-color: white;
+  width: 50%;
+  height: 50px;
+  line-height: 30px;
+  font-weight: bolder;
+}
+
+.step_btn {
+  margin-top: 20%;
+  display: flex;
+  /* justify-content: space-between; */
+  padding: 5%;
+  justify-content: space-evenly;
+}
+
+.prev {
+  width: 100px;
+  align-items: left;
+  background-color: #a26ce9;
+  border-color: white;
+  color: white;
+}
+
+.next {
+  width: 100px;
+  background-color: #a26ce9;
+  border-color: white;
+  color: white;
+}
+
+/* select box */
+.select_work{
+  margin:0 auto;
+  width:95%;
+  margin: 0;
+  margin-bottom : 5%;
+	min-width: 0;
+	display: block;
+	padding: 8px 8px;
+	font-size: inherit;
+	border: 1px solid;
+	border-radius: 4px;
+	color: inherit;
+	background-color: white;
+  -webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	&:focus {
+		border-color: #a26ce9;
+	}
+}
+
+/* 회사 정보 */
+.subject{
+  background-color:rgb(235, 210, 248);
+  margin-top : 5%;
+  font-size : 15px;
+}
+.company_name{
+  margin-top:5%;
+}
+
+.sal{
+  color : #6e6ce9;
+}
+
+.fadein{
+  margin-bottom : 5%;
+}
