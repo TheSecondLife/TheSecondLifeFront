@@ -37,7 +37,7 @@ function App() {
                     <Route path='/chat/:otherId' element={<ChatPage />}></Route>
                     <Route path='/board' element={<BoardPage />}></Route>
                     <Route path='/profile' element={<ProfilePage />}></Route>
-                    <Route path='/job' element={<JobPage/>}></Route>
+                    {/* <Route path='/job' element={<JobPage/>}></Route> */}
                     <Route path='/culture' element={<CulturePage/>}></Route>
                     <Route path='/board/:id' element={<BoardDetail/>}></Route>
                     <Route path='/workQuestion' element={<WorkQuestion/>}></Route>
