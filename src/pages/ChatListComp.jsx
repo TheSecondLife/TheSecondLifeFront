@@ -5,9 +5,10 @@ function ChatListComp(props) {
   const navigate = useNavigate();
   // console.log(props.item)
 
-  function chatStart(roomId) {
-    localStorage.setItem("roomId", roomId);
-    navigate("/chat/" + roomId);
+  function chatStart() {
+    localStorage.setItem("roomId", props.item.roomId);
+    navigate("/chat/" + props.item.otherId + "/" + props.item.roomId);
+    // navigate("/chat/" + props.item.otherId);
   }
 
   return(

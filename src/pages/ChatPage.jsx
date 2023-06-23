@@ -1,14 +1,13 @@
 import HeaderComp from './HeaderComp';
-import Footer from './FooterComp';
 import { useRef, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import * as StompJs from '@stomp/stompjs';
 import InputGroup from 'react-bootstrap/InputGroup';
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import style from "../css/ChatPage.module.css"
+import { compose } from '@reduxjs/toolkit';
 
 function ChatPage() {
 
@@ -16,13 +15,18 @@ function ChatPage() {
 
   let [chatList, setChatList] = useState([]);
   let [chat, setChat] = useState('');
+  let [otherName, setOtherName] = useState('');
+  let [userId, setUserId] = useState(1);
+  // let [roomId, setRoomId] = useState('');
   let [name, setName] = useState('');
-  let [userId, setUserId] = useState(0);
+  const profileImg = JSON.parse(sessionStorage.getItem("loginUser")).profileImg;
 
+  // const userId = JSON.parse(sessionStorage.getItem("loginUser")).id;
+  const { roomId } = useParams();
   const { otherId } = useParams();
 
-  const roomId = 1
   // const apply_id = 1;
+
   const client = useRef({});
 
   function connect() {
@@ -33,6 +37,8 @@ function ChatPage() {
         subscribe();
       },
     });
+    // console.log("connect")
+    // console.log(roomId)
     client.current.activate();
   };
 
@@ -46,21 +52,42 @@ function ChatPage() {
         roomId: roomId,
         userId: userId,
         nickname: name,
-        profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
+        profileImg: profileImg,
         chat: chat,
       }),
     });
-
     setChat('');
   };
 
   function subscribe() {
+    // console.log("subcribe")
+    // console.log(roomId)
     client.current.subscribe('/sub/chat/' + roomId, (body) => {
       const json_body = JSON.parse(body.body);
       const message = json_body;
-      setChatList((_chat_list) => [
-        ..._chat_list, message
-      ]);
+      console.log(message);
+
+      // 이게 랜더링 이슈로인해서 ㅜㅜㅜㅜㅜㅜㅜㅜㅜ
+      // setChatList((_chat_list) => [
+      //   ..._chat_list, message
+      // ]);
+
+      // 임시-------------------------------------------------
+      const url = "/api/chat"
+      const data = {
+        userA: userId,
+        userB: otherId
+      }
+      const config = {"Content-Type": 'application/json'};
+      axios.post(url, data, config)
+      .then((result) => {
+        setOtherName(result.data.talkUserName);
+        setChatList(result.data.chatList);
+      })
+      .then(() => {
+        console.log(chatList)
+      })
+      // --------------------------------------------------------
     });
   };
 
@@ -89,21 +116,28 @@ function ChatPage() {
   
   useEffect(() => {
 
-    // let roomId = localStorage.getItem("roomId")
-    // if (roomId == null) {
+    // url 접근 막기
+    // let roomId2 = localStorage.getItem("roomId")
+    // if (roomId2 == null) {
     //   navigate("/home")
     //   return
     // }
 
     let userId = JSON.parse(sessionStorage.getItem("loginUser")).id;
-    setUserId(userId);
-    
 
-
-    const url = "/api/chat/" + roomId
-    axios.get(url)
+    const url = "/api/chat"
+    const data = {
+      userA: userId,
+      userB: otherId
+    }
+    const config = {"Content-Type": 'application/json'};
+    axios.post(url, data, config)
     .then((result) => {
-      setChatList(result.data);
+      setOtherName(result.data.talkUserName);
+      setChatList(result.data.chatList);
+    })
+    .then(() => {
+      console.log(chatList)
       connect();
     })
 
@@ -125,13 +159,17 @@ function ChatPage() {
         <HeaderComp />
       </div>
       <div className={style.chatHeader}>
-          <img className={style.backImg} src="https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/secondlife/back.png"/>
-          <h4 style={styleObj}>대화</h4>
+          <img className={style.backImg} 
+              src="https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/secondlife/back.png"
+              onClick={() => { navigate(-1) }}
+              />
+          <h4 style={styleObj}>{otherName}님과의 대화</h4>
         </div>
-        
       <div>
+        <br></br>
+        <br></br>
         {/* temp */}
-        <h4>chatRoom : {roomId}</h4>
+        {/* <h4>chatRoom : {roomId}</h4> */}
         <div>
           name : {name}
           <InputGroup/>
@@ -162,7 +200,7 @@ function ChatPage() {
                 <div className={
                   userId == item.userId ? style.right:style.left
                 }>
-                  {item.chat}
+                  {item.content}
                 </div>
                 {
                   userId == item.userId?
