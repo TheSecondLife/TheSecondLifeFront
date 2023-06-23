@@ -2,123 +2,24 @@ import HeaderComp from './HeaderComp';
 import Footer from './FooterComp';
 import { useEffect, useState } from 'react';
 import ChatListComp from './ChatListComp';
+import axios from 'axios';
 
 function ChatList() {
 
-  let [chatList, setChetList] = useState([
-    {
-      roomId: "1",
-      profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
-      nickname: "민성",
-      lastChat: "ㅎㅎㅎ 매우 웃겨 ~~",
-      lastChatTime: "2023-04-13 12:41:34",
-    },
-    {
-      roomId: "1",
-      profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
-      nickname: "민성",
-      lastChat: "ㅎㅎㅎ 매우 웃겨 ~~",
-      lastChatTime: "2023-04-13 12:41:34",
-    },
-    {
-      roomId: "1",
-      profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
-      nickname: "민성",
-      lastChat: "ㅎㅎㅎ 매우 웃겨 ~~",
-      lastChatTime: "2023-04-13 12:41:34",
-    },
-    {
-      roomId: "1",
-      profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
-      nickname: "민성",
-      lastChat: "ㅎㅎㅎ 매우 웃겨 ~~",
-      lastChatTime: "2023-04-13 12:41:34",
-    },
-    {
-      roomId: "1",
-      profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
-      nickname: "민성",
-      lastChat: "ㅎㅎㅎ 매우 웃겨 ~~",
-      lastChatTime: "2023-04-13 12:41:34",
-    },
-    {
-      roomId: "1",
-      profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
-      nickname: "민성",
-      lastChat: "ㅎㅎㅎ 매우 웃겨 ~~",
-      lastChatTime: "2023-04-13 12:41:34",
-    },
-    {
-      roomId: "1",
-      profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
-      nickname: "민성",
-      lastChat: "ㅎㅎㅎ 매우 웃겨 ~~",
-      lastChatTime: "2023-04-13 12:41:34",
-    },
-    {
-      roomId: "1",
-      profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
-      nickname: "민성",
-      lastChat: "ㅎㅎㅎ 매우 웃겨 ~~",
-      lastChatTime: "2023-04-13 12:41:34",
-    },
-    {
-      roomId: "1",
-      profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
-      nickname: "민성",
-      lastChat: "ㅎㅎㅎ 매우 웃겨 ~~",
-      lastChatTime: "2023-04-13 12:41:34",
-    },
-    {
-      roomId: "1",
-      profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
-      nickname: "민성",
-      lastChat: "ㅎㅎㅎ 매우 웃겨 ~~",
-      lastChatTime: "2023-04-13 12:41:34",
-    },
-    {
-      roomId: "1",
-      profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
-      nickname: "민성",
-      lastChat: "ㅎㅎㅎ 매우 웃겨 ~~",
-      lastChatTime: "2023-04-13 12:41:34",
-    },
-    {
-      roomId: "1",
-      profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
-      nickname: "민성",
-      lastChat: "ㅎㅎㅎ 매우 웃겨 ~~",
-      lastChatTime: "2023-04-13 12:41:34",
-    },
-    {
-      roomId: "1",
-      profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
-      nickname: "민성",
-      lastChat: "ㅎㅎㅎ 매우 웃겨 ~~",
-      lastChatTime: "2023-04-13 12:41:34",
-    },
-    {
-      roomId: "1",
-      profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
-      nickname: "민성",
-      lastChat: "ㅎㅎㅎ 매우 웃겨 ~~",
-      lastChatTime: "2023-04-13 12:41:34",
-    },
-    {
-      roomId: "1",
-      profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
-      nickname: "민성",
-      lastChat: "ㅎㅎㅎ 매우 웃겨 ~~",
-      lastChatTime: "2023-04-13 12:41:34",
-    },
-    {
-      roomId: "1",
-      profileImg: "https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/profile_default.jpg",
-      nickname: "민성",
-      lastChat: "ㅎㅎㅎ 매우 웃겨 ~~",
-      lastChatTime: "2023-04-13 12:41:34",
-    },
-  ]);
+  let [chatList, setChetList] = useState([]);
+
+  useEffect(() => {
+    let userId = JSON.parse(sessionStorage.getItem("loginUser")).id;
+    console.log(userId)
+    const url = "/api/chat/" + userId;
+    axios.get(url)
+    .then((result) => {
+      setChetList(result.data);
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  },[])
 
   const styleObj = {
 		textAlign: "left",
