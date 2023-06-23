@@ -38,6 +38,7 @@ export const ModalBtn = styled.button`
   width : 80%;
   height : 50px;
   margin-bottom : 5%;
+  line-height :10px;
 `;
 
 export const ExitBtn = styled(ModalBtn) `

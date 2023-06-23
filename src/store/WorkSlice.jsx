@@ -10,7 +10,7 @@ let initialState = {
   depth2_idx:"",
   depth3_idx:"",
   question:["어디에서 일하시고 싶으세요?", "어떤 직업을 원하세요?", "이 중에선 어떤 직업을 원하시나요?", "마지막으로 최종 직업을 선택해주세요"],
-  explain:["서울 / 서울 송파구 / 인천 / 인천 남동구"],
+  explain:["ex) 서울 / 서울 송파구 / 인천 / 인천 남동구", "자유롭게 선택해주세요","자유롭게 선택해주세요","자유롭게 선택해주세요"],
   explain2:["녹음버튼을 누른 채 말씀해주세요", "목록을 보시고 선택해주세요", "목록을 보시고 선택해주세요", "목록을 보시고 선택해주세요"],
   local_code:"0000",
   work_code:"011100",
@@ -33,6 +33,7 @@ const work = createSlice({
 
     getWork : (state, action) => {
       state.work_code = action.payload;
+      localStorage.setItem("work_code",state.work_code);
     },
 
     setDepth_data : (state, action) => {
@@ -42,16 +43,20 @@ const work = createSlice({
       for(var i=0;i<state.work_info.length;i++){
         if(state.work_info[i].code === action.payload) state.depth1_idx = i;
       }
+
+      localStorage.setItem("depth1",action.payload);
     },
     setDepth2 : (state, action)=>{
       for(var i=0;i<state.work_info.length;i++){
         if(state.work_info[i].code === action.payload) state.depth2_idx = i;
       }
+      localStorage.setItem("depth2",action.payload);
     },
     setDepth3 : (state, action)=>{
       for(var i=0;i<state.work_info.length;i++){
         if(state.work_info[i].code === action.payload) state.depth3_idx = i;
       }
+      localStorage.setItem("depth3",action.payload);
     }
   }
 })

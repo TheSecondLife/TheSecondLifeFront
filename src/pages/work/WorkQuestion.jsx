@@ -47,7 +47,7 @@ const WorkQuestion = () => {
     <div className={style.intro, style.fadein}>
       <HeaderComp/>
       {/* 안내문구 */}
-      <div className={style.msg}>{loginUser.name}님, {state_work.question[questionNumber]} <p style={{fontSize:"15px", marginTop:"-15px"}}>ex) {state_work.explain[questionNumber]}</p></div>
+      <div className={style.msg}>{loginUser.name}님, {state_work.question[questionNumber]} <p style={{fontSize:"15px", marginTop:"-15px"}}>{state_work.explain[questionNumber]}</p></div>
       
       {/* 어디사는지 질문  */}
       <div className={style.q_and_a}>
@@ -88,8 +88,6 @@ const WorkQuestion = () => {
           {/* 답변을 local storage에 저장할 것 */}
           <button className={style.next} onClick={()=>{
             if(questionNumber==0){setValue(""); dispatch(getAddress(value));}
-            // else if(questionNumber==1){setValue(""); dispatch(getAddress_dong(value)); localStorage.setItem("address_dong", value);}
-            // else if(questionNumber==2){setValue(""); dispatch(getSickness(value)); localStorage.setItem("sickness", value); GPT();}
             setQuestionNumber(questionNumber+1);
             if(questionNumber==3){window.location.href = "/workList"}
             if(questionNumber>=1){return setBtnOn(true)}
