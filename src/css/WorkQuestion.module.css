@@ -160,3 +160,21 @@
 		border-color: #a26ce9;
 	}
 }
+
+/* 회사 정보 */
+.subject{
+  background-color:rgb(235, 210, 248);
+  margin-top : 5%;
+  font-size : 15px;
+}
+.company_name{
+  margin-top:5%;
+}
+
+.sal{
+  color : #6e6ce9;
+}
+
+.fadein{
+  margin-bottom : 5%;
+}

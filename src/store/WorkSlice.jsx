@@ -14,6 +14,7 @@ let initialState = {
   explain2:["녹음버튼을 누른 채 말씀해주세요", "목록을 보시고 선택해주세요", "목록을 보시고 선택해주세요", "목록을 보시고 선택해주세요"],
   local_code:"0000",
   work_code:"011100",
+  job_list : [],
 }
 
 const work = createSlice({
@@ -57,10 +58,14 @@ const work = createSlice({
         if(state.work_info[i].code === action.payload) state.depth3_idx = i;
       }
       localStorage.setItem("depth3",action.payload);
+    },
+
+    setJobList : (state, action)=>{
+      state.job_list = action.payload;
     }
   }
 })
 
 
-export let {getAddress, getWork, setDepth_data, setDepth1, setDepth2, setDepth3} = work.actions
+export let {getAddress, getWork, setDepth_data, setDepth1, setDepth2, setDepth3, setJobList} = work.actions
 export default work;

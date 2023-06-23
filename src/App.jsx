@@ -18,6 +18,7 @@ import JobPage from './pages/JobPage'
 import CulturePage from './pages/CulturePage'
 import BoardDetail from './pages/BoardDetail'
 import WorkQuestion from './pages/work/WorkQuestion'
+import WorkList from './pages/work/WorkList'
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
                     <Route path='/culture' element={<CulturePage/>}></Route>
                     <Route path='/board/:id' element={<BoardDetail/>}></Route>
                     <Route path='/workQuestion' element={<WorkQuestion/>}></Route>
+                    <Route path='/workList' element={<WorkList/>}></Route>
                 </Routes>
         </div>
         
