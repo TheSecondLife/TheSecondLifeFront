@@ -16,10 +16,10 @@ function ChatPage() {
   let [chatList, setChatList] = useState([]);
   let [chat, setChat] = useState('');
   let [otherName, setOtherName] = useState('');
-  let [userId, setUserId] = useState(1);
+
   let [name, setName] = useState('');
   const profileImg = JSON.parse(sessionStorage.getItem("loginUser")).profileImg;
-
+  const userId = JSON.parse(sessionStorage.getItem("loginUser")).userId;
   const { roomId } = useParams();
   const { otherId } = useParams();
 
@@ -101,7 +101,7 @@ function ChatPage() {
   }
 
   function idChange(event) {
-    setUserId(event.target.value);
+    // setUserId(event.target.value);
   }
 
   
