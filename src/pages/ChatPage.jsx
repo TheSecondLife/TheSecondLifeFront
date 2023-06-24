@@ -69,8 +69,8 @@ function ChatPage() {
       }),
     });
 
-    loadData(); //또 데이터 불러와 
-    setChat(''); //이게 변하면서 전체적으로 새롭게 대화 추가 후 재렌더링됨
+    // loadData(); //또 데이터 불러와 
+    // setChat(''); //이게 변하면서 전체적으로 새롭게 대화 추가 후 재렌더링됨
   };
 
   function subscribe() {
@@ -82,9 +82,10 @@ function ChatPage() {
 
       // 이게 랜더링 이슈로인해서 ㅜㅜㅜㅜㅜㅜㅜㅜㅜ
       // console.log(message);
+      loadData(); //또 데이터 불러와 
       // dispatch(getChatList(message)); //새로운 메세지 추가하여 새롭게 리스트 배치 
       // console.log(`state_chat.chatList : ${state_chat.chatList}`);
-      // setChat('');
+      setChat('');
     });
   };
 
