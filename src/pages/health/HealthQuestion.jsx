@@ -33,6 +33,7 @@ const HealthQuestion = () => {
   }
 
   function GPT() {
+    console.log(1);
     let list = [];
     axios.post(`${process.env.REACT_APP_SERVER}/api/gpt/chat`,{
             model : "gpt-3.5-turbo",
@@ -60,7 +61,7 @@ const HealthQuestion = () => {
             localStorage.setItem("diagnosisCodes",list);
             console.log(list);
   
-          })
+          }).catch((err)=>{console.log(err)})
   }
 
   return(
@@ -100,7 +101,7 @@ const HealthQuestion = () => {
             else if(questionNumber==1){setValue(""); dispatch(getAddress_dong(value)); localStorage.setItem("address_dong", value);}
             else if(questionNumber==2){setValue(""); dispatch(getSickness(value)); localStorage.setItem("sickness", value); GPT();}
             setQuestionNumber(questionNumber+1);
-            if(questionNumber==2){window.location.href = "/HealthList"}
+            // if(questionNumber==2){window.location.href = "/HealthList"}
             if(questionNumber>=1){return setBtnOn(true)}
           }}>다음</button>
         </div>
