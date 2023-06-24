@@ -15,7 +15,7 @@ function GetAuthCodeAndSendToSpring() {
     const url = "/api/kakao/code";
     const data = { 
       code: code2,
-      redirect: process.env.REACT_APP_KAKAO_CALL_BACK + "/kakao/callback", 
+      redirect: process.env.REACT_APP_KAKAO_CALL_BACK, 
     }
     const config = {"Content-Type": 'application/json'};
     // console.log(code2)
