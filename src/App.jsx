@@ -24,7 +24,6 @@ import WorkList from './pages/work/WorkList'
 
 
 function App() {
-
     return (
         <div className="App">
                 <Routes>

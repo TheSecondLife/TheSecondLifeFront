@@ -34,7 +34,7 @@ const HealthQuestion = () => {
 
   function GPT() {
     let list = [];
-    axios.post("http://localhost:8080/api/gpt/chat",{
+    axios.post(`${process.env.REACT_APP_SERVER}/api/gpt/chat`,{
             model : "gpt-3.5-turbo",
             role : "user",
             message:state_hospital.sickness,
