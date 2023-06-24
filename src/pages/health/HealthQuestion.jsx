@@ -45,7 +45,7 @@ const HealthQuestion = () => {
             console.log(res);
             let result = res.data.messages[0].message.split(', ');
             dispatch(getDiagnosis_list(result));
-            console.log(res.data.messages[0].message.split(', '));
+            console.log(result);
   
             console.log(state_hospital.diagnosis_list.length);
             console.log(state_hospital.hospitalInfo.length);
