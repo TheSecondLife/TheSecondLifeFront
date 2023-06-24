@@ -19,7 +19,7 @@ function ChatPage() {
 
   let [name, setName] = useState('');
   const profileImg = JSON.parse(sessionStorage.getItem("loginUser")).profileImg;
-  const userId = JSON.parse(sessionStorage.getItem("loginUser")).userId;
+  const userId = JSON.parse(sessionStorage.getItem("loginUser")).id;
   const { roomId } = useParams();
   const { otherId } = useParams();
 
