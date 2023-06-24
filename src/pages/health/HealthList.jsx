@@ -52,8 +52,6 @@ const HealthList = () => {
     });
   },[]);
 
-  console.log(state_hospital.hospitalList);
-
   
         
   return(

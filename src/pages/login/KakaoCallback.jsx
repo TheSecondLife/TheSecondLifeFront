@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Spinner from "../Loading";
 
 function GetAuthCodeAndSendToSpring() {
 
@@ -29,7 +30,7 @@ function GetAuthCodeAndSendToSpring() {
 
   return(
     <>
-    안녕카카오
+    <Spinner/>
     </>
   )
 }

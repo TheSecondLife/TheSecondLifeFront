@@ -12,6 +12,7 @@ import { useSpeechRecognition } from "react-speech-kit";
 import HeaderComp from "../HeaderComp";
 import FooterComp from "../FooterComp";
 import {Modal} from "./Modal";
+import Loading from "../Loading";
 
 const WorkQuestion = () => {
 
@@ -24,6 +25,7 @@ const WorkQuestion = () => {
 
   const [questionNumber, setQuestionNumber] = useState(0);
   const [btnOn, setBtnOn] = useState(false);
+  const [loading, setLoading] = useState(false);
   
   //음성인식 : react-speech-toolkit
   //참고문서 : https://www.npmjs.com/package/react-speech-kit
@@ -46,6 +48,9 @@ const WorkQuestion = () => {
   return(
     <div className={style.intro, style.fadein}>
       <HeaderComp/>
+      
+      {loading ? <Loading/> : null}
+
       {/* 안내문구 */}
       <div className={style.msg}>{loginUser.name}님, {state_work.question[questionNumber]} <p style={{fontSize:"15px", marginTop:"-15px"}}>{state_work.explain[questionNumber]}</p></div>
       
@@ -90,7 +95,7 @@ const WorkQuestion = () => {
             dispatch(changeStatement("여기를 눌러주세요"));
             if(questionNumber==0){setValue(""); dispatch(getAddress(value));}
             setQuestionNumber(questionNumber+1);
-            if(questionNumber==3){window.location.href = "/workList"}
+            if(questionNumber==3){setLoading(true); window.location.href = "/workList"}
             if(questionNumber>=1){return setBtnOn(true)}
           }}>다음</button>
         </div>
