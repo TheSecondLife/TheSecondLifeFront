@@ -31,6 +31,12 @@ function ChatPage() {
 
   const client = useRef({});
 
+  const scrollRef = useRef();
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({behavior : 'smooth'});
+  }, [up])
+
+
   function connect() {
     client.current = new StompJs.Client({
       brokerURL: process.env.REACT_APP_WS,
@@ -78,6 +84,7 @@ function ChatPage() {
         ..._chat_list, message
       ]);
       setUp(true);
+
       // setChatList(message);
 
       // 임시-------------------------------------------------
@@ -123,6 +130,7 @@ function ChatPage() {
   function idChange(event) {
     setUserId(event.target.value);
   }
+
   
   useEffect(() => {
 
@@ -160,6 +168,8 @@ function ChatPage() {
       disconnect();
     }
   }, [up]);
+
+
 
   const styleObj = {
 		textAlign: "left",
@@ -216,6 +226,10 @@ function ChatPage() {
                 }>
                   {item.content}
                 </div>
+
+                <div ref={scrollRef}></div>
+
+
                 {
                   userId == item.userId?
                   <div>
