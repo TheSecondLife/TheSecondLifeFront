@@ -31,7 +31,7 @@ function ChatPage() {
 
   function connect() {
     client.current = new StompJs.Client({
-      brokerURL: 'ws://localhost:8080/ws',
+      brokerURL: process.env.REACT_APP_WS,
       onConnect: () => {
         console.log('success');
         subscribe();

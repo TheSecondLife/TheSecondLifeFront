@@ -25,7 +25,7 @@ const WorkList = () => {
 
     useEffect(()=>{
       //back -> api -> cors 우회 
-      axios.post(`http://localhost:8080/api/open`,{openAPI:`http://openapi.work.go.kr/opi/opi/opia/wantedApi.do?authKey=WNLITIN7GFVJY3J17FMWQ2VR1HK&callTp=L&returnType=XML&startPage=1&display=30&region=${work_address_code}&occupation=${depth1}|${depth2}|${depth3}`})
+      axios.post(`${process.env.REACT_APP_SERVER}/api/open`,{openAPI:`http://openapi.work.go.kr/opi/opi/opia/wantedApi.do?authKey=WNLITIN7GFVJY3J17FMWQ2VR1HK&callTp=L&returnType=XML&startPage=1&display=30&region=${work_address_code}&occupation=${depth1}|${depth2}|${depth3}`})
       .then((res)=>{
         dispatch(setJobList(res.data.wantedRoot.wanted));
       }).catch((err)=>{

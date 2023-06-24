@@ -23,7 +23,7 @@ function Create() {
         if(category === ""){
             setCategory("HEALTH");
         }
-        const url = "http://localhost:8080/api/";
+        const url = `${process.env.REACT_APP_SERVER}/api/`;
         const data = {
         title : title,
         content : content,
