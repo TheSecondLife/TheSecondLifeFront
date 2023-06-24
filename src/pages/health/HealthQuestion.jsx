@@ -6,6 +6,7 @@ import { useSpeechRecognition } from "react-speech-kit";
 import axios from 'axios';
 import HeaderComp from "../HeaderComp";
 import FooterComp from "../FooterComp";
+import Loading from "../Loading";
 
 const HealthQuestion = () => {
   // redux 불러오기
@@ -17,6 +18,7 @@ const HealthQuestion = () => {
 
   const [questionNumber, setQuestionNumber] = useState(0);
   const [btnOn, setBtnOn] = useState(false);
+  const [loading, setLoading] = useState(false);
   
   //음성인식 : react-speech-toolkit
   //참고문서 : https://www.npmjs.com/package/react-speech-kit
@@ -32,9 +34,11 @@ const HealthQuestion = () => {
     window.location.href = "/HealthList"
   }
 
-  function GPT() {
+  async function GPT() {
+    setLoading(true);
+
     let list = [];
-    axios.post(`${process.env.REACT_APP_SERVER}/api/gpt/chat`,{
+    await axios.post(`${process.env.REACT_APP_SERVER}/api/gpt/chat`,{
             model : "gpt-3.5-turbo",
             role : "user",
             message:state_hospital.sickness,
@@ -43,11 +47,15 @@ const HealthQuestion = () => {
           .then((res)=>{
             console.log(res);
             let result = res.data.messages[0].message.split(', ');
+            // result.push(result[result.length-1].slice(".", ""));
+            console.log(result);
             dispatch(getDiagnosis_list(result));
-            console.log(res.data.messages[0].message.split(', '));
+            // console.log(res.data.messages[0].message.split(', '));
+            // console.log(res.data.messages[0].message.split(', ')[0].slice(".",""));
   
             console.log(state_hospital.diagnosis_list.length);
             console.log(state_hospital.hospitalInfo.length);
+
             //진료과명을 code로 변환
             state_hospital.diagnosis_list.map((diagnosis)=>{
               state_hospital.hospitalInfo.map((info)=>{
@@ -61,11 +69,14 @@ const HealthQuestion = () => {
             console.log(list);
   
           })
+          window.location.href = "/HealthList";
   }
 
   return(
     <div className={style.intro, style.fadein}> 
       <HeaderComp/>
+
+      {loading ? <Loading/> : null}
 
       {/* 안내문구 */}
       <div className={style.msg}>{loginUser.name}님, {state_hospital.question[questionNumber]} <p style={{fontSize:"15px", marginTop:"-15px"}}>ex) {state_hospital.explain[questionNumber]}</p></div>
@@ -100,7 +111,6 @@ const HealthQuestion = () => {
             else if(questionNumber==1){setValue(""); dispatch(getAddress_dong(value)); localStorage.setItem("address_dong", value);}
             else if(questionNumber==2){setValue(""); dispatch(getSickness(value)); localStorage.setItem("sickness", value); GPT();}
             setQuestionNumber(questionNumber+1);
-            if(questionNumber==2){window.location.href = "/HealthList"}
             if(questionNumber>=1){return setBtnOn(true)}
           }}>다음</button>
         </div>

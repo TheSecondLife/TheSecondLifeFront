@@ -1,11 +1,12 @@
-.job_data{
-  border-top : 1px double grey;
-  height:50px;
-  line-height:45px;
+.job_data {
+  border-top: 1px double grey;
+  height: 60px;
+  text-align: center;
+  padding: 3%;
 }
 
-.job_data:hover{
-  background-color : rgb(235, 210, 248);
+.job_data:hover {
+  background-color: rgb(235, 210, 248);
 }
 
 .msg {
