@@ -25,6 +25,8 @@ function ChatPage() {
   const { roomId } = useParams();
   const { otherId } = useParams();
 
+  let [up, setUp] = useState(false);
+
   // const apply_id = 1;
 
   const client = useRef({});
@@ -44,6 +46,7 @@ function ChatPage() {
 
   function publish(chat) {
     if (!client.current.connected) {
+      console.log(`no!!`);
       return;
     }
     client.current.publish({
@@ -61,32 +64,39 @@ function ChatPage() {
 
   function subscribe() {
     // console.log("subcribe")
-    // console.log(roomId)
+    console.log(roomId)
     client.current.subscribe('/sub/chat/' + roomId, (body) => {
+      console.log(`json_body : ${body.body}`);
       const json_body = JSON.parse(body.body);
+      
       const message = json_body;
+      console.log("여기!");
       console.log(message);
 
       // 이게 랜더링 이슈로인해서 ㅜㅜㅜㅜㅜㅜㅜㅜㅜ
-      // setChatList((_chat_list) => [
-      //   ..._chat_list, message
-      // ]);
+      setChatList((_chat_list) => [
+        ..._chat_list, message
+      ]);
+      setUp(true);
+      // setChatList(message);
 
       // 임시-------------------------------------------------
-      const url = "/api/chat"
-      const data = {
-        userA: userId,
-        userB: otherId
-      }
-      const config = {"Content-Type": 'application/json'};
-      axios.post(url, data, config)
-      .then((result) => {
-        setOtherName(result.data.talkUserName);
-        setChatList(result.data.chatList);
-      })
-      .then(() => {
-        console.log(chatList)
-      })
+      // const url = process.env.REACT_APP_SERVER+"/api/chat"
+      // const data = {
+      //   userA: userId,
+      //   userB: otherId
+      // }
+      // const config = {"Content-Type": 'application/json'};
+      // axios.post(url, data, config)
+      // .then((result) => {
+      //   setOtherName(result.data.talkUserName);
+      //   setChatList(result.data.chatList);
+      // })
+      // .then(() => {
+      //   console.log(chatList)
+      // }).catch((err)=>{
+      //   console.log(err.response.data);
+      // })
       // --------------------------------------------------------
     });
   };
@@ -131,21 +141,25 @@ function ChatPage() {
       userB: otherId
     }
     const config = {"Content-Type": 'application/json'};
+    
     axios.post(url, data, config)
     .then((result) => {
       setOtherName(result.data.talkUserName);
       setChatList(result.data.chatList);
+      console.log(33)
+      console.log(chatList) 
     })
     .then(() => {
-      console.log(chatList)
+      // console.log(chatList)
       connect();
+      setUp(false);
     })
 
     return () => {
       localStorage.removeItem("roomId")
       disconnect();
     }
-  }, []);
+  }, [up]);
 
   const styleObj = {
 		textAlign: "left",
@@ -186,7 +200,7 @@ function ChatPage() {
         {/* temp */}
 
         {
-          chatList.map((item, index) => {
+          Array.isArray(chatList) && chatList.map((item, index) => {
             return (
               <div key={index}>
                 {

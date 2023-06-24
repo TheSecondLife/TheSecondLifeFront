@@ -41,6 +41,7 @@ const HealthQuestion = () => {
             maxTokens : 1000,
           })
           .then((res)=>{
+            console.log(res);
             let result = res.data.messages[0].message.split(', ');
             dispatch(getDiagnosis_list(result));
             console.log(res.data.messages[0].message.split(', '));
