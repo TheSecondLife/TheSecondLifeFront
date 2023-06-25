@@ -15,14 +15,18 @@ function BoardDetail() {
   let[comment, setComment] = useState(""); 
 
   let user = JSON.parse(sessionStorage.getItem("loginUser"));
+  // let isUser;
 
   useEffect(()=> {
+
     const url = "/api/post/" + id;
     axios.get(url)
     .then((result) => {
       console.log(result.data);
       setCommentList(result.data.commentList);
       setPost(result.data);
+      //해당 게시글이 로그인유저가 쓴 글인지
+      // isUser = user.id === result.data.userId;
     })
     .catch((err) => {
       console.log(err)
@@ -59,6 +63,7 @@ function BoardDetail() {
                 <div>{post.userNickName} {paintGrade(post.grade, post)}</div>
                 <div>{sliceDate(post.modifiedDate)}</div>
             </div>
+            {}
             <VscBookmark className={`${style.bookmark}`} size={20} color=''/>
         <br />
         </div>

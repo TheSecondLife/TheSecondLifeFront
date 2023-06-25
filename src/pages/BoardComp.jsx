@@ -25,7 +25,7 @@ function BoardComp(props) {
         <div className={`${style.postDate}`}>{sliceDate(post.modifiedDate)}</div>
         <div className={`${style.chatCnt}`}>
           <img className={`${style.chatIcon}`} src="icon/chat.png" alt="" />
-          <span className={`${style.chatNum}`} >{}</span>
+          <span className={`${style.chatNum}`} >{post.commentCnt}</span>
         </div>
       </div>
     </>
