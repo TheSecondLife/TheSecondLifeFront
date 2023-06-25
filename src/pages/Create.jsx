@@ -15,6 +15,7 @@ function Create() {
     const [title, setTitle] = useState("")
     const [category, setCategory] = useState("")
     const [content, setContent] = useState("")
+    const [file, setFile] = useState(1);
     //dispatch
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -41,11 +42,11 @@ function Create() {
     const data = {
     title : title,
     content : content,
-    img : "",
+    img : file,
     category : category
     }
     console.log(data);
-    const config = {"Content-Type": 'application/json'};
+    const config = {"Content-Type": 'multipart/form-data'};
     axios.post(url+"post/regist/"+user.id, data, config)
     .then(() => {
     navigate('/board')
@@ -87,9 +88,10 @@ function Create() {
           
         </div>
         {/* <img style={{width : "50%", borderRadius : "7px"}} src={post.img} alt="" /> */}
-
        <div className={`${style.btnWrap}`}>
-        <BsCameraFill  className={`${style.addImageBtn}`} size={18} color='#7e4bc0' />
+        <input onChange={upload} className={style.myInput} id='myInput' type="file" />
+        <BsCameraFill  onClick={uploadPicture} className={`${style.addImageBtn}`} size={18} color='#7e4bc0'></BsCameraFill>
+        
         {/* <span>+</span> */}
        </div>
 
@@ -99,6 +101,23 @@ function Create() {
       </div>
     </>
   ) 
+
+  function uploadPicture(){
+    let myInput = document.getElementById("myInput");
+    myInput.click();
+  }
+  
+  function upload(e) {
+    let file = e.target.files[0];
+    setFile(file);
+    console.log(file);
+    // try {
+    //   let url = URL.createObjectURL(file); 
+    //   console.log(url);
+    // } catch (error) {
+    //   console.log(error)
+    // }
+  }
 }
 
 

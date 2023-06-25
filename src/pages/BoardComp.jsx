@@ -12,6 +12,7 @@ function BoardComp(props) {
 
   useEffect(() =>{
     setCommentList([]);
+    console.log(commentList);
   },[])
 
   return(
@@ -24,7 +25,7 @@ function BoardComp(props) {
         <div className={`${style.postDate}`}>{sliceDate(post.modifiedDate)}</div>
         <div className={`${style.chatCnt}`}>
           <img className={`${style.chatIcon}`} src="icon/chat.png" alt="" />
-          <span className={`${style.chatNum}`} >1</span>
+          <span className={`${style.chatNum}`} >{}</span>
         </div>
       </div>
     </>
