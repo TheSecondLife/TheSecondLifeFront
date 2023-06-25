@@ -4,29 +4,54 @@ import { useParams, useNavigate } from 'react-router-dom';
 import HeaderComp from './HeaderComp';
 import Footer from './FooterComp';
 import style from "../css/BoardDetail.module.css"
-import {BsSend} from 'react-icons/bs';
-import {VscBookmark} from "react-icons/vsc";
 import { IoIosArrowBack } from "react-icons/io";
+import { BsCameraFill } from "react-icons/bs";
+import { useDispatch } from 'react-redux';
 
-function BoardDetail() {
 
-  const navigate = useNavigate();
-  let { id } = useParams();
-  let [post, setPost] = useState({});
-  let[commentList, setCommentList] = useState([]); 
+function Create() {
 
-  useEffect(()=> {
-    const url = "/api/post/" + id;
-    axios.get(url)
-    .then((result) => {
-      console.log(result.data);
-      setCommentList(result.data.commentList);
-      setPost(result.data);
+    //변수 바구니
+    const [title, setTitle] = useState("")
+    const [category, setCategory] = useState("")
+    const [content, setContent] = useState("")
+    //dispatch
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    
+    let user = JSON.parse(sessionStorage.getItem("loginUser"));
+    function findUser(){
+        return user;
+    }
+    useEffect(()=> {
+    if(!findUser()){
+        alert("로그인 후 이용해주세요");
+        navigate(-1);
+    }
+    },[])
+
+  function createBoard(){
+    //카테고리 따로 클릭하지 않았을 시 디폴트 세팅
+    //axios에서 잘 들어가는지 테스트 필요.
+    if(category === ""){
+        setCategory("JOB");
+    }
+    const url = "/api/";
+    const data = {
+    title : title,
+    content : content,
+    img : "",
+    category : category
+    }
+    console.log(data);
+    const config = {"Content-Type": 'application/json'};
+    axios.post(url+"post/regist/"+user.id, data, config)
+    .then(() => {
+    navigate('/board')
     })
-    .catch((err) => {
-      console.log(err)
-    })
-  },[])
+    console.log(data)
+    }
 
   return (
     <>
@@ -34,42 +59,37 @@ function BoardDetail() {
         <HeaderComp />
       </div>
 
-      {/* <span onClick={()=>{navigate(-1)}} ><IoIosArrowBack className={`${style.goBack}`} /></span> */}
      <IoIosArrowBack onClick={()=>{navigate(-1)}} className={`${style.goBack}`} />
-      {/* <div onClick={()=>{navigate(-1)}} className={`${style.goBack}`}><IoIosArrowBack /></div> */}
+
       <div className={`${style.body}`}>
+        
         <div className={`${style.profileWrap}`}>
-            <div className={`${style.profileImg}`}><img className={`${style.img}`} src={`${post.profileImg}`} alt="" /></div>
-            <div className={`${style.profileInfo}`}>
-                <div>{post.userNickName} {paintGrade(post.grade, post)}</div>
-                <div>{sliceDate(post.modifiedDate)}</div>
-            </div>
-            <VscBookmark className={`${style.bookmark}`} size={20} color=''/>
+            <div onClick={createBoard}  className={`${style.addPost}`}>등록</div>
         <br />
         </div>
-        <div className={`${style.title}`}>
-          {post.title}
-        </div>
+        <div className={`${style.writeTitle}`}>
+          <input onChange={(e) => {setTitle(e.target.value)}} type="text" placeholder='제목을 입력하세요'/>
 
-        <div className={`${style.content}`}>
-          {post.content}
+          <span className={style.selectCategory}>
+                <select name="" id="" v-model="category" className={style.category}
+                        onChange={e => {setCategory(e.target.value); console.log(category)}}
+                >
+                    <option value="JOB">직업</option>
+                    <option value="CULTURE">문화생활</option>
+                    <option value="HEALTH">건강</option>
+                    <option value="COMMUNICATION">소통</option>
+                </select>
+            </span>
         </div>
-        <img style={{width : "50%", borderRadius : "7px"}} src={post.img} alt="" />
         <hr />
-        <div className={`${style.commentWrap}`}>
-          {commentList.map((comment, i) =>{
-            return <Comment comment={comment} key={i} ></Comment>
-            
-          })}
-          {commentList.map((comment, i) =>{
-            return <Comment comment={comment} key={i} ></Comment>
-
-          })}
+        <textarea onChange={(e) => {setContent(e.target.value)}} className={`${style.writeContent}`} name="" id="" cols="30"  placeholder='내용을 입력하세요'></textarea>
+        <div className={`${style.content}`}>
           
         </div>
-       <div className={`${style.inputComment}`}>
-        <input type="text" placeholder='댓글을 입력해주세요' />
-        <BsSend className={`${style.sendBtn}`} size={18} color='white' />
+        {/* <img style={{width : "50%", borderRadius : "7px"}} src={post.img} alt="" /> */}
+
+       <div className={`${style.btnWrap}`}>
+        <BsCameraFill  className={`${style.addImageBtn}`} size={18} color='#7e4bc0' />
         {/* <span>+</span> */}
        </div>
 
@@ -80,47 +100,7 @@ function BoardDetail() {
     </>
   ) 
 }
-function sliceDate(data){
-  let today = new Date();
 
-    let year = today.getFullYear();
-    let month = ('0' + (today.getMonth() + 1)).slice(-2);
-    let day = ('0' + today.getDate()).slice(-2);
-    let dateString = year + '-' + month  + '-' + day;
 
-    let regdate = '' + data;
-    let result = "";
-    if (regdate.substring(0, 10) === dateString) {
-      result = regdate.substring(11);
-    } else {
-      result = regdate.substring(0, 10);
-    }
-    return result;
-}
-function Comment({comment}){
-  return (
-    <>
-    <div className={`${style.line}`}>
-      <div className={`${style.profileWrap}`}>
-        <img className={`${style.commentProfileImg}`} src={comment.userProfileImg} alt="" />
-        <div className={`${style.commentProfileInfo}` }>
-            <div>{comment.userNickName} {paintGrade(comment.userGrade)}</div>
-            <div style={{fontSize: "11px", marginLeft : "-3px" }} >{sliceDate(comment.modifiedDate)}</div>
-        </div>
-        <div className={`${style.commentContent}`}>{comment.content}</div>
-      </div>
-    </div>
-    </>
-  )
-}
-function paintGrade(grade){
-  console.log(grade);
-  // console.log(post.commentList.length);
-  if(grade === "씨앗") return "🌱";
-  if(grade === "떡잎") return "🌿";
-  if(grade === "줄기") return "🪴";
-  if(grade === "꽃") return  "🌸";
-  if(grade === "열매") return  "🍎";
-}
 
-export default BoardDetail;
+export default Create;

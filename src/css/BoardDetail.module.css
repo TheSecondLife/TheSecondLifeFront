@@ -3,6 +3,7 @@
   z-index: 1;
   margin: auto;
   width: 85%;
+  height: 100%;
 }
 .body::before {
   margin: auto;
@@ -67,12 +68,12 @@
 .commentContent {
   flex: 4;
   line-height: 40px;
-  font-size: smaller;
+  /* font-size: smaller; */
 }
 .profileInfo {
   padding-top: 10px;
   margin-left: 20px;
-  flex: 4;
+  flex: 7;
 }
 .profileInfo :first-child {
   text-align: left;
@@ -88,6 +89,27 @@
   font-size: larger;
   padding-bottom: 5%;
 } 
+.writeTitle {
+  display: flex;
+  text-align: left;
+  font-weight: bold;
+}
+.writeTitle input {
+  flex: 5;
+}
+.writeTitle .selectCategory {
+  flex: 2;
+  margin-top: 1%;
+  width: 100%;
+}
+select {
+  width: 100%;
+  color: #333;
+
+}
+select option {
+  font-size: 50px;
+}
 .content {
   text-align: left;
 }
@@ -126,7 +148,41 @@
   background-color: #a26de8b6;
   border-radius: 4px;
 }
+.btnWrap {
+  position: fixed;
+  height: 35px;
+  width: 85%;
+  bottom: 60px;
+}
+.addImageBtn {
+  margin-right: 90%;
+  padding: 2% 1.5%;
+  width: 13%;
+  height: 100%;
+  border: 1px solid #7e4bc0;
+  background-color: transparent;
+  border-radius: 13px;
+}
 .bookmark {
-  padding-left: 40%;
+  flex: 1;
+  /* padding-left: 40%; */
   margin-top: 5%;
 }
+.addPost {
+  margin-top: -25px;
+  width: 10%;
+  position: fixed;
+  right: 30px;
+  font-weight: bold;
+  background-color:#7e4bc0;
+  border-radius: 7px;
+  color: #fff;
+  padding: 2px 0px;
+}
+
+.writeContent {
+  height: 65vh;
+  background-color: transparent;
+  resize: none;
+}
+

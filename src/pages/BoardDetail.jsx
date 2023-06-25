@@ -12,6 +12,9 @@ function BoardDetail() {
   let { id } = useParams();
   let [post, setPost] = useState({});
   let[commentList, setCommentList] = useState([]); 
+  let[comment, setComment] = useState(""); 
+
+  let user = JSON.parse(sessionStorage.getItem("loginUser"));
 
   useEffect(()=> {
     const url = "/api/post/" + id;
@@ -25,6 +28,20 @@ function BoardDetail() {
       console.log(err)
     })
   },[])
+
+  function createComment(){
+    const data = {
+    content : comment
+    };
+    console.log(data);
+    const config = {"Content-Type": 'application/json'};
+    axios.post("/api/comment/regist/"+user.id+"/"+id, data, config)
+    .then(() => {
+    // navigate(0);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
 
   return (
     <>
@@ -66,8 +83,8 @@ function BoardDetail() {
           
         </div>
        <div className={`${style.inputComment}`}>
-        <input type="text" placeholder='댓글을 입력해주세요' />
-        <BsSend className={`${style.sendBtn}`} size={18} color='white' />
+        <input onChange={(e)=>{setComment(e.target.value)}} type="text" placeholder='댓글을 입력해주세요' />
+        <BsSend onClick={createComment} className={`${style.sendBtn}`} size={18} color='white' />
         {/* <span>+</span> */}
        </div>
 
@@ -89,7 +106,7 @@ function sliceDate(data){
     let regdate = '' + data;
     let result = "";
     if (regdate.substring(0, 10) === dateString) {
-      result = regdate.substring(11);
+      result = regdate.substring(11,16);
     } else {
       result = regdate.substring(0, 10);
     }

@@ -64,7 +64,7 @@ const HealthQuestion = () => {
   }
 
   return(
-    <div className={style.intro, style.fadein}> 
+    <div className={`${style.intro, style.fadein}`}> 
       <HeaderComp/>
 
       {/* 안내문구 */}

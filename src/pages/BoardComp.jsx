@@ -49,7 +49,7 @@ function BoardComp(props) {
       let regdate = '' + data;
       let result = "";
       if (regdate.substring(0, 10) === dateString) {
-        result = regdate.substring(11);
+        result = regdate.substring(11,16);
       } else {
         result = regdate.substring(0, 10);
       }

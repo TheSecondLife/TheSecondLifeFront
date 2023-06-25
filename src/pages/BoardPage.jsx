@@ -16,7 +16,8 @@ function BoardPage() {
     const url = "/api/post/list";
     axios.get(url)
     .then((result) => {
-      const copy = [...postList, ...result.data];
+      // const copy = [...postList, ...result.data];
+      const copy = result.data.reverse();
       setPostList(copy);
     })
     .catch((err) => {
