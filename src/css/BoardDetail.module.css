@@ -73,7 +73,7 @@
 .profileInfo {
   padding-top: 10px;
   margin-left: 20px;
-  flex: 7;
+  flex: 5;
 }
 .profileInfo :first-child {
   text-align: left;
@@ -167,6 +167,12 @@ select option {
   flex: 1;
   /* padding-left: 40%; */
   margin-top: 5%;
+}
+.trashcan {
+  flex: 1;
+  margin-top: 5%;
+  font-size: 18px;
+  color: rgb(188, 13, 13);
 }
 .addPost {
   margin-top: -25px;

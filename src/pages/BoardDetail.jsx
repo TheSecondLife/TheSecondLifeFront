@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import HeaderComp from './HeaderComp';
 import Footer from './FooterComp';
 import style from "../css/BoardDetail.module.css"
-import {BsSend} from 'react-icons/bs';
+import {BsSend, BsTrash3} from 'react-icons/bs';
 import {VscBookmark} from "react-icons/vsc";
 import { IoIosArrowBack } from "react-icons/io";
 function BoardDetail() {
@@ -15,7 +15,8 @@ function BoardDetail() {
   let[comment, setComment] = useState(""); 
 
   let user = JSON.parse(sessionStorage.getItem("loginUser"));
-  // let isUser;
+      //해당 게시글이 로그인유저가 쓴 글인지
+  let isUser = post.userId === user.id;
 
   useEffect(()=> {
 
@@ -25,8 +26,6 @@ function BoardDetail() {
       console.log(result.data);
       setCommentList(result.data.commentList);
       setPost(result.data);
-      //해당 게시글이 로그인유저가 쓴 글인지
-      // isUser = user.id === result.data.userId;
     })
     .catch((err) => {
       console.log(err)
@@ -53,9 +52,7 @@ function BoardDetail() {
         <HeaderComp />
       </div>
 
-      {/* <span onClick={()=>{navigate(-1)}} ><IoIosArrowBack className={`${style.goBack}`} /></span> */}
      <IoIosArrowBack onClick={()=>{navigate(-1)}} className={`${style.goBack}`} />
-      {/* <div onClick={()=>{navigate(-1)}} className={`${style.goBack}`}><IoIosArrowBack /></div> */}
       <div className={`${style.body}`}>
         <div className={`${style.profileWrap}`}>
             <div className={`${style.profileImg}`}><img className={`${style.img}`} src={`${post.profileImg}`} alt="" /></div>
@@ -63,7 +60,9 @@ function BoardDetail() {
                 <div>{post.userNickName} {paintGrade(post.grade, post)}</div>
                 <div>{sliceDate(post.modifiedDate)}</div>
             </div>
-            {}
+            {isUser? 
+            <BsTrash3 onClick={deletePost} className={style.trashcan}></BsTrash3>
+            : ""}
             <VscBookmark className={`${style.bookmark}`} size={20} color=''/>
         <br />
         </div>
@@ -99,6 +98,18 @@ function BoardDetail() {
       </div>
     </>
   ) 
+  function deletePost(){
+    //백한테 이거 지워달라고 하기!
+    const url = `/api/post/delete/${post.id}`;
+    axios.delete(url)
+    .then((result) => {
+      navigate("/board");
+      alert("게시글이 삭제되었습니다.");
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
 }
 function sliceDate(data){
   let today = new Date();
