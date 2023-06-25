@@ -14,6 +14,7 @@ function BoardPage() {
   // let postCopy;
   let [postList, setPostList] = useState([]);
   let [originalPosts, setOriginalPostList] = useState([]);
+  let [select, setSelect] = useState("전체");
   let postRef = useRef([]);
 
   useEffect(() => {
@@ -30,6 +31,10 @@ function BoardPage() {
       console.log(err)
     })
   }, [])
+
+  useEffect(()=>{
+
+  }, [select])
 
   let categoryList = ["전체","인기글", "취업", "문화", "건강", "소통"];
   let convertedCategoryList = ["", "", "JOB", "CULTURE", "HEALTH", "COMMUNICATION"];
@@ -63,7 +68,8 @@ function BoardPage() {
 
   function CategoryItem(props) {
     return(
-      <div className={`${style.item}`} onClick={() => {
+      <div className={`${style.item} ${select===props.item? style.select : ''}`} onClick={() => {
+        setSelect(props.item);
         showSelectCategory(props.item);
       }}>
         {props.item}
@@ -72,9 +78,13 @@ function BoardPage() {
   }
 
 function showSelectCategory(item) {
-  console.log(originalPosts);
-  let posts = originalPosts;
+  let posts = originalPosts; //이게 오리지널
     if(item === "인기글"){
+      let popular = [...posts];
+      popular = popular.sort((a,b)=>{
+        return -a.commentCnt + b.commentCnt;
+      });
+      setPostList(popular);
 
     } else if (item === "전체"){
       setPostList(posts);
