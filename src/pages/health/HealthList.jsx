@@ -52,8 +52,6 @@ const HealthList = () => {
     });
   },[]);
 
-  console.log(state_hospital.hospitalList);
-
   
         
   return(
@@ -81,7 +79,7 @@ const HealthList = () => {
               <div class="card-body">
                 <h5 class="card-title">{res.yadmNm}</h5>
                 <p class="card-text" style={{fontSize:"15px", height:"100px"}}>{res.addr}</p>
-                <a href="#" class="btn btn-dark" href={`tel:${res.telno}`}>전화하기</a>
+                <a class="btn btn-dark" href={`tel:${res.telno}`}>전화하기</a>
               </div>
             </div>
           )

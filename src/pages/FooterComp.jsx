@@ -51,7 +51,7 @@ function Footer () {
   function selectIcon(index) {
     setState(index)
     localStorage.setItem("navState", index);
-    let navMenu = ["/home", "/chat", "/board", "/profile"];
+    let navMenu = ["/home", "/chatlist", "/board", "/profile"];
     navigate(navMenu[index]);
   }
 }

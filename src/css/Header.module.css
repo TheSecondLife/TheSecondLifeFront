@@ -1,6 +1,7 @@
 .headerComp {
   background-color: white;
   position: fixed;
+  z-index: 1;
 }
 
 .headerCompLogo {

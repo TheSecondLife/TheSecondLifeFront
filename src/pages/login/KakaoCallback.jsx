@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Spinner from "../Loading";
 
 function GetAuthCodeAndSendToSpring() {
 
@@ -15,7 +16,7 @@ function GetAuthCodeAndSendToSpring() {
     const url = "/api/kakao/code";
     const data = { 
       code: code2,
-      redirect: "http://localhost:3000/kakao/callback", 
+      redirect: process.env.REACT_APP_KAKAO_CALL_BACK, 
     }
     const config = {"Content-Type": 'application/json'};
     // console.log(code2)
@@ -29,7 +30,7 @@ function GetAuthCodeAndSendToSpring() {
 
   return(
     <>
-    안녕카카오
+    <Spinner/>
     </>
   )
 }

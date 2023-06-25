@@ -17,10 +17,13 @@ import ProfilePage from './pages/ProfilePage'
 import JobPage from './pages/JobPage'
 import CulturePage from './pages/CulturePage'
 import BoardDetail from './pages/BoardDetail'
+import ChatList from './pages/ChatListPage'
+import WorkQuestion from './pages/work/WorkQuestion'
+import WorkList from './pages/work/WorkList'
+
 
 
 function App() {
-
     return (
         <div className="App">
                 <Routes>
@@ -33,12 +36,15 @@ function App() {
                     <Route path='/boardDetail' element={<Detail />} />
                     <Route path="/HealthList" element={<HealthList/>}></Route>
                     <Route path="/HealthQuestion" element={<HealthQuestion/>}></Route>
-                    <Route path='/chat/:otherId' element={<ChatPage />}></Route>
+                    <Route path='/chatlist' element={<ChatList/>}/>
+                    <Route path='/chat/:otherId/:roomId' element={<ChatPage />}></Route>
                     <Route path='/board' element={<BoardPage />}></Route>
                     <Route path='/profile' element={<ProfilePage />}></Route>
-                    <Route path='/job' element={<JobPage/>}></Route>
+                    {/* <Route path='/job' element={<JobPage/>}></Route> */}
                     <Route path='/culture' element={<CulturePage/>}></Route>
                     <Route path='/board/:id' element={<BoardDetail/>}></Route>
+                    <Route path='/workQuestion' element={<WorkQuestion/>}></Route>
+                    <Route path='/workList' element={<WorkList/>}></Route>
                 </Routes>
         </div>
         
