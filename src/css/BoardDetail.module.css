@@ -3,15 +3,16 @@
   z-index: 1;
   margin: auto;
   width: 85%;
+  height: 100%;
 }
 .body::before {
   margin: auto;
   width: 90%;
   content: "";
   background-image: url("../../public/communication_nonback.png");
-  position: absolute;
+  position: fixed;
   top: 55%;
-  left: 5%;
+  left: 10%;
   bottom: 0;
   /* background-attachment: fixed;
   background-position: center; */
@@ -23,12 +24,15 @@
 
 
 .goBack {
-  margin-top: -2%;
-  text-align: left;
-  margin-left: 5%;
-  font-weight: bold;
+  display: inline;
+  width: 40px;
+  margin-right: 90%;
+  /* margin-top: -2%; */
+  padding-left: 10px;
+  /* font-weight: bold; */
   font-size: 25px;
   color: #555;
+
 }
 .profileWrap{
   display: flex;
@@ -64,12 +68,12 @@
 .commentContent {
   flex: 4;
   line-height: 40px;
-  font-size: smaller;
+  /* font-size: smaller; */
 }
 .profileInfo {
   padding-top: 10px;
   margin-left: 20px;
-  flex: 4;
+  flex: 7;
 }
 .profileInfo :first-child {
   text-align: left;
@@ -85,9 +89,29 @@
   font-size: larger;
   padding-bottom: 5%;
 } 
+.writeTitle {
+  display: flex;
+  text-align: left;
+  font-weight: bold;
+}
+.writeTitle input {
+  flex: 5;
+}
+.writeTitle .selectCategory {
+  flex: 2;
+  margin-top: 1%;
+  width: 100%;
+}
+select {
+  width: 100%;
+  color: #333;
+
+}
+select option {
+  font-size: 50px;
+}
 .content {
   text-align: left;
-
 }
 
 .commentWrap {
@@ -102,27 +126,63 @@
 .inputComment {
   position: fixed;
   margin: auto;
-  width: 80%;
+  height: 35px;
+  width: 85%;
   border: 1px solid gray;
   border-radius: 5px;
-  bottom: 70px;
+  bottom: 60px;
   font-size: smaller;
 }
 .inputComment input {
-  padding: 5px;
+  padding: 5px 5px;
   width: 90%;
-  height: 30px;
-  background-color:#ffffffac ;
-
+  /* height: 100%; */
+  background-color:#ffffffd1 ;
 }
 
 .inputComment > .sendBtn {
+  margin-right: -1px;
   padding: 1% 1.5%;
   width: 10%;
   height: 100%;
-  background-color: #a26de8;
+  background-color: #a26de8b6;
+  border-radius: 4px;
+}
+.btnWrap {
+  position: fixed;
+  height: 35px;
+  width: 85%;
+  bottom: 60px;
+}
+.addImageBtn {
+  margin-right: 90%;
+  padding: 2% 1.5%;
+  width: 13%;
+  height: 100%;
+  border: 1px solid #7e4bc0;
+  background-color: transparent;
+  border-radius: 13px;
 }
 .bookmark {
-  padding-left: 40%;
+  flex: 1;
+  /* padding-left: 40%; */
   margin-top: 5%;
 }
+.addPost {
+  margin-top: -25px;
+  width: 10%;
+  position: fixed;
+  right: 30px;
+  font-weight: bold;
+  background-color:#7e4bc0;
+  border-radius: 7px;
+  color: #fff;
+  padding: 2px 0px;
+}
+
+.writeContent {
+  height: 65vh;
+  background-color: transparent;
+  resize: none;
+}
+

@@ -4,9 +4,11 @@ import { useEffect, useState } from 'react';
 import BoardComp from './BoardComp';
 import axios from 'axios';
 import style from '../css/BoardComp.module.css';
+import { BiMessageSquareAdd } from "react-icons/bi";
+import { useNavigate } from 'react-router-dom';
 
 function BoardPage() {
-
+  const navigate = useNavigate();
   let [postList, setPostList] = useState([]);
 
   useEffect(() => {
@@ -14,7 +16,8 @@ function BoardPage() {
     const url = "/api/post/list";
     axios.get(url)
     .then((result) => {
-      const copy = [...postList, ...result.data];
+      // const copy = [...postList, ...result.data];
+      const copy = result.data.reverse();
       setPostList(copy);
     })
     .catch((err) => {
@@ -44,7 +47,8 @@ function BoardPage() {
         })
       }
       </div>
-      <span className={`${style.addPost}`}>+</span>
+      <BiMessageSquareAdd onClick={()=>{navigate("/boardCreate")}} color='#7d578d'  className={`${style.addPost}`}/>
+      {/* <span className={`${style.addPost}`}>+</span> */}
       <div style={{height: "51px"}}>
         <Footer />
       </div>
