@@ -1,6 +1,6 @@
 import HeaderComp from './HeaderComp';
 import Footer from './FooterComp';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import BoardComp from './BoardComp';
 import axios from 'axios';
 import style from '../css/BoardComp.module.css';
@@ -9,7 +9,12 @@ import { useNavigate } from 'react-router-dom';
 
 function BoardPage() {
   const navigate = useNavigate();
+  //postList의 내용을 리스팅해줌.
+  // => postList를 바꿔주면 됨!
+  // let postCopy;
   let [postList, setPostList] = useState([]);
+  let [originalPosts, setOriginalPostList] = useState([]);
+  let postRef = useRef([]);
 
   useEffect(() => {
     localStorage.setItem("navState", 2);
@@ -19,6 +24,7 @@ function BoardPage() {
       // const copy = [...postList, ...result.data];
       const copy = result.data.reverse();
       setPostList(copy);
+      setOriginalPostList(copy);
     })
     .catch((err) => {
       console.log(err)
@@ -26,7 +32,7 @@ function BoardPage() {
   }, [])
 
   let categoryList = ["전체","인기글", "취업", "문화", "건강", "소통"];
-
+  let convertedCategoryList = ["", "", "JOB", "CULTURE", "HEALTH", "COMMUNICATION"];
   return(
     <div>
       <div  style={{height: "53px"}}>
@@ -37,7 +43,7 @@ function BoardPage() {
       <div className={`${style.categoryList}`}>
         {
           categoryList.map((category, index) => {
-            return <CategoryItem item={category} key={index}/>
+            return <CategoryItem item={category} key={index} itemKey={index}/>
           })
         }
       </div>
@@ -58,15 +64,25 @@ function BoardPage() {
   function CategoryItem(props) {
     return(
       <div className={`${style.item}`} onClick={() => {
-        showSelectCategory(props.item)
+        showSelectCategory(props.item);
       }}>
         {props.item}
       </div>
     )
   }
 
-  function showSelectCategory(item) {
-    console.log(item);
+function showSelectCategory(item) {
+  console.log(originalPosts);
+  let posts = originalPosts;
+    if(item === "인기글"){
+
+    } else if (item === "전체"){
+      setPostList(posts);
+    } else {
+      let idx = categoryList.indexOf(item);
+      let selectPost = posts.filter((post)=>post.category === convertedCategoryList[idx]);
+      setPostList(selectPost);
+    }
   }
 }
 

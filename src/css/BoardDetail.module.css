@@ -186,3 +186,7 @@ select option {
   resize: none;
 }
 
+
+.myInput{
+  display: none;
+}
