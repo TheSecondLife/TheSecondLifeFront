@@ -5,7 +5,7 @@ import HeaderComp from './HeaderComp';
 import Footer from './FooterComp';
 import style from "../css/BoardDetail.module.css"
 import { IoIosArrowBack } from "react-icons/io";
-import { BsCameraFill } from "react-icons/bs";
+import { BsCameraFill, BsFillTrash3Fill } from "react-icons/bs";
 import { useDispatch } from 'react-redux';
 
 
@@ -38,7 +38,7 @@ function Create() {
     if(category === ""){
         setCategory("JOB");
     }
-    const url = "/api/";
+    const url = "http://localhost:8080/api/";
     const data = {
     title : title,
     content : content,
@@ -91,7 +91,6 @@ function Create() {
        <div className={`${style.btnWrap}`}>
         <input onChange={upload} className={style.myInput} id='myInput' type="file" />
         <BsCameraFill  onClick={uploadPicture} className={`${style.addImageBtn}`} size={18} color='#7e4bc0'></BsCameraFill>
-        
         {/* <span>+</span> */}
        </div>
 
