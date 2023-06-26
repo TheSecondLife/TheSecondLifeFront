@@ -7,12 +7,16 @@ import style from "../css/BoardDetail.module.css"
 import {BsSend, BsTrash3} from 'react-icons/bs';
 import {VscBookmark} from "react-icons/vsc";
 import { IoIosArrowBack } from "react-icons/io";
+
+let toggleNickname;
+
 function BoardDetail() {
   const navigate = useNavigate();
   let { id } = useParams();
   let [post, setPost] = useState({});
   let[commentList, setCommentList] = useState([]); 
   let[comment, setComment] = useState(""); 
+  
 
   let user = JSON.parse(sessionStorage.getItem("loginUser"));
       //해당 게시글이 로그인유저가 쓴 글인지
@@ -55,7 +59,26 @@ function BoardDetail() {
      <IoIosArrowBack onClick={()=>{navigate(-1)}} className={`${style.goBack}`} />
       <div className={`${style.body}`}>
         <div className={`${style.profileWrap}`}>
-            <div className={`${style.profileImg}`}><img className={`${style.img}`} src={`${post.profileImg}`} alt="" /></div>
+        {/* modal-dialog modal-sm" */}
+          {/* 프로필 사진 */}
+            <div className={`${style.profileImg}`}>
+              <button type="button" class="btn btn-primary" id='profileBtn' className={style.profileBtn} data-bs-toggle="modal" data-bs-target="#chatBtn">demo
+              </button>
+              <div class="modal fade" id="chatBtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    {post.userNickName}님과 채팅을 시작하시겠습니까?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    <button type="button" className={style.startChatBtn} class="btn btn-primary" >채팅 시작</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <img onClick={openToggle} className={`${style.img}`} src={`${post.profileImg}`} alt="" />
+            </div>
             <div className={`${style.profileInfo}`}>
                 <div>{post.userNickName} {paintGrade(post.grade, post)}</div>
                 <div>{sliceDate(post.modifiedDate)}</div>
@@ -80,10 +103,7 @@ function BoardDetail() {
             return <Comment comment={comment} key={i} ></Comment>
             
           })}
-          {commentList.map((comment, i) =>{
-            return <Comment comment={comment} key={i} ></Comment>
 
-          })}
           
         </div>
        <div className={`${style.inputComment}`}>
@@ -98,6 +118,11 @@ function BoardDetail() {
       </div>
     </>
   ) 
+  function openToggle(){
+    document.querySelector("#profileBtn").click();
+    console.log(post.userId);
+  }
+
   function deletePost(){
     //백한테 이거 지워달라고 하기!
     const url = `/api/post/delete/${post.id}`;
@@ -127,13 +152,19 @@ function sliceDate(data){
       result = regdate.substring(0, 10);
     }
     return result;
-}
-function Comment({comment}){
+  }
+
+  function Comment({comment}){
+    let[commentId, setCommentId] = useState(0); 
+    let[commentUserNickName, setcommentUserNickName] = useState(""); 
+    // nickname = commentUserNickName;
+
   return (
     <>
     <div className={`${style.line}`}>
       <div className={`${style.profileWrap}`}>
-        <img className={`${style.commentProfileImg}`} src={comment.userProfileImg} alt="" />
+        {/* profile img */}
+        <img onClick={()=>{openCommentToggle(comment.userId, comment.userNickName)}} className={`${style.commentProfileImg}`} src={comment.userProfileImg} alt="" />
         <div className={`${style.commentProfileInfo}` }>
             <div>{comment.userNickName} {paintGrade(comment.userGrade)}</div>
             <div style={{fontSize: "11px", marginLeft : "-3px" }} >{sliceDate(comment.modifiedDate)}</div>
@@ -141,9 +172,74 @@ function Comment({comment}){
         <div className={`${style.commentContent}`}>{comment.content}</div>
       </div>
     </div>
+
+          <button type="button" class="btn btn-primary" id="commentToggleBtn" className={style.profileBtn} data-bs-toggle="modal" data-bs-target="#commentChatBtn">demo
+              </button>
+              <div class="modal fade" id="commentChatBtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    {commentUserNickName}님과 채팅을 시작하시겠습니까?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-primary" className={style.commentStartChatBtn} >채팅 시작</button>
+                  </div>
+                </div>
+              </div>
+            </div>
     </>
+    
   )
-}
+  function openCommentToggle(userId, userNickName){
+    setCommentId(userId);
+    setcommentUserNickName(userNickName);
+    console.log(userId);
+    console.log(userNickName);
+
+    setTimeout(()=>{
+      document.querySelector(`#commentToggleBtn`).click();
+    },100)
+
+  }
+  } 
+// function Comment({comment}){
+//   return (
+//     <>
+//     <div className={`${style.line}`}>
+//       <div className={`${style.profileWrap}`}>
+//         {/* profile img */}
+//         <button type="button" class="btn btn-primary" id={`profileBtn${comment.userId}`} className={style.profileBtn} data-bs-toggle="modal" data-bs-target={`#profileBtn${comment.userId}`}>demo
+//               </button>
+//               <div class="modal fade" id={`profileBtn${comment.userId}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+//               <div class="modal-dialog modal-sm modal-dialog-centered">
+//                 <div class="modal-content">
+//                   <div class="modal-body">
+//                     {comment.userNickName}님과 채팅을 시작하시겠습니까?
+//                   </div>
+//                   <div class="modal-footer">
+//                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+//                     <button type="button" className={style.startChatBtn} class="btn btn-primary">채팅 시작</button>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+
+//         <img onClick={()=>{openCommentToggle(comment.userId)}} className={`${style.commentProfileImg}`} src={comment.userProfileImg} alt="" />
+//         <div className={`${style.commentProfileInfo}` }>
+//             <div>{comment.userNickName} {paintGrade(comment.userGrade)}</div>
+//             <div style={{fontSize: "11px", marginLeft : "-3px" }} >{sliceDate(comment.modifiedDate)}</div>
+//         </div>
+//         <div className={`${style.commentContent}`}>{comment.content}</div>
+//       </div>
+//     </div>
+//     </>
+//   )
+//   function openCommentToggle(userId){
+//     console.log(userId);
+//     document.querySelector(`#profileBtn${userId}`).click();
+//   }
+
 function paintGrade(grade){
   console.log(grade);
   // console.log(post.commentList.length);
