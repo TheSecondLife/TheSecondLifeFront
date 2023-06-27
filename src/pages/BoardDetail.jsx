@@ -9,7 +9,7 @@ import {VscBookmark} from "react-icons/vsc";
 import { IoIosArrowBack } from "react-icons/io";
 import { GrEdit } from "react-icons/gr";
 import { AiOutlineDelete } from "react-icons/ai";
-
+import { GrAddCircle } from "react-icons/gr";
 let toggleNickname;
 
 function BoardDetail() {
@@ -167,6 +167,8 @@ function sliceDate(data){
   }
 
   function Comment({comment}){
+    let [editMode, setEditMode] = useState(false);
+    let [editComment, setEditComment] = useState("")
     let navigate = useNavigate();
     let[commentId, setCommentId] = useState(0); 
     let[commentUserNickName, setcommentUserNickName] = useState(""); 
@@ -174,7 +176,7 @@ function sliceDate(data){
     //해당 게시글이 로그인유저가 쓴 글인지
     let isCommentUser = comment.userId === user.id;
     // nickname = commentUserNickName;
-
+   
   return (
     <>
     <div className={`${style.line}`}>
@@ -185,34 +187,74 @@ function sliceDate(data){
             <div>{comment.userNickName} {paintGrade(comment.userGrade)}</div>
             <div style={{fontSize: "11px", marginLeft : "-7px" }} >{sliceDate(comment.modifiedDate)}</div>
         </div>
-        <div className={`${style.commentContent}`}>{comment.content}</div>
-        {isCommentUser? 
-        <>
-        < GrEdit className={`${style.commentUpdate}`} />
-        < AiOutlineDelete onClick={() =>{deleteComment(comment.id)}} className={`${style.commentDelete}`}/>
-        </>
-        : ""}
+
+        {
+          editMode?
+          <>
+          <input type="text" onKeyDown={(e)=>{editEnter(e, comment.id)}} onChange={(e)=>setEditComment(e.target.value)} placeholder={comment.content} className={`${style.commentContent} ${style.updateModeInput}`}/> 
+          <GrAddCircle onClick={()=>modifyComment(comment.id)} className={style.commentEdit}/>
+          </>
+          :
+          <>
+          <div className={`${style.commentContent}`}>{comment.content}</div>
+            < GrEdit onClick={()=>{editingMode(comment.id)}} className={`${isCommentUser? "" : style.hidden} ${style.commentUpdate} `} />
+            < AiOutlineDelete onClick={() =>{deleteComment(comment.id)}} className={`${isCommentUser? "" : style.hidden} ${style.commentDelete}`}/>
+          </>
+        }
+          {/* isCommentUser?
+            <>
+            < GrEdit onClick={()=>{editComment(comment.id)}} className={`${style.commentUpdate}${isCommentUser? "" : style.hidden}`} />
+            < AiOutlineDelete onClick={() =>{deleteComment(comment.id)}} className={`${style.commentDelete}`}/>
+            </>
+            :
+           "" */}
+
       </div>
     </div>
 
-          <button type="button" class="btn btn-primary" id="commentToggleBtn" className={style.profileBtn} data-bs-toggle="modal" data-bs-target="#commentChatBtn">demo
-              </button>
-              <div class="modal fade" id="commentChatBtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-sm modal-dialog-centered">
-                <div class="modal-content">
-                  <div class="modal-body">
-                    {commentUserNickName}님과 채팅을 시작하시겠습니까?
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    <button type="button" class="btn btn-primary" className={style.commentStartChatBtn} >채팅 시작</button>
-                  </div>
-                </div>
+      <button type="button" class="btn btn-primary" id="commentToggleBtn" className={style.profileBtn} data-bs-toggle="modal" data-bs-target="#commentChatBtn">demo
+          </button>
+          <div class="modal fade" id="commentChatBtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body">
+                {commentUserNickName}님과 채팅을 시작하시겠습니까?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary" className={style.commentStartChatBtn} >채팅 시작</button>
               </div>
             </div>
+          </div>
+        </div>
     </>
     
   )
+  function editEnter(e, id) {
+    if(e.key == "Enter"){
+      modifyComment(id);
+  }
+}
+  function modifyComment(id){
+    console.log(editComment);
+   let url = `http://localhost:8080/api/comment/update/${id}`;
+   const data = {
+    content : editComment
+    }
+    const config = {"Content-Type": 'application/json'};
+    axios.put(url, data, config)
+    .then(() => {
+    navigate(0);
+
+    //commentList렌더링 시 업데이트 되도록 useEffect?
+    })
+    setEditMode(false);
+
+  }
+  function editingMode(id){
+    setEditMode(true);
+
+  }
   function deleteComment(id){
     let url = `/api/comment/delete/${id}`
     axios.delete(url)

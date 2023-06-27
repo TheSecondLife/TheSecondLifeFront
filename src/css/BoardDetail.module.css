@@ -62,7 +62,7 @@
 .commentProfileInfo {
   padding-top: 5px;
   margin-left: 5px;
-  flex: 1.5;
+  flex: 1.8;
   text-align: left;
 }
 .commentContent {
@@ -70,12 +70,12 @@
   padding-top: 3%;
   line-height: 20px;
   /* max-width: max-content; */
-  text-overflow: ellipsis;
   overflow-x:scroll;
   font-size: smaller;
 
   /* font-size: smaller; */
 }
+
 .commentUpdate {
   margin-top: 3%;
   flex: 0.5;
@@ -230,4 +230,17 @@ select option {
   border-radius: 5px;
   color: #fff;
 
+}
+.hidden {
+  /* display: hidden; */
+  visibility: none;
+}
+.updateModeInput {
+  background-color: transparent;
+  color: #333;
+  padding-left: 3%;
+}
+.commentEdit {
+  margin-top: 3%;
+  flex: 1;
 }
