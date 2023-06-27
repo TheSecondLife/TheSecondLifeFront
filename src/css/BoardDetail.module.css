@@ -66,9 +66,23 @@
   text-align: left;
 }
 .commentContent {
-  flex: 4;
-  line-height: 40px;
+  flex: 5;
+  padding-top: 3%;
+  line-height: 20px;
+  /* max-width: max-content; */
+  text-overflow: ellipsis;
+  overflow-x:scroll;
+  font-size: smaller;
+
   /* font-size: smaller; */
+}
+.commentUpdate {
+  margin-top: 3%;
+  flex: 0.5;
+}
+.commentDelete {
+  margin-top: 3%;
+  flex: 0.7;
 }
 .profileInfo {
   padding-top: 10px;

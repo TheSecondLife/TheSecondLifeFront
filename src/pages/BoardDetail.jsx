@@ -7,6 +7,8 @@ import style from "../css/BoardDetail.module.css"
 import {BsSend, BsTrash3} from 'react-icons/bs';
 import {VscBookmark} from "react-icons/vsc";
 import { IoIosArrowBack } from "react-icons/io";
+import { GrEdit } from "react-icons/gr";
+import { AiOutlineDelete } from "react-icons/ai";
 
 let toggleNickname;
 
@@ -21,9 +23,9 @@ function BoardDetail() {
   let user = JSON.parse(sessionStorage.getItem("loginUser"));
       //해당 게시글이 로그인유저가 쓴 글인지
   let isUser = post.userId === user.id;
+  
 
   useEffect(()=> {
-
     const url = "/api/post/" + id;
     axios.get(url)
     .then((result) => {
@@ -34,17 +36,17 @@ function BoardDetail() {
     .catch((err) => {
       console.log(err)
     })
-  },[])
+  },[comment])
 
   function createComment(){
     const data = {
     content : comment
     };
-    console.log(data);
     const config = {"Content-Type": 'application/json'};
     axios.post("/api/comment/regist/"+user.id+"/"+id, data, config)
     .then(() => {
-    // navigate(0);
+      // let commentsCopy= [...commentList, ...]
+      // navigate(0);
     }).catch((err)=>{
       console.log(err);
     })
@@ -100,14 +102,15 @@ function BoardDetail() {
         <hr />
         <div className={`${style.commentWrap}`}>
           {commentList.map((comment, i) =>{
-            return <Comment comment={comment} key={i} ></Comment>
+            return <Comment comment={comment} userId={user.id} key={i} ></Comment>
             
           })}
 
           
         </div>
+        {/* 댓글 입력창 */}
        <div className={`${style.inputComment}`}>
-        <input onChange={(e)=>{setComment(e.target.value)}} type="text" placeholder='댓글을 입력해주세요' />
+        <input onKeyUp={enterKey} onChange={(e)=>{setComment(e.target.value)}} type="text" placeholder='댓글을 입력해주세요' value={comment} />
         <BsSend onClick={createComment} className={`${style.sendBtn}`} size={18} color='white' />
         {/* <span>+</span> */}
        </div>
@@ -118,6 +121,15 @@ function BoardDetail() {
       </div>
     </>
   ) 
+  function enterKey(e){
+    if(e.key == "Enter"){
+      createComment();
+      setTimeout(()=>{
+        setComment("");
+
+      },100)
+    }
+  }
   function openToggle(){
     document.querySelector("#profileBtn").click();
     console.log(post.userId);
@@ -155,8 +167,12 @@ function sliceDate(data){
   }
 
   function Comment({comment}){
+    let navigate = useNavigate();
     let[commentId, setCommentId] = useState(0); 
     let[commentUserNickName, setcommentUserNickName] = useState(""); 
+    let user = JSON.parse(sessionStorage.getItem("loginUser"));
+    //해당 게시글이 로그인유저가 쓴 글인지
+    let isCommentUser = comment.userId === user.id;
     // nickname = commentUserNickName;
 
   return (
@@ -167,9 +183,15 @@ function sliceDate(data){
         <img onClick={()=>{openCommentToggle(comment.userId, comment.userNickName)}} className={`${style.commentProfileImg}`} src={comment.userProfileImg} alt="" />
         <div className={`${style.commentProfileInfo}` }>
             <div>{comment.userNickName} {paintGrade(comment.userGrade)}</div>
-            <div style={{fontSize: "11px", marginLeft : "-3px" }} >{sliceDate(comment.modifiedDate)}</div>
+            <div style={{fontSize: "11px", marginLeft : "-7px" }} >{sliceDate(comment.modifiedDate)}</div>
         </div>
         <div className={`${style.commentContent}`}>{comment.content}</div>
+        {isCommentUser? 
+        <>
+        < GrEdit className={`${style.commentUpdate}`} />
+        < AiOutlineDelete onClick={() =>{deleteComment(comment.id)}} className={`${style.commentDelete}`}/>
+        </>
+        : ""}
       </div>
     </div>
 
@@ -191,11 +213,20 @@ function sliceDate(data){
     </>
     
   )
+  function deleteComment(id){
+    let url = `/api/comment/delete/${id}`
+    axios.delete(url)
+    .then((result) => {
+      navigate(0);
+      alert("댓글이 삭제되었습니다.");
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
   function openCommentToggle(userId, userNickName){
     setCommentId(userId);
     setcommentUserNickName(userNickName);
-    console.log(userId);
-    console.log(userNickName);
 
     setTimeout(()=>{
       document.querySelector(`#commentToggleBtn`).click();
@@ -241,8 +272,6 @@ function sliceDate(data){
 //   }
 
 function paintGrade(grade){
-  console.log(grade);
-  // console.log(post.commentList.length);
   if(grade === "씨앗") return "🌱";
   if(grade === "떡잎") return "🌿";
   if(grade === "줄기") return "🪴";
