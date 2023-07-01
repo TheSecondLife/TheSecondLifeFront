@@ -6,7 +6,6 @@ import { Route, Routes, Link, useNavigate, Outlet, Router } from 'react-router-d
 import Main from "./pages/login/Main";
 // import Home from "./pages/Home";
 import Create from "./pages/Create";
-import Detail from "./pages/Detail";
 import KakaoCallback from './pages/login/KakaoCallback'
 import HomePage from './pages/HomePage';
 import HealthList from "./pages/health/HealthList";
@@ -37,7 +36,6 @@ function App() {
                     {/* <Route path="/" element={<Home></Home>}></Route> */}
                     <Route path="/boardCreate" element={<Create />}></Route>
                     <Route path="/main" element={<Main />}></Route>
-                    <Route path='/boardDetail' element={<Detail />} />
                     <Route path="/HealthList" element={<HealthList/>}></Route>
                     <Route path="/HealthQuestion" element={<HealthQuestion/>}></Route>
                     <Route path='/chatlist' element={<ChatList/>}/>
