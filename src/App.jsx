@@ -12,7 +12,7 @@ import HealthList from "./pages/health/HealthList";
 import HealthQuestion from "./pages/health/HealthQuestion";
 import ChatPage from "./pages/chat/ChatPage";
 import BoardPage from "./pages/board/BoardPage";
-import ProfilePage from './pages/ProfilePage'
+import ProfilePage from './pages/profile/ProfilePage'
 import JobPage from './pages/JobPage'
 import CulturePage from './pages/CulturePage'
 import BoardDetail from './pages/board/BoardDetail'
