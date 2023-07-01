@@ -10,13 +10,13 @@ import KakaoCallback from './pages/login/KakaoCallback'
 import HomePage from './pages/HomePage';
 import HealthList from "./pages/health/HealthList";
 import HealthQuestion from "./pages/health/HealthQuestion";
-import ChatPage from "./pages/ChatPage";
+import ChatPage from "./pages/chat/ChatPage";
 import BoardPage from "./pages/board/BoardPage";
 import ProfilePage from './pages/ProfilePage'
 import JobPage from './pages/JobPage'
 import CulturePage from './pages/CulturePage'
 import BoardDetail from './pages/board/BoardDetail'
-import ChatList from './pages/ChatListPage'
+import ChatList from './pages/chat/ChatListPage'
 import WorkQuestion from './pages/work/WorkQuestion'
 import WorkList from './pages/work/WorkList'
 import BoardEdit from "./pages/board/BoardEdit";

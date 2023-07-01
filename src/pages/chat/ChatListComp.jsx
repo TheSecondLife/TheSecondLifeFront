@@ -1,4 +1,4 @@
-import style from '../css/ChatList.module.css';
+import style from './ChatList.module.css';
 import { useNavigate } from 'react-router-dom';
 
 function ChatListComp(props) {

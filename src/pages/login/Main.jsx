@@ -38,11 +38,13 @@ export default function Main(){
 
       
       {/* 카카오 로그인 */}
-      <div><button className={style.btn} style={{marginTop:"5%"}} onClick={() => {
-        kakaoLogin()}}>로그인</button></div>
+      {/* <div><button className={style.btn} style={{marginTop:"5%"}} onClick={() => {
+        kakaoLogin()}}>로그인</button></div> */}
       {/* <div><button className={style.btn} style={{marginTop:"5%"}} onClick={() => {
         enter()}}>회원가입</button></div> */}
-
+      <img src="/icon/kakao.jpg" className={style.kakaoBtn} onClick={() => {
+        kakaoLogin()
+      }}></img>
       <div className={style.bottom}></div>
     </div>
   );

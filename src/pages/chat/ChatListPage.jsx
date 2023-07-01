@@ -1,5 +1,5 @@
-import HeaderComp from './HeaderComp';
-import Footer from './FooterComp';
+import HeaderComp from '../HeaderComp';
+import Footer from '../FooterComp';
 import { useEffect, useState } from 'react';
 import ChatListComp from './ChatListComp';
 import axios from 'axios';
