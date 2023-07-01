@@ -109,7 +109,10 @@
   font-weight: bold;
 }
 .writeTitle input {
+  outline: none;
   flex: 5;
+  border: none;
+  text-align: left;
 }
 .writeTitle .selectCategory {
   flex: 2;
@@ -119,7 +122,7 @@
 select {
   width: 100%;
   color: #333;
-
+  border: none;
 }
 select option {
   font-size: 50px;
@@ -204,6 +207,9 @@ select option {
   height: 65vh;
   background-color: transparent;
   resize: none;
+  outline: none;
+  border: none;
+  text-align: left;
 }
 
 
