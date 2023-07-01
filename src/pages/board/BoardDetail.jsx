@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import HeaderComp from './HeaderComp';
-import Footer from './FooterComp';
-import style from "../css/BoardDetail.module.css"
+import HeaderComp from '../HeaderComp';
+import Footer from '../FooterComp';
+import style from "../../css/BoardDetail.module.css"
 import {BsSend, BsTrash3} from 'react-icons/bs';
 import {VscBookmark} from "react-icons/vsc";
 import { IoIosArrowBack } from "react-icons/io";

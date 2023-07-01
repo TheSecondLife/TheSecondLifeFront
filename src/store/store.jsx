@@ -4,7 +4,7 @@
 
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import user from "./UserSlice";
-import board from "./BoardSlice";
+// import board from "./BoardSlice";
 import hospital from "./HospitalSlice";
 import work from "./WorkSlice";
 import chat from "./chatSlice";
@@ -17,7 +17,7 @@ import culture from "./CultureSlice";
 export default configureStore({
     reducer: {
         user: user.reducer,
-        board : board.reducer,
+        // board : board.reducer,
         hospital : hospital.reducer,
         work : work.reducer,
         chat : chat.reducer,

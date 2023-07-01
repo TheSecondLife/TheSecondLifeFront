@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import style from '../css/BoardComp.module.css';
+import style from '../../css/BoardComp.module.css';
 import { useNavigate } from 'react-router-dom';
 
 
