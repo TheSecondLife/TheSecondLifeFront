@@ -53,6 +53,28 @@ function BoardDetail() {
     })
   }
 
+  function chatStart() {
+    if (isUser) {
+      alert("다른 유저와 채팅을 해주세요!")
+      return
+    } else {
+      // alert("다름")
+      const url = "/api/chat"
+      const data = {
+        "userA": user.id,
+        "userB": post.userId
+      }
+      const config = {"Content-Type": 'application/json'};
+      axios.post(url, data, config)
+      .then(() => {
+        navigate("/chatlist")
+      })
+      .catch((err) => {
+
+      })
+    }
+  }
+
   return (
     <>
       <div  style={{height: "53px"}}>
@@ -75,7 +97,9 @@ function BoardDetail() {
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    <button type="button" className={style.startChatBtn} class="btn btn-primary" >채팅 시작</button>
+                    <button type="button" className={style.startChatBtn} data-bs-dismiss="modal" class="btn btn-primary" onClick={() => {
+                      chatStart();
+                    }} >채팅 시작</button>
                   </div>
                 </div>
               </div>
@@ -174,6 +198,8 @@ function sliceDate(data){
   }
 
   function Comment({comment}){
+
+
     let [editMode, setEditMode] = useState(false);
     let [editComment, setEditComment] = useState("")
     let navigate = useNavigate();
@@ -183,7 +209,30 @@ function sliceDate(data){
     //해당 게시글이 로그인유저가 쓴 글인지
     let isCommentUser = comment.userId === user.id;
     // nickname = commentUserNickName;
-   
+    
+    function chatStart() {
+      if (isCommentUser) {
+        alert("다른 유저와 채팅을 해주세요!")
+        return
+      } else {
+        const url = "/api/chat"
+        const data = {
+          "userA": user.id,
+          "userB": comment.userId
+        }
+        const config = {"Content-Type": 'application/json'};
+        axios.post(url, data, config)
+        .then(() => {
+          navigate("/chatlist")
+        })
+        .catch((err) => {
+
+        })
+      }
+    }
+  
+
+
   return (
     <>
     <div className={`${style.line}`}>
@@ -229,7 +278,9 @@ function sliceDate(data){
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-primary" className={style.commentStartChatBtn} >채팅 시작</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" className={style.commentStartChatBtn} onClick={() => {
+                  chatStart()
+                }}>채팅 시작</button>
               </div>
             </div>
           </div>

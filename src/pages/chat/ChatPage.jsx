@@ -1,13 +1,10 @@
-import HeaderComp from './HeaderComp';
+import HeaderComp from '../HeaderComp';
 import { useRef, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import * as StompJs from '@stomp/stompjs';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import style from "../css/ChatPage.module.css"
-import { compose } from '@reduxjs/toolkit';
+import style from "./ChatPage.module.css"
 
 function ChatPage() {
 

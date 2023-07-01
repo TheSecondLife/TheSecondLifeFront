@@ -86,3 +86,13 @@
 .bottom {
   margin-top: 20%;
 }
+
+/* 카카오 로그인 버튼 */
+.kakaoBtn{
+  /* height: 80%; */
+  width: 80%;
+  margin-top: 10% !important;
+  margin: auto;
+  display: block;
+  border-radius: 13px;
+}

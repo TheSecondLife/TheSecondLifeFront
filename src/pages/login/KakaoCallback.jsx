@@ -13,7 +13,7 @@ function GetAuthCodeAndSendToSpring() {
   }, [])
 
   async function kakaoLogin(code2) {
-    const url = "/api/kakao/code";
+    const url = process.env.REACT_APP_SERVER + "/api/kakao/code";
     const data = { 
       code: code2,
       redirect: process.env.REACT_APP_KAKAO_CALL_BACK, 
