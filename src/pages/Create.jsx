@@ -13,7 +13,7 @@ function Create() {
 
     //변수 바구니
     const [title, setTitle] = useState("")
-    const [category, setCategory] = useState("")
+    const [category, setCategory] = useState("JOB")
     const [content, setContent] = useState("")
     const [file, setFile] = useState(1);
     //dispatch
@@ -32,27 +32,24 @@ function Create() {
     }
     },[])
 
-  function createBoard(){
-    //카테고리 따로 클릭하지 않았을 시 디폴트 세팅
-    //axios에서 잘 들어가는지 테스트 필요.
-    if(category === ""){
-        setCategory("JOB");
-    }
+function createBoard(){
     const url = "http://localhost:8080/api/";
     const data = {
-    title : title,
-    content : content,
-    img : file,
-    category : category
-    }
-    console.log(data);
-    const config = {"Content-Type": 'multipart/form-data'};
-    axios.post(url+"post/regist/"+user.id, data, config)
-    .then(() => {
-    navigate('/board')
-    })
-    console.log(data)
-    }
+      title : title,
+      content : content,
+      img : file,
+      category : category
+      }
+      const config = {"Content-Type": 'multipart/form-data'};
+      console.log(data);
+      axios.post(url+"post/regist/"+user.id, data, config)
+      .then(() => {
+      navigate('/board')
+      })
+    setTimeout(()=>{
+ 
+    }, 200)
+  }
 
   return (
     <>

@@ -20,6 +20,7 @@ import BoardDetail from './pages/BoardDetail'
 import ChatList from './pages/ChatListPage'
 import WorkQuestion from './pages/work/WorkQuestion'
 import WorkList from './pages/work/WorkList'
+import BoardEdit from "./pages/BoardEdit";
 
 
 
@@ -43,6 +44,7 @@ function App() {
                     {/* <Route path='/job' element={<JobPage/>}></Route> */}
                     <Route path='/culture' element={<CulturePage/>}></Route>
                     <Route path='/board/:id' element={<BoardDetail/>}></Route>
+                    <Route path='/boardEdit/:id' element={<BoardEdit/>}></Route>
                     <Route path='/workQuestion' element={<WorkQuestion/>}></Route>
                     <Route path='/workList' element={<WorkList/>}></Route>
                 </Routes>

@@ -10,6 +10,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { GrEdit } from "react-icons/gr";
 import { AiOutlineDelete } from "react-icons/ai";
 import { GrAddCircle } from "react-icons/gr";
+import { AiFillEdit } from "react-icons/ai";
 let toggleNickname;
 
 function BoardDetail() {
@@ -86,7 +87,10 @@ function BoardDetail() {
                 <div>{sliceDate(post.modifiedDate)}</div>
             </div>
             {isUser? 
+            <>
+            <AiFillEdit onClick={()=>{postEdit(post.id)}} className={style.trashcan}/>
             <BsTrash3 onClick={deletePost} className={style.trashcan}></BsTrash3>
+            </>
             : ""}
             <VscBookmark className={`${style.bookmark}`} size={20} color=''/>
         <br />
@@ -98,7 +102,7 @@ function BoardDetail() {
         <div className={`${style.content}`}>
           {post.content}
         </div>
-        <img style={{width : "50%", borderRadius : "7px"}} src={post.img} alt="" />
+        <img style={{width : "70%", borderRadius : "7px"}} src={post.img} alt="" />
         <hr />
         <div className={`${style.commentWrap}`}>
           {commentList.map((comment, i) =>{
@@ -121,6 +125,9 @@ function BoardDetail() {
       </div>
     </>
   ) 
+  function postEdit(id) {
+    navigate(`/boardEdit/${id}`)
+  }
   function enterKey(e){
     if(e.key == "Enter"){
       createComment();
@@ -237,7 +244,7 @@ function sliceDate(data){
 }
   function modifyComment(id){
     console.log(editComment);
-   let url = `http://localhost:8080/api/comment/update/${id}`;
+   let url = `/api/comment/update/${id}`;
    const data = {
     content : editComment
     }
