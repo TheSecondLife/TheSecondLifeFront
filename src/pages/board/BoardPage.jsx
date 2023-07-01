@@ -1,9 +1,9 @@
-import HeaderComp from './HeaderComp';
-import Footer from './FooterComp';
+import HeaderComp from '../HeaderComp';
+import Footer from '../FooterComp';
 import { useEffect, useState, useRef } from 'react';
 import BoardComp from './BoardComp';
 import axios from 'axios';
-import style from '../css/BoardComp.module.css';
+import style from '../../css/BoardComp.module.css';
 import { BiMessageSquareAdd } from "react-icons/bi";
 import { useNavigate } from 'react-router-dom';
 
