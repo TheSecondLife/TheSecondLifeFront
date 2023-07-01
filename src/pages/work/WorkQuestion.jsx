@@ -90,7 +90,7 @@ const WorkQuestion = () => {
             setValue("")
           }}>이전</button>}
 
-          {/* 답변을 local storage에 저장할 것 */}
+          
           <button className={style.next} onClick={()=>{
             dispatch(changeStatement("여기를 눌러주세요"));
             if(questionNumber==0){setValue(""); dispatch(getAddress(value));}

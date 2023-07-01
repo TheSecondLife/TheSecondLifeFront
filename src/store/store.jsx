@@ -8,6 +8,7 @@ import board from "./BoardSlice";
 import hospital from "./HospitalSlice";
 import work from "./WorkSlice";
 import chat from "./chatSlice";
+import culture from "./CultureSlice";
 
 //이렇게 객체를 전달하면 redux state에는 state.name 변수가 만들어짐
 //예) state.user, state.board
@@ -20,5 +21,6 @@ export default configureStore({
         hospital : hospital.reducer,
         work : work.reducer,
         chat : chat.reducer,
+        culture: culture.reducer
     },
 });

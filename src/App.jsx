@@ -21,6 +21,9 @@ import ChatList from './pages/ChatListPage'
 import WorkQuestion from './pages/work/WorkQuestion'
 import WorkList from './pages/work/WorkList'
 import BoardEdit from "./pages/BoardEdit";
+import CultureQuestion from './pages/culture/CultureQuestion';
+import CultureList from './pages/culture/CultureList';
+
 
 
 
@@ -47,6 +50,8 @@ function App() {
                     <Route path='/boardEdit/:id' element={<BoardEdit/>}></Route>
                     <Route path='/workQuestion' element={<WorkQuestion/>}></Route>
                     <Route path='/workList' element={<WorkList/>}></Route>
+                    <Route path='/cultureQuestion' element={<CultureQuestion/>}></Route>
+                    <Route path="/cultureList" element={<CultureList/>}></Route>
                 </Routes>
         </div>
         
