@@ -252,3 +252,7 @@ select option {
   margin-top: 3%;
   flex: 1;
 }
+
+.minsungImg {
+  border-radius: 10px;
+}

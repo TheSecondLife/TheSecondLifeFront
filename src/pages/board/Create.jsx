@@ -16,6 +16,7 @@ function Create() {
     const [category, setCategory] = useState("JOB")
     const [content, setContent] = useState("")
     const [file, setFile] = useState(1);
+    const [tempFile, setTempFile] = useState("https://fitsta-bucket.s3.ap-northeast-2.amazonaws.com/383e4119-bcee-4aa9-83f4-eef677e23fd7-profile.png");
     //dispatch
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -34,18 +35,36 @@ function Create() {
 
 function createBoard(){
     const url = "http://localhost:8080/api/";
-    const data = {
-      title : title,
-      content : content,
-      img : file,
-      category : category
-      }
-      const config = {"Content-Type": 'multipart/form-data'};
-      console.log(data);
-      axios.post(url+"post/regist/"+user.id, data, config)
+    if (file == 1) {
+      const data = {
+        title : title,
+        content : content,
+        img : file,
+        category : category
+        }
+        const config = {"Content-Type": 'multipart/form-data'};
+        console.log(data);
+        axios.post(url+"post/regist/"+user.id, data, config)
+        .then(() => {
+        navigate('/board')
+        })
+    } else {
+      let data = new FormData();
+      data.append("title", title);
+      data.append("content", content)
+      data.append("file", file);
+      data.append("category", category);
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      };
+      axios.post(url+"post/registimg/"+user.id, data, config)
       .then(() => {
-      navigate('/board')
+        navigate('/board')
       })
+    }
+
     setTimeout(()=>{
  
     }, 200)
@@ -90,6 +109,7 @@ function createBoard(){
         <BsCameraFill  onClick={uploadPicture} className={`${style.addImageBtn}`} size={18} color='#7e4bc0'></BsCameraFill>
         {/* <span>+</span> */}
        </div>
+       <img className={style.minsungImg} src={tempFile}></img>
 
       </div >
       <div style={{height: "51px"}}>
@@ -107,12 +127,12 @@ function createBoard(){
     let file = e.target.files[0];
     setFile(file);
     console.log(file);
-    // try {
-    //   let url = URL.createObjectURL(file); 
-    //   console.log(url);
-    // } catch (error) {
-    //   console.log(error)
-    // }
+    try {
+      let url = URL.createObjectURL(file); 
+      setTempFile(url);
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
