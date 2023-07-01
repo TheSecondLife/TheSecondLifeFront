@@ -55,6 +55,7 @@ function ProfilePage() {
     let data = new FormData();
     data.append("image", event.target.files[0]);
     data.append("id", user.id);
+    console.log(data)
     const config = {
       headers: {
         'Content-Type': 'multipart/form-data'
