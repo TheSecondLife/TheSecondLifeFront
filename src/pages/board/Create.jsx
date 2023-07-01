@@ -34,7 +34,7 @@ function Create() {
     },[])
 
 function createBoard(){
-    const url = "http://localhost:8080/api/";
+    // const url = process.env.REACT_APP_SERVER + "/"
     if (file == 1) {
       const data = {
         title : title,
@@ -44,7 +44,8 @@ function createBoard(){
         }
         const config = {"Content-Type": 'multipart/form-data'};
         console.log(data);
-        axios.post(url+"post/regist/"+user.id, data, config)
+        // axios.post(url+"post/regist/"+user.id, data, config)
+        axios.post("/api/post/regist/"+user.id, data, config)
         .then(() => {
         navigate('/board')
         })
@@ -59,7 +60,7 @@ function createBoard(){
           'Content-Type': 'multipart/form-data'
         }
       };
-      axios.post(url+"post/registimg/"+user.id, data, config)
+      axios.post("/api/post/registimg/"+user.id, data, config)
       .then(() => {
         navigate('/board')
       })
