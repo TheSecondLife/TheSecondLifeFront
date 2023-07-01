@@ -18,7 +18,7 @@ function ChatListComp(props) {
         <div className={`${style.content}`}>
           <div className={`${style.box}`}>
             <p className={`${style.name}`}>{props.item.nickname}</p>
-            <p className={`${style.date}`}>{props.item.lastChatTime}</p>
+            <p className={`${style.date}`}>{sliceDate(props.item.lastChatTime)}</p>
           </div>
           <p className={`${style.content2}`}>{props.item.lastChat}</p>
         </div>
@@ -27,6 +27,23 @@ function ChatListComp(props) {
   )
 
 }
+function sliceDate(data){
+  let today = new Date();
+
+    let year = today.getFullYear();
+    let month = ('0' + (today.getMonth() + 1)).slice(-2);
+    let day = ('0' + today.getDate()).slice(-2);
+    let dateString = year + '-' + month  + '-' + day;
+
+    let regdate = '' + data;
+    let result = "";
+    if (regdate.substring(0, 10) === dateString) {
+      result = regdate.substring(11,16);
+    } else {
+      result = regdate.substring(0, 10);
+    }
+    return result;
+  }
 
 
 export default ChatListComp;
