@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import HeaderComp from './HeaderComp';
+import HeaderComp from '../HeaderComp';
 import { IoIosArrowBack } from 'react-icons/io';
-import Footer from './FooterComp';
+import Footer from '../FooterComp';
 import { BsCameraFill } from 'react-icons/bs';
-import style from "../css/BoardDetail.module.css"
+import style from "../../css/BoardDetail.module.css"
 import axios from 'axios';
 function BoardEdit() {
 
