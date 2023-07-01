@@ -7,6 +7,7 @@ import { BsCameraFill } from 'react-icons/bs';
 import style from "../../css/BoardDetail.module.css"
 import axios from 'axios';
 function BoardEdit() {
+
 let { id } = useParams();
 let navigate = useNavigate();
 const [post, setPost] = useState({})
@@ -17,6 +18,7 @@ const [file, setFile] = useState(1);
 
 useEffect(()=>{
     const url = "/api/post/" + id;
+    console.log();
     axios.get(url)
     .then((result) => {
       setTitle(result.data.title);
