@@ -27,7 +27,7 @@ function HomePage() {
       <div className={style.selectBtn}>
         <div className={style.lineOne}>
           <button onClick={() => navigate("/workQuestion") } className={style.workBtn}><div className={style.backText}><b className={style.title}>취업</b></div></button>
-          <button onClick={() => navigate("/culture") } className={style.exerciseBtn}><div className={style.backText}><b className={style.title}>문화</b></div></button>
+          <button onClick={() => navigate("/cultureQuestion") } className={style.exerciseBtn}><div className={style.backText}><b className={style.title}>문화</b></div></button>
         </div>
 
         <div className={style.lineTwo}>
