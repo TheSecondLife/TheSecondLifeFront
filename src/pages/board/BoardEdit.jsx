@@ -17,7 +17,7 @@ const [content, setContent] = useState("")
 const [file, setFile] = useState(1);
 
 useEffect(()=>{
-    const url = "/api/post/" + id;
+    const url = process.env.REACT_APP_SERVER + "/api/post/" + id;
     console.log();
     axios.get(url)
     .then((result) => {
@@ -82,7 +82,7 @@ useEffect(()=>{
     </>
   )
   function editBoard(){
-    const url = "/api/post/update/" + id;
+    const url = process.env.REACT_APP_SERVER + "/api/post/update/" + id;
     let data = {
       title : title,
       content : content,

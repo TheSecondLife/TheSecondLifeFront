@@ -11,7 +11,7 @@ function ChatList() {
   useEffect(() => {
     let userId = JSON.parse(sessionStorage.getItem("loginUser")).id;
     console.log(userId)
-    const url = "/api/chat/" + userId;
+    const url = process.env.REACT_APP_SERVER + "/api/chat/" + userId;
     axios.get(url)
     .then((result) => {
       setChetList(result.data);

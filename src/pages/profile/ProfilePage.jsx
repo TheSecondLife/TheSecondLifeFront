@@ -20,7 +20,7 @@ function ProfilePage() {
   // console.log(user)
   function update() {
     let user = JSON.parse(sessionStorage.getItem("loginUser"));
-    const url = "/api/user/info";
+    const url = process.env.REACT_APP_SERVER + "/api/user/info";
     const data = {
       userId: user.id,
       name: name,
@@ -51,7 +51,7 @@ function ProfilePage() {
   function handleProfileImg(event) {
     // console.log(event.target.value)
     // console.log(event.target.files[0])
-    const url = "/api/user/profile";
+    const url = process.env.REACT_APP_SERVER + "/api/user/profile";
     let data = new FormData();
     data.append("image", event.target.files[0]);
     data.append("id", user.id);
