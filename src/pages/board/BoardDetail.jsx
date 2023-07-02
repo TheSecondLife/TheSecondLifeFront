@@ -334,13 +334,32 @@ function sliceDate(data){
     })
   }
   function openCommentToggle(userId, userNickName){
-    setCommentId(userId);
-    setcommentUserNickName(userNickName);
+    console.log(userId);
+    let myId = JSON.parse(sessionStorage.getItem("loginUser")).id;
+    
+    console.log(myId);
 
-    setTimeout(()=>{
-      document.querySelector(`#commentToggleBtn`).click();
-    },100)
-
+    if (window.confirm(userNickName + "님과 대화를 시작하시겠습니까?")) {
+      if (myId == userId) {
+        alert("다른 유저와 채팅을 해주세요!")
+        return
+      } else {
+        const url = process.env.REACT_APP_SERVER + "/api/chat"
+        const data = {
+          "userA": myId,
+          "userB": userId
+        }
+        const config = {"Content-Type": 'application/json'};
+        axios.post(url, data, config)
+        .then(() => {
+          navigate("/chatlist")
+        })
+        .catch((err) => {
+  
+        })
+      }
+    
+    }
   }
   } 
 // function Comment({comment}){
