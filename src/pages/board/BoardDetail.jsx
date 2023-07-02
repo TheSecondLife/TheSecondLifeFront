@@ -44,7 +44,6 @@ function BoardDetail() {
     const data = {
     content : comment
     };
-
     const config = {"Content-Type": 'application/json'};
     axios.post(process.env.REACT_APP_SERVER + "/api/comment/regist/"+user.id+"/"+id, data, config)
     .then(() => {
