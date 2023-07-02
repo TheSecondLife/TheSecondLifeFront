@@ -216,6 +216,8 @@ function ChatPage() {
         <br></br>
         <br></br>
         <br></br>
+        <br></br>
+        <br></br>
         <div className={style.messages}>
           <form className={style.send} onSubmit={(event) => handleSubmit(event, chat)}>
             <input className={style.input} placeholder="메시지를 입력하세요" type={'text'} onChange={handleChange} value={chat} />
