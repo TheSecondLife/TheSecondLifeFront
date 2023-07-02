@@ -1,3 +1,29 @@
+.body {
+  z-index: 1;
+  margin: auto;
+  width: 90%;
+  /* background-size: contain;
+  background-attachment: fixed;
+  background-position: center bottom; */
+
+}
+.body::before {
+  margin: auto;
+  width: 90%;
+  content: "";
+  background-image: url('../../../public/mainImg1_3.png');
+  /* background-image: url("../../public/communication_nonback.png"); */
+  position: fixed;
+  top: 70%;
+  left: 10%;
+  bottom: 0;
+  /* background-attachment: fixed;
+  background-position: center; */
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: -1;
+  opacity : 0.4;
+}
 .content {
   margin-top: 4%;
   /* margin-left: 3%; */
@@ -20,24 +46,39 @@
   font-weight: bolder;
   font-size: 14px;
 }
-
+.color {
+  background-color: transparent;
+}
 p {
 
   margin-bottom: 0px;
 }
 
-.box {
+.box1 {
   width: 97%;
   margin-left: 1.5%;
-  background-color: rgb(248, 237, 223);
-  border-radius: 10px 10px 10px 10px;
+  background-color: rgba(248, 237, 223, 0.568);
+  border-radius: 10px 10px 10px 10px !important;
   margin-bottom: 2%;
   justify-content: flex-start;
   display: flex;
   /* margin-bottom: 3%; */
 }
 
+
+.box2 {
+  /* width: 97%; */
+  /* margin-left: 1.5%; */
+  /* background-color: rgba(248,/= 237, 223, 0.568); */
+  /* border-radius: 10px 10px 10px 10px; */
+  /* margin-bottom: 2%; */
+  justify-content: flex-start;
+  display: flex;
+  /* margin-bottom: 3%; */
+}
+
 .date {
+  background-color: transparent;
   font-weight: bolder;
   margin-top: -1.3%;
   text-align: left !important;
@@ -57,4 +98,5 @@ p {
   border-radius: 50%;
   float: left;
   margin-left: 4%;
+  /* padding-bottom: 4%; */
 }

@@ -3,6 +3,7 @@ import Footer from '../FooterComp';
 import { useEffect, useState } from 'react';
 import ChatListComp from './ChatListComp';
 import axios from 'axios';
+import style from './ChatList.module.css'
 
 function ChatList() {
 
@@ -32,13 +33,15 @@ function ChatList() {
       <div style={{height: "53px"}}>
         <HeaderComp />
       </div>
+      <div className={`${style.body}`}>
+
       <h4 style={styleObj}>대화</h4>
       {
         chatList.map((item, index) => {
           return <ChatListComp item={item} key={index}/>
         })
       }
-        
+      </div>
       <div style={{height: "51px"}}>
         <Footer />
       </div>

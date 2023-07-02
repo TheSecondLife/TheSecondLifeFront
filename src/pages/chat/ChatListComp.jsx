@@ -13,10 +13,10 @@ function ChatListComp(props) {
 
   return(
     <>
-      <div className={`${style.box}`} onClick={() => {chatStart(props.item.roomId)}}>
+      <div className={`${style.box1}`} onClick={() => {chatStart(props.item.roomId)}}>
         <img className={`${style.profile}`} src={props.item.profileImg} />
         <div className={`${style.content}`}>
-          <div className={`${style.box}`}>
+          <div className={`${style.box2} ${style.color}`}>
             <p className={`${style.name}`}>{props.item.nickname}</p>
             <p className={`${style.date}`}>{sliceDate(props.item.lastChatTime)}</p>
           </div>
