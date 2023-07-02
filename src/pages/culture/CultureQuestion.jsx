@@ -2,8 +2,7 @@ import React, { useState , useEffect} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import style from "../../css/Culture.module.css";
 
-// rt {} from "../../store/CultureSlice.jsx";
-import { useSpeechRecognition } from "react-speech-kit";
+import SpeechRecognition,{ useSpeechRecognition } from "react-speech-recognition";
 
 import HeaderComp from "../HeaderComp";
 import FooterComp from "../FooterComp";
@@ -26,11 +25,24 @@ const CultureQuestion = () => {
   //참고문서 : https://www.npmjs.com/package/react-speech-kit
   const [value, setValue] = useState("");
 
-  const { listen, listening, stop } = useSpeechRecognition({
-    onResult: (result) => {
-      setValue(result);
-    },
-  });
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition
+  } = useSpeechRecognition();
+
+  useEffect(()=>{
+    SpeechRecognition.startListening();
+    if(!listening){
+      setValue(transcript);
+      resetTranscript();
+    }
+  },[listening])
+
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser doesn't support speech recognition.</span>;
+  }
 
   // 결과 페이지 이동 함수
   function resultPage(){
@@ -55,9 +67,12 @@ const CultureQuestion = () => {
         />
 
       </div>  
-        <button type="button" className={style.speack_btn} onMouseDown={listen} onMouseUp={stop} data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tooltip on bottom">
-          녹음
-        </button>
+
+        {/* 버튼들 */}
+        <p>녹음중 : {listening ?'on' : 'off'}</p>
+        <button onClick={SpeechRecognition.startListening} className={style.speack_btn} >start</button>
+        <button onClick={SpeechRecognition.stopListening} className={style.speack_btn}>stop</button>
+
         
         {listening && <div>말씀이 끝나셨다면, 손을 떼주세요!</div>}
 
@@ -68,15 +83,16 @@ const CultureQuestion = () => {
             setQuestionNumber(questionNumber-1);
             // input 비우기위해 value 초기화
             setValue("")
+            resetTranscript();
           }}>이전</button>}
 
           {/* 답변을 local storage에 저장할 것 */}
           <button className={style.next} onClick={()=>{
             if(questionNumber==0){setValue("");localStorage.setItem("culture_country", value);}
             else if(questionNumber==1){setValue("");localStorage.setItem("yes_or_no", value); setLoading(true); resultPage()}
-           
             setQuestionNumber(questionNumber+1);
             if(questionNumber>=1){return setBtnOn(true)}
+            resetTranscript();
           }}>다음</button>
         </div>
         <FooterComp/>

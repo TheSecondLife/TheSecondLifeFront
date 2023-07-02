@@ -2,7 +2,7 @@ import React, { useState , useEffect} from 'react';
 import style from "../../css/HealthList.module.css";
 import { useSelector, useDispatch } from 'react-redux';
 import {changeHospitalList, getAddress_sido, getAddress_dong, getSickness,getDiagnosis_list,getDiagnosisCodes} from "../../store/HospitalSlice.jsx";
-import { useSpeechRecognition } from "react-speech-kit";
+import SpeechRecognition,{ useSpeechRecognition } from "react-speech-recognition";
 import axios from 'axios';
 import HeaderComp from "../HeaderComp";
 import FooterComp from "../FooterComp";
@@ -23,11 +23,24 @@ const HealthQuestion = () => {
   //음성인식 : react-speech-toolkit
   //참고문서 : https://www.npmjs.com/package/react-speech-kit
   const [value, setValue] = useState("");
-  const { listen, listening, stop } = useSpeechRecognition({
-    onResult: (result) => {
-      setValue(result);
-    },
-  });
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition
+  } = useSpeechRecognition();
+
+  useEffect(()=>{
+    SpeechRecognition.startListening();
+    if(!listening){
+      setValue(transcript);
+      resetTranscript();
+    }
+  },[listening])
+
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser doesn't support speech recognition.</span>;
+  }
 
   // 결과 페이지 이동 함수
   function resultPage(){
@@ -47,11 +60,9 @@ const HealthQuestion = () => {
           .then((res)=>{
             console.log(res);
             let result = res.data.messages[0].message.split(', ');
-            // result.push(result[result.length-1].slice(".", ""));
+
             console.log(result);
             dispatch(getDiagnosis_list(result));
-            // console.log(res.data.messages[0].message.split(', '));
-            // console.log(res.data.messages[0].message.split(', ')[0].slice(".",""));
   
             console.log(state_hospital.diagnosis_list.length);
             console.log(state_hospital.hospitalInfo.length);
@@ -90,9 +101,12 @@ const HealthQuestion = () => {
         />
 
       </div>  
-        <button type="button" className={style.speack_btn} onMouseDown={listen} onMouseUp={stop} data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tooltip on bottom">
-          녹음
-        </button>
+
+        {/* 버튼들 */}
+        <p>녹음중 : {listening ?'on' : 'off'}</p>
+        <button onClick={SpeechRecognition.startListening} className={style.speack_btn}>start</button>
+        <button onClick={SpeechRecognition.stopListening} className={style.speack_btn}>stop</button>
+
         
         {listening && <div>말씀이 끝나셨다면, 손을 떼주세요!</div>}
 
@@ -103,6 +117,7 @@ const HealthQuestion = () => {
             setQuestionNumber(questionNumber-1);
             // input 비우기위해 value 초기화
             setValue("")
+            resetTranscript();
           }}>이전</button>}
 
           {/* 답변을 local storage에 저장할 것 */}
@@ -111,6 +126,7 @@ const HealthQuestion = () => {
             else if(questionNumber==1){setValue(""); dispatch(getAddress_dong(value)); localStorage.setItem("address_dong", value);}
             else if(questionNumber==2){setValue(""); dispatch(getSickness(value)); localStorage.setItem("sickness", value); GPT();}
             setQuestionNumber(questionNumber+1);
+            resetTranscript();
             if(questionNumber>=1){return setBtnOn(true)}
           }}>다음</button>
         </div>

@@ -6,7 +6,7 @@ import style from "../../css/WorkQuestion.module.css";
 
 import axios from 'axios';
 
-import { useSpeechRecognition } from "react-speech-kit";
+import SpeechRecognition,{ useSpeechRecognition } from "react-speech-recognition";
 
 
 import HeaderComp from "../HeaderComp";
@@ -31,11 +31,24 @@ const WorkQuestion = () => {
   //참고문서 : https://www.npmjs.com/package/react-speech-kit
   const [value, setValue] = useState("");
 
-  const { listen, listening, stop } = useSpeechRecognition({
-    onResult: (result) => {
-      setValue(result);
-    },
-  });
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition
+  } = useSpeechRecognition();
+
+  useEffect(()=>{
+    SpeechRecognition.startListening();
+    if(!listening){
+      setValue(transcript);
+      resetTranscript();
+    }
+  },[listening])
+
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser doesn't support speech recognition.</span>;
+  }
 
 
   // 결과 페이지 이동 함수
@@ -75,9 +88,13 @@ const WorkQuestion = () => {
 
 
       </div>  
-        {questionNumber===0&& <button type="button" className={style.speack_btn} onMouseDown={listen} onMouseUp={stop} data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tooltip on bottom">
-          녹음
-        </button>}
+
+
+        {/* 버튼들 */}
+        <p>녹음중 : {listening ?'on' : 'off'}</p>
+        <button onClick={SpeechRecognition.startListening} className={style.speack_btn} >start</button>
+        <button onClick={SpeechRecognition.stopListening} className={style.speack_btn}>stop</button>
+
         
         {listening && <div>말씀이 끝나셨다면, 손을 떼주세요!</div>}
 
@@ -88,6 +105,7 @@ const WorkQuestion = () => {
             setQuestionNumber(questionNumber-1);
             // input 비우기위해 value 초기화
             setValue("")
+            resetTranscript();
           }}>이전</button>}
 
           
@@ -97,6 +115,7 @@ const WorkQuestion = () => {
             setQuestionNumber(questionNumber+1);
             if(questionNumber==3){setLoading(true); window.location.href = "/workList"}
             if(questionNumber>=1){return setBtnOn(true)}
+            resetTranscript();
           }}>다음</button>
         </div>
         <FooterComp/>

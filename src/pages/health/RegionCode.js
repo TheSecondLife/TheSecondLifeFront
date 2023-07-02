@@ -103,199 +103,199 @@ export const codes_info =  [
       },
       {
         "code": "210001",
-        "region": "부산남구"
+        "region": "부산 남구"
       },
       {
         "code": "210002",
-        "region": "부산동구"
+        "region": "부산 동구"
       },
       {
         "code": "210003",
-        "region": "부산동래구"
+        "region": "부산 동래구"
       },
       {
         "code": "210004",
-        "region": "부산진구"
+        "region": "부산 진구"
       },
       {
         "code": "210005",
-        "region": "부산북구"
+        "region": "부산 북구"
       },
       {
         "code": "210006",
-        "region": "부산서구"
+        "region": "부산 서구"
       },
       {
         "code": "210007",
-        "region": "부산영도구"
+        "region": "부산 영도구"
       },
       {
         "code": "210008",
-        "region": "부산중구"
+        "region": "부산 중구"
       },
       {
         "code": "210009",
-        "region": "부산해운대구"
+        "region": "부산 해운대구"
       },
       {
         "code": "210010",
-        "region": "부산사하구"
+        "region": "부산 사하구"
       },
       {
         "code": "210011",
-        "region": "부산금정구"
+        "region": "부산 금정구"
       },
       {
         "code": "210012",
-        "region": "부산강서구"
+        "region": "부산 강서구"
       },
       {
         "code": "210013",
-        "region": "부산연제구"
+        "region": "부산 연제구"
       },
       {
         "code": "210014",
-        "region": "부산수영구"
+        "region": "부산 수영구"
       },
       {
         "code": "210015",
-        "region": "부산사상구"
+        "region": "부산 사상구"
       },
       {
         "code": "210100",
-        "region": "부산기장군"
+        "region": "부산 기장군"
       },
       {
         "code": "220001",
-        "region": "인천미추홀구"
+        "region": "인천 미추홀구"
       },
       {
         "code": "220002",
-        "region": "인천동구"
+        "region": "인천 동구"
       },
       {
         "code": "220003",
-        "region": "인천부평구"
+        "region": "인천 부평구"
       },
       {
         "code": "220004",
-        "region": "인천중구"
+        "region": "인천 중구"
       },
       {
         "code": "220005",
-        "region": "인천서구"
+        "region": "인천 서구"
       },
       {
         "code": "220006",
-        "region": "인천남동구"
+        "region": "인천 남동구"
       },
       {
         "code": "220007",
-        "region": "인천연수구"
+        "region": "인천 연수구"
       },
       {
         "code": "220008",
-        "region": "인천계양구"
+        "region": "인천 계양구"
       },
       {
         "code": "220100",
-        "region": "인천강화군"
+        "region": "인천 강화군"
       },
       {
         "code": "220200",
-        "region": "인천옹진군"
+        "region": "인천 옹진군"
       },
       {
         "code": "230001",
-        "region": "대구남구"
+        "region": "대구 남구"
       },
       {
         "code": "230002",
-        "region": "대구동구"
+        "region": "대구 동구"
       },
       {
         "code": "230003",
-        "region": "대구북구"
+        "region": "대구 북구"
       },
       {
         "code": "230004",
-        "region": "대구서구"
+        "region": "대구 서구"
       },
       {
         "code": "230005",
-        "region": "대구수성구"
+        "region": "대구 수성구"
       },
       {
         "code": "230006",
-        "region": "대구중구"
+        "region": "대구 중구"
       },
       {
         "code": "230007",
-        "region": "대구달서구"
+        "region": "대구 달서구"
       },
       {
         "code": "230100",
-        "region": "대구달성군"
+        "region": "대구 달성군"
       },
       {
         "code": "240001",
-        "region": "광주동구"
+        "region": "광주 동구"
       },
       {
         "code": "240002",
-        "region": "광주북구"
+        "region": "광주 북구"
       },
       {
         "code": "240003",
-        "region": "광주서구"
+        "region": "광주 서구"
       },
       {
         "code": "240004",
-        "region": "광주광산구"
+        "region": "광주 광산구"
       },
       {
         "code": "240005",
-        "region": "광주남구"
+        "region": "광주 남구"
       },
       {
         "code": "250001",
-        "region": "대전유성구"
+        "region": "대전 유성구"
       },
       {
         "code": "250002",
-        "region": "대전대덕구"
+        "region": "대전 대덕구"
       },
       {
         "code": "250003",
-        "region": "대전서구"
+        "region": "대전 서구"
       },
       {
         "code": "250004",
-        "region": "대전동구"
+        "region": "대전 동구"
       },
       {
         "code": "250005",
-        "region": "대전중구"
+        "region": "대전 중구"
       },
       {
         "code": "260001",
-        "region": "울산남구"
+        "region": "울산 남구"
       },
       {
         "code": "260002",
-        "region": "울산동구"
+        "region": "울산 동구"
       },
       {
         "code": "260003",
-        "region": "울산중구"
+        "region": "울산 중구"
       },
       {
         "code": "260004",
-        "region": "울산북구"
+        "region": "울산 북구"
       },
       {
         "code": "260100",
-        "region": "울산울주군"
+        "region": "울산 울주군"
       },
       {
         "code": "310001",
@@ -351,27 +351,27 @@ export const codes_info =  [
       },
       {
         "code": "310301",
-        "region": "부천소사구"
+        "region": "부천 소사구"
       },
       {
         "code": "310302",
-        "region": "부천오정구"
+        "region": "부천 오정구"
       },
       {
         "code": "310303",
-        "region": "부천원미구"
+        "region": "부천 원미구"
       },
       {
         "code": "310401",
-        "region": "성남수정구"
+        "region": "성남 수정구"
       },
       {
         "code": "310402",
-        "region": "성남중원구"
+        "region": "성남 중원구"
       },
       {
         "code": "310403",
-        "region": "성남분당구"
+        "region": "성남 분당구"
       },
       {
         "code": "310500",
@@ -383,27 +383,27 @@ export const codes_info =  [
       },
       {
         "code": "310601",
-        "region": "수원권선구"
+        "region": "수원 권선구"
       },
       {
         "code": "310602",
-        "region": "수원장안구"
+        "region": "수원 장안구"
       },
       {
         "code": "310603",
-        "region": "수원팔달구"
+        "region": "수원 팔달구"
       },
       {
         "code": "310604",
-        "region": "수원영통구"
+        "region": "수원 영통구"
       },
       {
         "code": "310701",
-        "region": "안양만안구"
+        "region": "안양 만안구"
       },
       {
         "code": "310702",
-        "region": "안양동안구"
+        "region": "안양 동안구"
       },
       {
         "code": "310800",
@@ -423,11 +423,11 @@ export const codes_info =  [
       },
       {
         "code": "311101",
-        "region": "안산단원구"
+        "region": "안산 단원구"
       },
       {
         "code": "311102",
-        "region": "안산상록구"
+        "region": "안산 상록구"
       },
       {
         "code": "311200",
@@ -459,15 +459,15 @@ export const codes_info =  [
       },
       {
         "code": "311901",
-        "region": "고양덕양구"
+        "region": "고양 덕양구"
       },
       {
         "code": "311902",
-        "region": "고양일산서구"
+        "region": "고양 일산서구"
       },
       {
         "code": "311903",
-        "region": "고양일산동구"
+        "region": "고양 일산동구"
       },
       {
         "code": "312000",
@@ -475,15 +475,15 @@ export const codes_info =  [
       },
       {
         "code": "312001",
-        "region": "용인기흥구"
+        "region": "용인 기흥구"
       },
       {
         "code": "312002",
-        "region": "용인수지구"
+        "region": "용인 수지구"
       },
       {
         "code": "312003",
-        "region": "용인처인구"
+        "region": "용인 처인구"
       },
       {
         "code": "312100",
@@ -639,19 +639,19 @@ export const codes_info =  [
       },
       {
         "code": "330101",
-        "region": "청주상당구"
+        "region": "청주 상당구"
       },
       {
         "code": "330102",
-        "region": "청주흥덕구"
+        "region": "청주 흥덕구"
       },
       {
         "code": "330103",
-        "region": "청주청원구"
+        "region": "청주 청원구"
       },
       {
         "code": "330104",
-        "region": "청주서원구"
+        "region": "청주 서원구"
       },
       {
         "code": "330200",
@@ -707,11 +707,11 @@ export const codes_info =  [
       },
       {
         "code": "340201",
-        "region": "천안서북구"
+        "region": "천안 서북구"
       },
       {
         "code": "340202",
-        "region": "천안동남구"
+        "region": "천안 동남구"
       },
       {
         "code": "340300",
@@ -795,11 +795,11 @@ export const codes_info =  [
       },
       {
         "code": "350401",
-        "region": "전주완산구"
+        "region": "전주 완산구"
       },
       {
         "code": "350402",
-        "region": "전주덕진구"
+        "region": "전주 덕진구"
       },
       {
         "code": "350500",
@@ -987,11 +987,11 @@ export const codes_info =  [
       },
       {
         "code": "370701",
-        "region": "포항남구"
+        "region": "포항 남구"
       },
       {
         "code": "370702",
-        "region": "포항북구"
+        "region": "포항 북구"
       },
       {
         "code": "370800",
@@ -1083,23 +1083,23 @@ export const codes_info =  [
       },
       {
         "code": "380701",
-        "region": "창원마산회원구"
+        "region": "창원 마산회원구"
       },
       {
         "code": "380702",
-        "region": "창원마산합포구"
+        "region": "창원 마산합포구"
       },
       {
         "code": "380703",
-        "region": "창원진해구"
+        "region": "창원 진해구"
       },
       {
         "code": "380704",
-        "region": "창원의창구"
+        "region": "창원 의창구"
       },
       {
         "code": "380705",
-        "region": "창원성산구"
+        "region": "창원 성산구"
       },
       {
         "code": "380800",

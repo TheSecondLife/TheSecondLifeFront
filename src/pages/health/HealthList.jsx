@@ -72,7 +72,7 @@ const HealthList = () => {
       {/* 결과 지도 및 리스트 */}
       <div><Kakao></Kakao></div>
       {
-        state_hospital.hospitalList.map((res)=>{
+        state_hospital.hospitalList.length!==0?state_hospital.hospitalList.map((res)=>{
           return(
             <div class="card" className={style.card} style={{width:"18rem"}}>
               <img src="https://media.istockphoto.com/id/1240772668/ko/%EC%82%AC%EC%A7%84/%EB%B3%91%EC%9B%90%EC%9D%84%EC%9C%84%ED%95%9C-%ED%8C%8C%EB%9E%80%EC%83%89-%EB%AC%B8%EC%9E%90-h-%EA%B8%B0%ED%98%B8%EC%99%80-%ED%81%B0-%ED%98%84%EB%8C%80-%EA%B1%B4%EB%AC%BC.jpg?s=612x612&w=0&k=20&c=L4PWMffTtF8qilVCFpWjyIK8iqvBE9XVv3WpAF4naPs=" class="card-img-top" alt="..."/>
@@ -83,7 +83,7 @@ const HealthList = () => {
               </div>
             </div>
           )
-        })
+        }): <div style={{backgroundColor: '#a26ce9', color: 'white',fontSize: '30px', marginTop:'30%'}}>적합한 병원이 없습니다.</div>
       }
       <FooterComp/>
     </div>
