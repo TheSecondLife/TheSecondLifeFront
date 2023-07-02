@@ -240,8 +240,8 @@ select option {
 
 }
 .hidden {
-  /* display: hidden; */
-  visibility: none;
+  display: none;
+  /* visibility: none; */
 }
 .updateModeInput {
   background-color: transparent;
