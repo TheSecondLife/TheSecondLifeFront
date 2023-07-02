@@ -37,21 +37,31 @@ function BoardDetail() {
     .catch((err) => {
       console.log(err)
     })
-  },[comment])
+  },[])
 
   function createComment(){
+
     const data = {
     content : comment
     };
+
     const config = {"Content-Type": 'application/json'};
     axios.post(process.env.REACT_APP_SERVER + "/api/comment/regist/"+user.id+"/"+id, data, config)
     .then(() => {
       // let commentsCopy= [...commentList, ...]
       // navigate(0);
-    }).catch((err)=>{
-      console.log(err);
-    })
-  }
+      // get요청
+      const url = process.env.REACT_APP_SERVER + "/api/post/" + id;
+      axios.get(url)
+      .then((result) => {
+        console.log(result.data);
+        setCommentList(result.data.commentList);
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  })
+}
 
   function chatStart() {
     if (isUser) {
