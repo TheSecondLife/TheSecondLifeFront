@@ -27,7 +27,7 @@ function BoardDetail() {
   
 
   useEffect(()=> {
-    const url = "/api/post/" + id;
+    const url = process.env.REACT_APP_SERVER + "/api/post/" + id;
     axios.get(url)
     .then((result) => {
       console.log(result.data);
@@ -44,7 +44,7 @@ function BoardDetail() {
     content : comment
     };
     const config = {"Content-Type": 'application/json'};
-    axios.post("/api/comment/regist/"+user.id+"/"+id, data, config)
+    axios.post(process.env.REACT_APP_SERVER + "/api/comment/regist/"+user.id+"/"+id, data, config)
     .then(() => {
       // let commentsCopy= [...commentList, ...]
       // navigate(0);
@@ -59,7 +59,7 @@ function BoardDetail() {
       return
     } else {
       // alert("다름")
-      const url = "/api/chat"
+      const url = process.env.REACT_APP_SERVER + "/api/chat"
       const data = {
         "userA": user.id,
         "userB": post.userId
@@ -168,7 +168,7 @@ function BoardDetail() {
 
   function deletePost(){
     //백한테 이거 지워달라고 하기!
-    const url = `/api/post/delete/${post.id}`;
+    const url = process.env.REACT_APP_SERVER + `/api/post/delete/${post.id}`;
     axios.delete(url)
     .then((result) => {
       navigate("/board");
@@ -215,7 +215,7 @@ function sliceDate(data){
         alert("다른 유저와 채팅을 해주세요!")
         return
       } else {
-        const url = "/api/chat"
+        const url = process.env.REACT_APP_SERVER + "/api/chat"
         const data = {
           "userA": user.id,
           "userB": comment.userId
@@ -295,7 +295,7 @@ function sliceDate(data){
 }
   function modifyComment(id){
     console.log(editComment);
-   let url = `/api/comment/update/${id}`;
+   let url = process.env.REACT_APP_SERVER + `/api/comment/update/${id}`;
    const data = {
     content : editComment
     }
@@ -314,7 +314,7 @@ function sliceDate(data){
 
   }
   function deleteComment(id){
-    let url = `/api/comment/delete/${id}`
+    let url = process.env.REACT_APP_SERVER + `/api/comment/delete/${id}`
     axios.delete(url)
     .then((result) => {
       navigate(0);

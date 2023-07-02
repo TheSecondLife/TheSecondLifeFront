@@ -19,7 +19,7 @@ function BoardPage() {
 
   useEffect(() => {
     localStorage.setItem("navState", 2);
-    const url = "/api/post/list";
+    const url = process.env.REACT_APP_SERVER + "/api/post/list";
     axios.get(url)
     .then((result) => {
       // const copy = [...postList, ...result.data];

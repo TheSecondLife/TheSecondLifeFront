@@ -45,7 +45,7 @@ function createBoard(){
         const config = {"Content-Type": 'multipart/form-data'};
         console.log(data);
         // axios.post(url+"post/regist/"+user.id, data, config)
-        axios.post("/api/post/regist/"+user.id, data, config)
+        axios.post(process.env.REACT_APP_SERVER + "/api/post/regist/"+user.id, data, config)
         .then(() => {
         navigate('/board')
         })
@@ -60,7 +60,7 @@ function createBoard(){
           'Content-Type': 'multipart/form-data'
         }
       };
-      axios.post("/api/post/registimg/"+user.id, data, config)
+      axios.post(process.env.REACT_APP_SERVER + "/api/post/registimg/"+user.id, data, config)
       .then(() => {
         navigate('/board')
       })

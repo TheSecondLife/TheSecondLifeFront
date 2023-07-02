@@ -113,7 +113,7 @@ function ChatPage() {
 
     let userId = JSON.parse(sessionStorage.getItem("loginUser")).id;
 
-    const url = "/api/chat"
+    const url = process.env.REACT_APP_SERVER + "/api/chat"
     const data = {
       userA: userId,
       userB: otherId
