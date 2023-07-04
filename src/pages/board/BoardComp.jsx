@@ -13,6 +13,7 @@ function BoardComp(props) {
   useEffect(() =>{
     setCommentList([]);
     console.log(commentList);
+    console.log("test");
   },[])
 
   return(
